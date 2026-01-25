@@ -178,9 +178,24 @@
                 </div>
             </div>
 
-            <!-- Image Placeholder -->
-            <div class="full-width-image" style="margin-top: 3rem;">
-                <p>Affinity Map from User Interviews<br><em style="font-size: 0.9rem; color: #999;">(Shows clustered user quotes and behaviors)</em></p>
+            <!-- Affinity Map Images - Clickable Gallery -->
+            <div style="margin-top: 3rem;">
+                <h4 style="font-size: 1.2rem; color: #212529; margin-bottom: 1rem;">Affinity Map from User Interviews</h4>
+                <p style="font-size: 1rem; color: #6C757D; margin-bottom: 1.5rem;">Click images to view larger. Use arrows to navigate between views.</p>
+                
+                <div class="image-gallery">
+                    <img src="../images/shazam/affinity-map-overview.png" alt="Affinity map showing user insights clustered into themes: Discovery, Why, Social, Convenience, Information, and Frustrations" class="gallery-image clickable-image" onclick="openLightbox(0)">
+                    <img src="../images/shazam/affinity-map-detailed.png" alt="Detailed affinity map showing what users do after song identification, reasons for using Shazam, improvements needed, and other apps used" class="gallery-image clickable-image" onclick="openLightbox(1)">
+                </div>
+            </div>
+
+            <!-- Lightbox Modal -->
+            <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+                <span class="lightbox-close">&times;</span>
+                <span class="lightbox-prev" onclick="event.stopPropagation(); changeImage(-1)">&#10094;</span>
+                <span class="lightbox-next" onclick="event.stopPropagation(); changeImage(1)">&#10095;</span>
+                <img id="lightbox-img" class="lightbox-content" onclick="event.stopPropagation()">
+                <div class="lightbox-caption" id="lightbox-caption"></div>
             </div>
 
             <p class="large-text" style="margin-top: 3rem;">
@@ -481,5 +496,68 @@
     </footer>
 
     <script src="../js/script.js"></script>
+    <script>
+        // Lightbox functionality for image gallery
+        const images = [
+            {
+                src: '../images/shazam/affinity-map-overview.png',
+                alt: 'Affinity map showing user insights clustered into themes: Discovery, Why, Social, Convenience, Information, and Frustrations'
+            },
+            {
+                src: '../images/shazam/affinity-map-detailed.png',
+                alt: 'Detailed affinity map showing what users do after song identification, reasons for using Shazam, improvements needed, and other apps used'
+            }
+        ];
+
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+
+            lightbox.style.display = 'block';
+            lightboxImg.src = images[currentImageIndex].src;
+            caption.textContent = images[currentImageIndex].alt;
+            
+            // Prevent body scroll when lightbox is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            
+            // Loop back to start/end
+            if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            }
+            
+            const lightboxImg = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+            
+            lightboxImg.src = images[currentImageIndex].src;
+            caption.textContent = images[currentImageIndex].alt;
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            } else if (event.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        });
+    </script>
 </body>
 </html>
