@@ -648,3 +648,171 @@
         padding: 0.8rem 1.5rem;
     }
 }
+
+/* ================================
+   INTERACTIVE PROTOTYPE VIEWER
+   ================================ */
+
+.prototype-viewer {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 2rem;
+}
+
+.prototype-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* iPhone Frame */
+.iphone-frame {
+    position: relative;
+    width: 390px;
+    height: 844px;
+    background: #1a1a1a;
+    border-radius: 50px;
+    padding: 12px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+}
+
+.iphone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 30px;
+    background: #1a1a1a;
+    border-radius: 0 0 20px 20px;
+    z-index: 10;
+}
+
+.iphone-screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #0a1a2e;
+    border-radius: 40px;
+    overflow: hidden;
+}
+
+/* Screen Images */
+.prototype-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.prototype-screen.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Interactive Hotspots */
+.hotspot {
+    position: absolute;
+    cursor: pointer;
+    z-index: 5;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.hotspot.visible {
+    opacity: 1;
+}
+
+.hotspot:hover {
+    background: rgba(232, 114, 125, 0.2);
+    border: 2px solid #E8727D;
+}
+
+.hotspot.pulse {
+    animation: hotspotPulse 2s ease-in-out infinite;
+}
+
+@keyframes hotspotPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(232, 114, 125, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 15px rgba(232, 114, 125, 0);
+    }
+}
+
+/* Controls */
+.prototype-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.control-btn {
+    padding: 0.8rem 1.5rem;
+    background: #E8727D;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Sora', sans-serif;
+}
+
+.control-btn:hover:not(:disabled) {
+    background: #d35f6c;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(232, 114, 125, 0.3);
+}
+
+.control-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.screen-counter {
+    padding: 0.8rem 1.5rem;
+    background: #F8F9FA;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #212529;
+    font-family: 'Sora', sans-serif;
+}
+
+/* Instructions */
+.prototype-instructions {
+    text-align: center;
+    color: #6C757D;
+    font-size: 0.95rem;
+    max-width: 500px;
+}
+
+/* Responsive Prototype */
+@media (max-width: 768px) {
+    .iphone-frame {
+        width: 325px;
+        height: 703px;
+        border-radius: 40px;
+        padding: 10px;
+    }
+    
+    .prototype-controls {
+        flex-direction: column;
+    }
+    
+    .control-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
