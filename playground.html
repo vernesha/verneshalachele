@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Playground - Vernesha LaChele's Front-End Development Projects">
+    <title>Playground - Vernesha LaChele</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Playground-specific styles */
+        .playground-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            padding: 8rem 2rem 4rem;
+        }
+
+        .playground-hero-content {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .playground-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: #212529;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .gradient-heading {
+            background: linear-gradient(
+                90deg,
+                #E8727D,
+                #FF8C94,
+                #E8727D,
+                #D0606B,
+                #E8727D
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 4s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% center;
+            }
+            50% {
+                background-position: 100% center;
+            }
+            100% {
+                background-position: 0% center;
+            }
+        }
+
+        .playground-hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: #6C757D;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .bootcamp-badge {
+            display: inline-block;
+            background: #FFE8EB;
+            color: #E8727D;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Gamification Elements */
+        .level-system {
+            margin: 2rem auto;
+            max-width: 500px;
+        }
+
+        .level-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .level-number {
+            background: linear-gradient(135deg, #E8727D, #D0606B);
+            color: #FFFFFF;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(232, 114, 125, 0.3);
+        }
+
+        .level-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .xp-bar-container {
+            width: 100%;
+            height: 12px;
+            background: #E9ECEF;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .xp-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #E8727D, #FF8C94);
+            border-radius: 20px;
+            transition: width 0.5s ease;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .xp-text {
+            font-size: 0.85rem;
+            color: #6C757D;
+            font-weight: 600;
+        }
+
+        .achievement-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .achievement {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            border: 3px solid #E9ECEF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .achievement.unlocked {
+            border-color: #E8727D;
+            box-shadow: 0 4px 15px rgba(232, 114, 125, 0.3);
+            animation: bounce-in 0.6s ease;
+        }
+
+        .achievement.unlocked:hover {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .achievement.locked {
+            opacity: 0.3;
+            filter: grayscale(100%);
+        }
+
+        @keyframes bounce-in {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .playground-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .playground-section {
+            margin-bottom: 6rem;
+        }
+
+        .playground-section h2 {
+            font-size: 2.5rem;
+            color: #212529;
+            margin-bottom: 2rem;
+            font-weight: 800;
+        }
+
+        .playground-intro {
+            font-size: 1.2rem;
+            color: #6C757D;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .dev-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .dev-project-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid #E9ECEF;
+        }
+
+        .dev-project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(232, 114, 125, 0.2);
+            border-color: #E8727D;
+        }
+
+        .dev-project-image {
+            height: 250px;
+            background: linear-gradient(135deg, #FFE8EB, #FFEEF0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .dev-project-card:hover .dev-project-image {
+            transform: scale(1.05);
+        }
+
+        .coming-soon-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(232, 114, 125, 0.95);
+            color: #FFFFFF;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .project-status-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(232, 114, 125, 0.95);
+            color: #FFFFFF;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-status-badge.locked {
+            background: rgba(108, 117, 125, 0.95);
+        }
+
+        .project-header-with-xp {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-header-with-xp h4 {
+            margin: 0;
+        }
+
+        .project-xp {
+            background: #FFE8EB;
+            color: #E8727D;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .project-progress {
+            margin: 1.5rem 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #6C757D;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar-small {
+            width: 100%;
+            height: 8px;
+            background: #E9ECEF;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #E8727D, #FF8C94);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .dev-project-content {
+            padding: 2rem;
+        }
+
+        .dev-project-content h4 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #212529;
+            font-weight: 700;
+        }
+
+        .dev-project-content p {
+            color: #6C757D;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: #F8F9FA;
+            color: #495057;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid #E9ECEF;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .link-demo {
+            background: #E8727D;
+            color: #FFFFFF;
+            border: 2px solid #E8727D;
+        }
+
+        .link-demo:hover {
+            background: transparent;
+            color: #E8727D;
+        }
+
+        .link-code {
+            background: transparent;
+            color: #212529;
+            border: 2px solid #E9ECEF;
+        }
+
+        .link-code:hover {
+            border-color: #E8727D;
+            color: #E8727D;
+        }
+
+        .project-link.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .skills-learning {
+            background: #FFFFFF;
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid #E9ECEF;
+            margin-top: 4rem;
+        }
+
+        .stats-dashboard {
+            background: linear-gradient(135deg, #FFFFFF, #F8F9FA);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid #E9ECEF;
+            margin-top: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .stats-dashboard h3 {
+            font-size: 1.8rem;
+            color: #212529;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            text-align: center;
+            background: #FFFFFF;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #E9ECEF;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            border-color: #E8727D;
+            box-shadow: 0 10px 30px rgba(232, 114, 125, 0.15);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #E8727D;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: #6C757D;
+            font-weight: 600;
+        }
+
+        .skills-learning h3 {
+            font-size: 1.8rem;
+            color: #212529;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            text-align: center;
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 0.8rem;
+        }
+
+        .skill-status {
+            font-size: 0.9rem;
+            color: #6C757D;
+        }
+
+        .skill-progress-mini {
+            width: 100%;
+            height: 6px;
+            background: #E9ECEF;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 150px;
+        }
+
+        .mini-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #E8727D, #FF8C94);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav id="nav" class="scrolled">
+        <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li class="nav-logo">
+                <a href="index.html">
+                    <svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="25" cy="25" r="25" fill="#E8727D"/>
+                        <text x="25" y="25" text-anchor="middle" dominant-baseline="central" 
+                              font-family="Sora, sans-serif" font-size="20" font-weight="800" fill="#FFFFFF">VL</text>
+                    </svg>
+                </a>
+            </li>
+            <li><a href="playground.html">Playground</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Playground Hero -->
+    <section class="playground-hero">
+        <div class="playground-hero-content">
+            <h1 class="gradient-heading">Playground</h1>
+            <p>Where I break things, build things, and level up my code. This is my digital sandbox for experimenting with front-end development.</p>
+            
+            <!-- XP/Level System -->
+            <div class="level-system">
+                <div class="level-badge">
+                    <span class="level-number">Level 2</span>
+                    <span class="level-title">Code Explorer</span>
+                </div>
+                <div class="xp-bar-container">
+                    <div class="xp-bar" style="width: 40%;"></div>
+                </div>
+                <span class="xp-text">200 / 500 XP to Level 3</span>
+            </div>
+
+            <!-- Achievement Badges -->
+            <div class="achievement-row">
+                <div class="achievement unlocked" title="Started first project">🏆</div>
+                <div class="achievement locked" title="Complete Bootstrap project">🔒</div>
+                <div class="achievement locked" title="Master React">🔒</div>
+                <div class="achievement locked" title="Build mobile app">🔒</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="playground-content">
+        
+        <!-- Dev Projects Section -->
+        <section class="playground-section">
+            <h2>Development Projects</h2>
+            <p class="playground-intro">
+                I don't just design beautiful interfaces—I build them. Here's where my wireframes become working code, and ideas turn into interactive experiences you can actually use.
+            </p>
+
+            <div class="dev-projects-grid">
+                
+                <!-- Bootstrap Portfolio Project -->
+                <div class="dev-project-card placeholder-card">
+                    <div class="dev-project-image">
+                        🎨
+                        <div class="project-status-badge">🚧 In Progress</div>
+                    </div>
+                    <div class="dev-project-content">
+                        <div class="project-header-with-xp">
+                            <h4>Bootstrap Portfolio Site</h4>
+                            <span class="project-xp">+500 XP</span>
+                        </div>
+                        <p>A fully responsive portfolio website built with Bootstrap, showcasing modern grid systems, mobile-first design, and professional UI components.</p>
+                        
+                        <div class="project-progress">
+                            <div class="progress-label">
+                                <span>Progress</span>
+                                <span>40%</span>
+                            </div>
+                            <div class="progress-bar-small">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">Bootstrap</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="#" class="project-link link-demo disabled">View Demo</a>
+                            <a href="#" class="project-link link-code disabled">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Challenges Card -->
+                <div class="dev-project-card placeholder-card">
+                    <div class="dev-project-image">
+                        📝
+                        <div class="project-status-badge locked">🔒 Coming Soon</div>
+                    </div>
+                    <div class="dev-project-content">
+                        <div class="project-header-with-xp">
+                            <h4>Code Challenges</h4>
+                            <span class="project-xp">+50 XP each</span>
+                        </div>
+                        <p>Bite-sized projects and coding exercises. From DOM manipulation to API integration, each challenge sharpens a specific skill.</p>
+                        
+                        <div class="project-progress">
+                            <div class="progress-label">
+                                <span>Completed</span>
+                                <span>0/15</span>
+                            </div>
+                            <div class="progress-bar-small">
+                                <div class="progress-fill" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">React Native</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="#" class="project-link link-demo disabled">View Challenges</a>
+                            <a href="#" class="project-link link-code disabled">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Experiments -->
+                <div class="dev-project-card placeholder-card">
+                    <div class="dev-project-image">
+                        🚀
+                        <div class="project-status-badge locked">🔒 Coming Soon</div>
+                    </div>
+                    <div class="dev-project-content">
+                        <div class="project-header-with-xp">
+                            <h4>Side Projects</h4>
+                            <span class="project-xp">+300 XP</span>
+                        </div>
+                        <p>Experimental builds and personal projects where I explore new ideas, test different approaches, and push beyond the fundamentals.</p>
+                        
+                        <div class="project-progress">
+                            <div class="progress-label">
+                                <span>Progress</span>
+                                <span>0%</span>
+                            </div>
+                            <div class="progress-bar-small">
+                                <div class="progress-fill" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">TBD</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="#" class="project-link link-demo disabled">View Demo</a>
+                            <a href="#" class="project-link link-code disabled">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Stats Dashboard -->
+        <section class="stats-dashboard">
+            <h3>📊 My Stats</h3>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-icon">💻</div>
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">Active Project</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-number">200</div>
+                    <div class="stat-label">Total XP</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-number">1/4</div>
+                    <div class="stat-label">Achievements</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills I'm Learning -->
+        <section class="skills-learning">
+            <h3>🛠️ Tech Stack</h3>
+            <p style="color: #6C757D; margin-bottom: 2rem;">Technologies I'm leveling up with</p>
+            
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon">⚛️</div>
+                    <div class="skill-name">React</div>
+                    <div class="skill-progress-mini">
+                        <div class="mini-bar" style="width: 5%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">🎨</div>
+                    <div class="skill-name">Bootstrap</div>
+                    <div class="skill-progress-mini">
+                        <div class="mini-bar" style="width: 20%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">📱</div>
+                    <div class="skill-name">React Native</div>
+                    <div class="skill-progress-mini">
+                        <div class="mini-bar" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">💻</div>
+                    <div class="skill-name">JavaScript</div>
+                    <div class="skill-progress-mini">
+                        <div class="mini-bar" style="width: 15%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">🔗</div>
+                    <div class="skill-name">Git & GitHub</div>
+                    <div class="skill-progress-mini">
+                        <div class="mini-bar" style="width: 25%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">🌐</div>
+                    <div class="skill-name">APIs</div>
+                    <div class="skill-progress-mini">
+                        <div class="mini-bar" style="width: 10%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <h2 class="footer-name">Vernesha LaChele © 2026</h2>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

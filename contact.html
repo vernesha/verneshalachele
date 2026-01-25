@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Vernesha LaChele - Get In Touch">
+    <title>Contact - Vernesha LaChele</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Contact Page Specific Styles */
+        .contact-hero {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            padding: 8rem 2rem 4rem;
+        }
+
+        .contact-hero-content {
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .contact-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: #212529;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .contact-hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: #6C757D;
+            line-height: 1.8;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .contact-form-wrapper {
+            background: #FFFFFF;
+            border: 2px solid #E9ECEF;
+            border-radius: 30px;
+            padding: 4rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 0.8rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #E9ECEF;
+            border-radius: 15px;
+            font-family: 'Sora', sans-serif;
+            font-size: 1rem;
+            color: #212529;
+            transition: all 0.3s ease;
+            background: #F8F9FA;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #E8727D;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(232, 114, 125, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #ADB5BD;
+        }
+
+        /* Captcha Section */
+        .captcha-section {
+            background: #F8F9FA;
+            border: 2px solid #E9ECEF;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .captcha-challenge {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .captcha-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .captcha-code {
+            background: #FFFFFF;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #E8727D;
+            letter-spacing: 8px;
+            font-family: 'Courier New', monospace;
+            border: 2px solid #E9ECEF;
+            user-select: none;
+        }
+
+        .captcha-input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .captcha-refresh {
+            background: transparent;
+            border: 2px solid #E9ECEF;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .captcha-refresh:hover {
+            border-color: #E8727D;
+            transform: rotate(180deg);
+        }
+
+        /* Submit Button */
+        .submit-button-wrapper {
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1.5rem;
+            background: #E8727D;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: 'Sora', sans-serif;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-button:hover:not(:disabled) {
+            background: #D0606B;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(232, 114, 125, 0.4);
+        }
+
+        .submit-button:active:not(:disabled) {
+            transform: translateY(-1px);
+        }
+
+        .submit-button:disabled {
+            background: #ADB5BD;
+            cursor: not-allowed;
+        }
+
+        /* Button States */
+        .submit-button .button-text {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button.sending .button-text {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .submit-button .loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #FFFFFF;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button.sending .loader {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .submit-button .success-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 2rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button.success .success-icon {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .submit-button.success {
+            background: #059669;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #D1FAE5;
+            border: 2px solid #059669;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-message h3 {
+            color: #059669;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message p {
+            color: #047857;
+            font-size: 1rem;
+        }
+
+        /* Error Message */
+        .error-message {
+            background: #FFE8EB;
+            border: 2px solid #E8727D;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            color: #D0606B;
+            font-weight: 600;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Alternative Contact Methods */
+        .alternative-contact {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 3rem;
+            background: #F8F9FA;
+            border-radius: 20px;
+        }
+
+        .alternative-contact h3 {
+            font-size: 1.5rem;
+            color: #212529;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-link-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: #FFFFFF;
+            border: 2px solid #E9ECEF;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #212529;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link-item:hover {
+            border-color: #E8727D;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(232, 114, 125, 0.15);
+        }
+
+        .contact-link-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-form-wrapper {
+                padding: 2rem;
+            }
+
+            .captcha-challenge {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .captcha-input {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav id="nav" class="scrolled">
+        <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li class="nav-logo">
+                <a href="index.html">
+                    <svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="25" cy="25" r="25" fill="#E8727D"/>
+                        <text x="25" y="25" text-anchor="middle" dominant-baseline="central" 
+                              font-family="Sora, sans-serif" font-size="20" font-weight="800" fill="#FFFFFF">VL</text>
+                    </svg>
+                </a>
+            </li>
+            <li><a href="playground.html">Playground</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="contact-hero-content">
+            <h1>Let's Connect</h1>
+            <p>Have a project in mind? Want to collaborate? I'd love to hear from you.</p>
+        </div>
+    </section>
+
+    <div class="contact-container">
+        
+        <!-- Contact Form -->
+        <div class="contact-form-wrapper">
+            <form id="contactForm">
+                
+                <!-- Name Field -->
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        placeholder="John Doe" 
+                        required
+                    >
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="john@example.com" 
+                        required
+                    >
+                </div>
+
+                <!-- Message Field -->
+                <div class="form-group">
+                    <label for="message">Your Message *</label>
+                    <textarea 
+                        id="message" 
+                        name="message" 
+                        placeholder="Tell me about your project or idea..." 
+                        required
+                    ></textarea>
+                </div>
+
+                <!-- Captcha Section -->
+                <div class="captcha-section">
+                    <div class="captcha-challenge">
+                        <span class="captcha-question">Verify you're human:</span>
+                        <div class="captcha-code" id="captchaCode">AB7K9</div>
+                        <button type="button" class="captcha-refresh" id="refreshCaptcha" title="Refresh code">
+                            🔄
+                        </button>
+                    </div>
+                    <div class="form-group captcha-input" style="margin-top: 1rem; margin-bottom: 0;">
+                        <input 
+                            type="text" 
+                            id="captchaInput" 
+                            name="captcha" 
+                            placeholder="Enter the code above" 
+                            required
+                            autocomplete="off"
+                        >
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div class="error-message" id="errorMessage"></div>
+
+                <!-- Submit Button -->
+                <div class="submit-button-wrapper">
+                    <button type="submit" class="submit-button" id="submitButton">
+                        <span class="button-text">Send Message</span>
+                        <span class="loader"></span>
+                        <span class="success-icon">✓</span>
+                    </button>
+                </div>
+
+            </form>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <h3>Message Sent! 🎉</h3>
+                <p>Thanks for reaching out! I'll get back to you as soon as possible.</p>
+            </div>
+        </div>
+
+        <!-- Alternative Contact Methods -->
+        <div class="alternative-contact">
+            <h3>Or reach out directly</h3>
+            <div class="contact-links">
+                <a href="mailto:verneshalachele@icloud.com" class="contact-link-item">
+                    <span class="contact-link-icon">📧</span>
+                    <span>verneshalachele@icloud.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/vernesha-jones" target="_blank" class="contact-link-item">
+                    <span class="contact-link-icon">💼</span>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <h2 class="footer-name">Vernesha LaChele © 2026</h2>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Captcha Logic
+        const captchaCode = document.getElementById('captchaCode');
+        const captchaInput = document.getElementById('captchaInput');
+        const refreshCaptcha = document.getElementById('refreshCaptcha');
+        const contactForm = document.getElementById('contactForm');
+        const submitButton = document.getElementById('submitButton');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+
+        let currentCaptcha = 'AB7K9';
+
+        // Generate random captcha
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let captcha = '';
+            for (let i = 0; i < 5; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return captcha;
+        }
+
+        // Refresh captcha
+        refreshCaptcha.addEventListener('click', function() {
+            currentCaptcha = generateCaptcha();
+            captchaCode.textContent = currentCaptcha;
+            captchaInput.value = '';
+        });
+
+        // Form submission
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Hide previous errors
+            errorMessage.classList.remove('show');
+            errorMessage.textContent = '';
+
+            // Validate captcha
+            if (captchaInput.value.toUpperCase() !== currentCaptcha) {
+                errorMessage.textContent = '❌ Captcha code is incorrect. Please try again.';
+                errorMessage.classList.add('show');
+                return;
+            }
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Validate fields
+            if (!name || !email || !message) {
+                errorMessage.textContent = '❌ Please fill in all required fields.';
+                errorMessage.classList.add('show');
+                return;
+            }
+
+            // Show loading state
+            submitButton.classList.add('sending');
+            submitButton.disabled = true;
+
+            // Simulate sending (replace with actual form submission)
+            setTimeout(() => {
+                // Show success state
+                submitButton.classList.remove('sending');
+                submitButton.classList.add('success');
+                
+                setTimeout(() => {
+                    // Hide form and show success message
+                    contactForm.style.display = 'none';
+                    successMessage.classList.add('show');
+                    
+                    // In production, you would submit to a backend here
+                    console.log('Form submitted:', { name, email, message });
+                    
+                    // Or open email client
+                    // window.location.href = `mailto:verneshalachele@icloud.com?subject=Contact from ${name}&body=${message}`;
+                    
+                }, 1000);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
