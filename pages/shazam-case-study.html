@@ -217,12 +217,16 @@
             </div>
 
             <div style="margin-top: 4rem;">
-                <h3>"How Might We" Questions</h3>
+                <h3>"How Might We" Questions & Journey Map</h3>
                 <p class="intro-text">Sylvester's journey helped us pinpoint the friction, and our HMW questions opened the door to a more connected, discovery-driven experience.</p>
                 
-                <!-- Image Placeholder -->
-                <div class="full-width-image" style="margin-top: 2rem;">
-                    <p>HMW Statements & Journey Map<br><em style="font-size: 0.9rem; color: #999;">(Add HMW and journey map images)</em></p>
+                <div style="margin-top: 2rem;">
+                    <h4 style="font-size: 1.2rem; color: #212529; margin-bottom: 1rem;">User Journey Map</h4>
+                    <p style="font-size: 1rem; color: #6C757D; margin-bottom: 1.5rem;">Click to view the progressive journey stages. Use arrows to navigate through each step.</p>
+                    
+                    <div class="image-gallery">
+                        <img src="../images/shazam/journey-map-5.png" alt="Complete user journey map showing Think, Feeling, Do, and Opportunity across all stages" class="gallery-image clickable-image" onclick="openJourneyLightbox(4)">
+                    </div>
                 </div>
             </div>
         </section>
@@ -240,8 +244,13 @@
                 <h3>Sketches: Exploring the Possibilities</h3>
                 <p>We began sketching with one goal in mind: transform Shazam's song result screen from a static endpoint into a dynamic launchpad for discovery.</p>
                 
-                <div class="full-width-image" style="margin-top: 2rem;">
-                    <p>Early Sketches & Concepts<br><em style="font-size: 0.9rem; color: #999;">(Add sketch images)</em></p>
+                <div style="margin-top: 2rem;">
+                    <h4 style="font-size: 1.2rem; color: #212529; margin-bottom: 1rem;">Early Concept Sketches</h4>
+                    <p style="font-size: 1rem; color: #6C757D; margin-bottom: 1.5rem;">Click to view larger. Exploring save confirmations, tagging, user profiles, and social discovery.</p>
+                    
+                    <div class="image-gallery">
+                        <img src="../images/shazam/sketches.png" alt="Early sketches exploring different screens: Song Result Page with heart icon, Tag Discovery Context Page, Save Confirmation State, User Profile Page, and Other User's Playlist/Discoveries" class="gallery-image clickable-image" onclick="openSketchesLightbox(0)">
+                    </div>
                 </div>
             </div>
 
@@ -497,8 +506,8 @@
 
     <script src="../js/script.js"></script>
     <script>
-        // Lightbox functionality for image gallery
-        const images = [
+        // Affinity Map Lightbox
+        const affinityImages = [
             {
                 src: '../images/shazam/affinity-map-overview.png',
                 alt: 'Affinity map showing user insights clustered into themes: Discovery, Why, Social, Convenience, Information, and Frustrations'
@@ -509,17 +518,65 @@
             }
         ];
 
+        // Journey Map Lightbox
+        const journeyImages = [
+            {
+                src: '../images/shazam/journey-map-1.png',
+                alt: 'Journey map showing all four stages: Hears a song at a restaurant, Identifying the song, Sees Results, Decides What to do Next'
+            },
+            {
+                src: '../images/shazam/journey-map-2.png',
+                alt: 'Journey map stage 1: Hears a song at a restaurant - Think, Feeling, Do, and Opportunity'
+            },
+            {
+                src: '../images/shazam/journey-map-3.png',
+                alt: 'Journey map stages 1-2: From hearing the song to identifying it'
+            },
+            {
+                src: '../images/shazam/journey-map-4.png',
+                alt: 'Journey map stages 1-3: From hearing to identifying to seeing results'
+            },
+            {
+                src: '../images/shazam/journey-map-5.png',
+                alt: 'Complete journey map: All four stages showing the full user experience from discovery to decision'
+            }
+        ];
+
+        // Sketches Lightbox
+        const sketchesImages = [
+            {
+                src: '../images/shazam/sketches.png',
+                alt: 'Early sketches exploring Song Result Page, Tag Discovery Context Page, Save Confirmation State, User Profile Page, and Other User\'s Playlist/Discoveries'
+            }
+        ];
+
         let currentImageIndex = 0;
+        let currentGallery = [];
 
         function openLightbox(index) {
+            currentGallery = affinityImages;
+            showLightbox(index);
+        }
+
+        function openJourneyLightbox(index) {
+            currentGallery = journeyImages;
+            showLightbox(index);
+        }
+
+        function openSketchesLightbox(index) {
+            currentGallery = sketchesImages;
+            showLightbox(index);
+        }
+
+        function showLightbox(index) {
             currentImageIndex = index;
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const caption = document.getElementById('lightbox-caption');
 
             lightbox.style.display = 'block';
-            lightboxImg.src = images[currentImageIndex].src;
-            caption.textContent = images[currentImageIndex].alt;
+            lightboxImg.src = currentGallery[currentImageIndex].src;
+            caption.textContent = currentGallery[currentImageIndex].alt;
             
             // Prevent body scroll when lightbox is open
             document.body.style.overflow = 'hidden';
@@ -535,17 +592,17 @@
             currentImageIndex += direction;
             
             // Loop back to start/end
-            if (currentImageIndex >= images.length) {
+            if (currentImageIndex >= currentGallery.length) {
                 currentImageIndex = 0;
             } else if (currentImageIndex < 0) {
-                currentImageIndex = images.length - 1;
+                currentImageIndex = currentGallery.length - 1;
             }
             
             const lightboxImg = document.getElementById('lightbox-img');
             const caption = document.getElementById('lightbox-caption');
             
-            lightboxImg.src = images[currentImageIndex].src;
-            caption.textContent = images[currentImageIndex].alt;
+            lightboxImg.src = currentGallery[currentImageIndex].src;
+            caption.textContent = currentGallery[currentImageIndex].alt;
         }
 
         // Close lightbox with Escape key
