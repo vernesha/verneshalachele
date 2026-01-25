@@ -671,10 +671,59 @@
     position: relative;
     width: 390px;
     height: 844px;
-    background: #1a1a1a;
+    background: linear-gradient(135deg, #e8e8e8 0%, #d4d4d4 50%, #e8e8e8 100%);
     border-radius: 50px;
     padding: 12px;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+    border: 3px solid #b8b8b8;
+}
+
+/* iPhone Buttons */
+.iphone-frame::before {
+    /* Power button */
+    content: '';
+    position: absolute;
+    right: -3px;
+    top: 180px;
+    width: 3px;
+    height: 80px;
+    background: linear-gradient(90deg, #a0a0a0, #c0c0c0);
+    border-radius: 0 3px 3px 0;
+}
+
+.iphone-frame::after {
+    /* Silent switch */
+    content: '';
+    position: absolute;
+    left: -3px;
+    top: 120px;
+    width: 3px;
+    height: 35px;
+    background: linear-gradient(-90deg, #a0a0a0, #c0c0c0);
+    border-radius: 3px 0 0 3px;
+}
+
+/* Volume buttons */
+.iphone-volume-up,
+.iphone-volume-down {
+    position: absolute;
+    left: -3px;
+    width: 3px;
+    background: linear-gradient(-90deg, #a0a0a0, #c0c0c0);
+    border-radius: 3px 0 0 3px;
+}
+
+.iphone-volume-up {
+    top: 170px;
+    height: 60px;
+}
+
+.iphone-volume-down {
+    top: 245px;
+    height: 60px;
 }
 
 .iphone-notch {
@@ -698,14 +747,15 @@
     overflow: hidden;
 }
 
-/* Screen Images */
+/* Screen Images - FIT PROPERLY */
 .prototype-screen {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: top center;
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
@@ -714,6 +764,23 @@
 .prototype-screen.active {
     opacity: 1;
     pointer-events: auto;
+}
+
+/* Scrollable Screen Content */
+.iphone-screen-scroll {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+}
+
+.iphone-screen-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
 }
 
 /* Interactive Hotspots */
@@ -805,6 +872,31 @@
         height: 703px;
         border-radius: 40px;
         padding: 10px;
+    }
+    
+    .iphone-notch {
+        width: 125px;
+        height: 25px;
+    }
+    
+    .iphone-volume-up {
+        top: 145px;
+        height: 50px;
+    }
+    
+    .iphone-volume-down {
+        top: 205px;
+        height: 50px;
+    }
+    
+    .iphone-frame::before {
+        top: 150px;
+        height: 65px;
+    }
+    
+    .iphone-frame::after {
+        top: 100px;
+        height: 30px;
     }
     
     .prototype-controls {
