@@ -89,13 +89,26 @@
                             <img src="../images/shazam/prototype-10-other-profile.png" class="prototype-screen" data-screen="12" alt="Other User Profile">
                             
                             <!-- Interactive Hotspots -->
-                            <div class="hotspot hotspot-shazam-button" data-next="2" style="top: 40%; left: 50%; transform: translate(-50%, -50%); width: 180px; height: 180px; border-radius: 50%;"></div>
-                            <div class="hotspot hotspot-next" data-next="6" data-screen="5" style="top: 50%; left: 50%; width: 80%; height: 30%;"></div>
-                            <div class="hotspot hotspot-next-button" data-next="7" data-screen="6" style="bottom: 100px; right: 30px; width: 120px; height: 50px;"></div>
-                            <div class="hotspot hotspot-confirm" data-next="8" data-screen="7" style="bottom: 100px; right: 30px; width: 140px; height: 50px;"></div>
-                            <div class="hotspot hotspot-profile" data-next="10" data-screen="9" style="bottom: 60px; left: 50%; transform: translateX(-50%); width: 80px; height: 80px;"></div>
-                            <div class="hotspot hotspot-discover" data-next="11" data-screen="10" style="bottom: 60px; left: 30%; width: 80px; height: 80px;"></div>
-                            <div class="hotspot hotspot-user" data-next="12" data-screen="11" style="top: 560px; left: 20%; width: 80px; height: 80px; border-radius: 50%;"></div>
+                            <!-- Screen 1: Home - Click Shazam button -->
+                            <div class="hotspot hotspot-shazam-button" data-next="2" data-screen="1" style="top: 45%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; border-radius: 50%;"></div>
+                            
+                            <!-- Screen 5: Song Result - Click heart icon (top right area) -->
+                            <div class="hotspot hotspot-heart" data-next="6" data-screen="5" style="top: 200px; right: 30px; width: 60px; height: 60px; border-radius: 50%;"></div>
+                            
+                            <!-- Screen 6: Tag Popup - Click NEXT button -->
+                            <div class="hotspot hotspot-next-button" data-next="7" data-screen="6" style="bottom: 100px; right: 20px; width: 130px; height: 55px; border-radius: 30px;"></div>
+                            
+                            <!-- Screen 7: Which Store - Click CONFIRM button -->
+                            <div class="hotspot hotspot-confirm" data-next="8" data-screen="7" style="bottom: 100px; right: 20px; width: 150px; height: 55px; border-radius: 30px;"></div>
+                            
+                            <!-- Screen 9: Song Result Tagged - Click fan profile (echohunter middle) -->
+                            <div class="hotspot hotspot-fan-profile" data-next="10" data-screen="9" style="top: 485px; left: 50%; transform: translateX(-50%); width: 80px; height: 80px; border-radius: 50%;"></div>
+                            
+                            <!-- Screen 10: Sylvester Profile - Click Discover in bottom nav -->
+                            <div class="hotspot hotspot-discover-nav" data-next="11" data-screen="10" style="bottom: 50px; left: 28%; width: 80px; height: 80px;"></div>
+                            
+                            <!-- Screen 11: Discover - Click Tweety profile in Recent Profiles -->
+                            <div class="hotspot hotspot-tweety-profile" data-next="12" data-screen="11" style="top: 550px; left: 25%; width: 90px; height: 90px; border-radius: 50%;"></div>
                         </div>
                     </div>
                     
@@ -561,18 +574,18 @@
         
         // Screen flow configuration
         const screenFlow = {
-            1: { next: 2, hotspot: '.hotspot-shazam-button' },
-            2: { next: 3, auto: true, delay: 800 },
-            3: { next: 4, auto: true, delay: 800 },
-            4: { next: 5, auto: true, delay: 800 },
-            5: { next: 6, hotspot: '.hotspot-next' },
-            6: { next: 7, hotspot: '.hotspot-next-button' },
-            7: { next: 8, hotspot: '.hotspot-confirm' },
-            8: { next: 9, auto: true, delay: 1500 },
-            9: { next: 10, hotspot: '.hotspot-profile' },
-            10: { next: 11, hotspot: '.hotspot-discover' },
-            11: { next: 12, hotspot: '.hotspot-user' },
-            12: { next: 1 }
+            1: { next: 2, hotspot: '.hotspot-shazam-button' },      // Home → Click Shazam
+            2: { next: 3, auto: true, delay: 600 },                  // Listening 1 → 2 (auto)
+            3: { next: 4, auto: true, delay: 600 },                  // Listening 2 → 3 (auto)
+            4: { next: 5, auto: true, delay: 600 },                  // Listening 3 → Song Result (auto)
+            5: { next: 6, hotspot: '.hotspot-heart' },               // Song Result → Click heart → Tag popup
+            6: { next: 7, hotspot: '.hotspot-next-button' },         // Tag popup → Click NEXT
+            7: { next: 8, hotspot: '.hotspot-confirm' },             // Which store → Click CONFIRM
+            8: { next: 9, auto: true, delay: 1500 },                 // Save notification (auto)
+            9: { next: 10, hotspot: '.hotspot-fan-profile' },        // Song Result Tagged → Click fan
+            10: { next: 11, hotspot: '.hotspot-discover-nav' },      // Sylvester Profile → Click Discover
+            11: { next: 12, hotspot: '.hotspot-tweety-profile' },    // Discover → Click Tweety
+            12: { next: 1 }                                           // Tweety Profile → Restart
         };
         
         function showScreen(screenNumber) {
