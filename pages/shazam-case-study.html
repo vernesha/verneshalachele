@@ -65,6 +65,7 @@
 
         <!-- Hero Image/Video Placeholder -->
         <div class="hero-image-wrapper">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem; color: #212529;">Interactive Prototype</h2>
             <!-- Figma Embedded Prototype -->
             <div class="figma-prototype-container">
                 <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="800" src="https://embed.figma.com/proto/XgXoPXGMOreM6zqcsKwg6k/Project-3--Prototype?page-id=812%3A6672&node-id=812-6673&viewport=1413%2C158%2C0.5&scaling=scale-down&content-scaling=fixed&starting-point-node-id=812%3A6777&embed-host=share" allowfullscreen></iframe>
@@ -77,10 +78,16 @@
         <!-- Introduction -->
         <section id="overview" class="case-study-section">
             <div class="section-label">01 — INTRODUCTION</div>
-            <h2>From Recognition to Discovery</h2>
+            <h2>From <span style="color: #E8727D; font-weight: 700;">Recognition</span> to Discovery</h2>
             <p class="large-text">
                 Shazam has mastered one thing: identifying music in seconds. But the experience surrounding that moment—saving songs, browsing past Shazams, and discovering new music—has room to grow.
             </p>
+            
+            <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: #f8f9fa; border-left: 4px solid #E8727D;">
+                <h3 style="font-size: 2.5rem; line-height: 1.3; font-weight: 700; margin: 0;">
+                    "This redesign is driven by this simple but powerful question: How do we allow users to <em style="color: #E8727D;">identify</em> songs AND <em style="color: #E8727D;">discover quality music</em>?"
+                </h3>
+            </div>
             <p class="large-text">
                 Through research and usability testing, we found users often hit a dead end after identifying a track, unsure where to go next or how to explore related music. This redesign focuses on strengthening the <strong>Identify → Save → Explore</strong> journey.
             </p>
@@ -173,30 +180,13 @@
                         <p>Many didn't know Auto-Shazam existed. Users described discovery as "shallow, repetitive, or lonely."</p>
                     </div>
                     <div class="insight-card">
-                        <h4>✗ No continuity</h4>
-                        <p>Saving songs required too many steps. Streaming apps reinforced echo chambers. Users craved connection and context in discovery.</p>
+                        <h4>✗ Need for human connection, not algorithms</h4>
+                        <p>Saving songs required too many steps. Streaming apps created echo chambers with algorithm-driven playlists. Users craved authentic connection and context in discovery—not just what an algorithm thinks they'll like.</p>
+                        <blockquote style="margin-top: 1rem; padding-left: 1rem; border-left: 3px solid #E8727D; font-style: italic; color: #6C757D;">
+                            "I want to discover music through people, not just algorithms telling me what I should listen to."
+                        </blockquote>
                     </div>
                 </div>
-            </div>
-
-            <!-- Affinity Map Images - Clickable Gallery -->
-            <div style="margin-top: 3rem;">
-                <h4 style="font-size: 1.2rem; color: #212529; margin-bottom: 1rem;">Affinity Map from User Interviews</h4>
-                <p style="font-size: 1rem; color: #6C757D; margin-bottom: 1.5rem;">Click images to view larger. Use arrows to navigate between views.</p>
-                
-                <div class="image-gallery">
-                    <img src="../images/shazam/affinity-map-overview.png" alt="Affinity map showing user insights clustered into themes: Discovery, Why, Social, Convenience, Information, and Frustrations" class="gallery-image clickable-image" onclick="openLightbox(0)">
-                    <img src="../images/shazam/affinity-map-detailed.png" alt="Detailed affinity map showing what users do after song identification, reasons for using Shazam, improvements needed, and other apps used" class="gallery-image clickable-image" onclick="openLightbox(1)">
-                </div>
-            </div>
-
-            <!-- Lightbox Modal -->
-            <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-                <span class="lightbox-close">&times;</span>
-                <span class="lightbox-prev" onclick="event.stopPropagation(); changeImage(-1)">&#10094;</span>
-                <span class="lightbox-next" onclick="event.stopPropagation(); changeImage(1)">&#10095;</span>
-                <img id="lightbox-img" class="lightbox-content" onclick="event.stopPropagation()">
-                <div class="lightbox-caption" id="lightbox-caption"></div>
             </div>
 
             <p class="large-text" style="margin-top: 3rem;">
@@ -209,19 +199,20 @@
             <div class="section-label">04 — DEFINING THE USER</div>
             <h2>Meet Sylvester</h2>
             <p class="intro-text">
-                To move forward, we needed to define who we were designing for. Sylvester emerged—a music lover whose habits, frustrations, and goals embodied the gaps we saw across our research.
+                We created Sylvester so that we could remain user-focused and remember these pain points as we moved into ideation. His habits, frustrations, and goals embodied the gaps we saw across our research.
             </p>
 
             <!-- Image Placeholder -->
             <div class="full-width-image" style="margin-top: 2rem;">
                 <div class="persona-card">
-                    <img src="../images/shazam/sylvester-persona.png" alt="Sylvester Persona - Student, barista, and music enthusiast who curates playlists and discovers music through Spotify, outings, and friends" style="width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <img src="../images/shazam/sylvester-persona.png" alt="Sylvester Persona - Student, barista, and music enthusiast who curates playlists and discovers music through Spotify, outings, and friends" style="width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer;" onclick="openPersonaLightbox()">
+                    <p style="text-align: center; color: #6C757D; margin-top: 1rem; font-size: 0.95rem;">Click to enlarge</p>
                 </div>
             </div>
 
             <div style="margin-top: 4rem;">
-                <h3>"How Might We" Questions & Journey Map</h3>
-                <p class="intro-text">Sylvester's journey helped us pinpoint the friction, and our HMW questions opened the door to a more connected, discovery-driven experience.</p>
+                <h3>From Insights to Opportunities</h3>
+                <p class="intro-text">How might we bridge the gap between users' current experience and their desired experience?</p>
                 
                 <div style="margin-top: 2rem;">
                     <h4 style="font-size: 1.2rem; color: #212529; margin-bottom: 1rem;">User Journey Map</h4>
@@ -239,13 +230,13 @@
             <div class="section-label">05 — IDEATION</div>
             <h2>From Insights to Possibilities</h2>
             <p class="intro-text">
-                With a clear understanding of our users and the gaps in their experience, we shifted into ideation. Guided by Sylvester's needs and our HMWs, we explored multiple directions for transforming Shazam.
+                With a clear understanding of our users and the gaps in their experience, we shifted into ideation. Guided by Sylvester's needs and our research insights, we explored multiple directions for transforming Shazam into a <strong>dynamic launchpad for discovery</strong>.
             </p>
 
             <!-- Sketches -->
             <div style="margin-top: 3rem;">
-                <h3>Sketches: Exploring the Possibilities</h3>
-                <p>We began sketching with one goal in mind: transform Shazam's song result screen from a static endpoint into a dynamic launchpad for discovery.</p>
+                <h3>We began sketching</h3>
+                <p class="large-text">We began exploring ways to extend the moment of song identification into a broader discovery journey—focusing on contextual tagging, social connections, and personalized playlists.</p>
                 
                 <div style="margin-top: 2rem;">
                     <h4 style="font-size: 1.2rem; color: #212529; margin-bottom: 1rem;">Early Concept Sketches</h4>
@@ -264,7 +255,7 @@
                     <p>"What if we reframed the 'identified song' screen as a launchpad rather than a dead end?"</p>
                 </div>
                 <p class="large-text" style="margin-top: 2rem;">
-                    Instead of simply showing the track name, we imagined it as a gateway to deeper discovery: related songs, artist credits, user-generated playlists, and people who Shazamed the same track. This shift unlocked the core direction of our redesign—<strong>transforming a single moment into a continuous journey</strong>.
+                    Instead of simply showing the track name, we imagined it as a <strong>gateway</strong> to deeper discovery: related songs, artist credits, user-generated playlists, and <strong>people</strong> who Shazamed the same track. This shift unlocked the core direction of our redesign—<strong>transforming a single moment into a continuous journey</strong>.
                 </p>
             </div>
         </section>
@@ -503,6 +494,15 @@
         </section>
     </div>
 
+    <!-- Lightbox Modal for all images -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <span class="lightbox-prev" onclick="event.stopPropagation(); changeImage(-1)">&#10094;</span>
+        <span class="lightbox-next" onclick="event.stopPropagation(); changeImage(1)">&#10095;</span>
+        <img id="lightbox-img" class="lightbox-content" onclick="event.stopPropagation()">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
     <footer>
         <h2 class="footer-name">Vernesha LaChele © 2026</h2>
     </footer>
@@ -565,6 +565,15 @@
         function openJourneyLightbox(index) {
             currentGallery = journeyImages;
             showLightbox(index);
+        }
+
+        function openPersonaLightbox() {
+            const personaImages = [{
+                src: '../images/shazam/sylvester-persona.png',
+                alt: 'Sylvester Persona - Student, barista, and music enthusiast'
+            }];
+            currentGallery = personaImages;
+            showLightbox(0);
         }
 
         function openSketchesLightbox(index) {
