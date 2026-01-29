@@ -302,24 +302,86 @@
             <!-- Key Design Changes -->
             <div style="margin-top: 4rem;">
                 <h3>Key Design Changes from Testing</h3>
+                <p class="intro-text" style="margin-bottom: 2rem;">We conducted 3 rounds of usability testing with 5 participants. Here's what we learned and how we iterated.</p>
                 
                 <div class="insights-grid" style="margin-top: 2rem;">
                     <div class="insight-card">
                         <h4>Home & Tagging</h4>
-                        <p><strong>Problem:</strong> Generic tags like "mall" felt meaningless<br><strong>Solution:</strong> Replaced with specific contextual tags (e.g., "LAX Airport") to create memory cues tied to the discovery moment</p>
+                        <p style="color: #E8727D; font-weight: 600; margin-bottom: 0.5rem;">Round 1 Discovery</p>
+                        <p><strong>Problem:</strong> Generic tags like "mall" felt meaningless. Users couldn't remember discovery context.</p>
+                        <blockquote style="margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #E8727D; font-style: italic; color: #6C757D;">
+                            "Don't see the point of tagging without specific location. Which coffee shop? Where?"
+                        </blockquote>
+                        <p><strong>Solution:</strong> Replaced with specific contextual tags (e.g., "LAX Airport," "The Corner Store") to create memory cues tied to the discovery moment</p>
+                        <p style="color: #28a745; font-weight: 600; margin-top: 0.5rem;">✓ Result: Users found tags meaningful when tied to specific places</p>
                     </div>
+
                     <div class="insight-card">
-                        <h4>Song Results</h4>
-                        <p><strong>Problem:</strong> 3/5 users said initial layout felt too dense<br><strong>Solution:</strong> Increased whitespace, limited items shown at once, moved "Fans of This Song" higher to encourage social exploration</p>
+                        <h4>Song Result Page</h4>
+                        <p style="color: #E8727D; font-weight: 600; margin-bottom: 0.5rem;">Round 1-2 Discovery</p>
+                        <p><strong>Problem:</strong> 3/5 users said initial layout felt too dense. Users got stuck on what to do next.</p>
+                        <blockquote style="margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #E8727D; font-style: italic; color: #6C757D;">
+                            "Took a couple of minutes to figure out what to do next. User scrolled through the page and then finally clicked the heart button."
+                        </blockquote>
+                        <p><strong>Solution:</strong> Increased whitespace, limited items shown at once, moved "Fans of This Song" higher to encourage social exploration</p>
+                        <p style="color: #28a745; font-weight: 600; margin-top: 0.5rem;">✓ Result: Round 3 users completed save action without hesitation</p>
                     </div>
+
                     <div class="insight-card">
                         <h4>Save Behavior</h4>
-                        <p><strong>Problem:</strong> Plus icon wasn't intuitive<br><strong>Solution:</strong> Replaced with heart icon, added top-bar notification to confirm saves, maintained discovery flow</p>
+                        <p style="color: #E8727D; font-weight: 600; margin-bottom: 0.5rem;">Round 1 Discovery</p>
+                        <p><strong>Problem:</strong> Plus icon wasn't intuitive as save action</p>
+                        <blockquote style="margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #E8727D; font-style: italic; color: #6C757D;">
+                            "Where to save song…like? [pauses] Was able to find it after saying that to realize"
+                        </blockquote>
+                        <p><strong>Solution:</strong> Replaced with heart icon (universal "like/save"), added top-bar notification to confirm saves, maintained discovery flow</p>
+                        <p style="color: #28a745; font-weight: 600; margin-top: 0.5rem;">✓ Result: "Finding the song was simple. Easy to follow someone and save music"</p>
                     </div>
+
                     <div class="insight-card">
-                        <h4>Continuity</h4>
-                        <p><strong>Problem:</strong> Redirecting after save broke momentum<br><strong>Solution:</strong> Maintained song result page as persistent discovery surface with lightweight inline confirmation</p>
+                        <h4>Page Continuity</h4>
+                        <p style="color: #E8727D; font-weight: 600; margin-bottom: 0.5rem;">Round 1-2 Critical Issue</p>
+                        <p><strong>Problem:</strong> Redirecting after save broke momentum. Users expected to stay on song result page.</p>
+                        <blockquote style="margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #E8727D; font-style: italic; color: #6C757D;">
+                            "Once added song to profile, it brought her to a different page...We stayed here, we didn't go somewhere new, but it changed. Doesn't feel right."
+                        </blockquote>
+                        <p><strong>Solution:</strong> Maintained song result page as persistent discovery surface with lightweight inline confirmation instead of full page redirect</p>
+                        <p style="color: #28a745; font-weight: 600; margin-top: 0.5rem;">✓ Result: Users stayed in discovery flow and explored fans/related content after saving</p>
                     </div>
+
+                    <div class="insight-card">
+                        <h4>Visual Hierarchy</h4>
+                        <p style="color: #E8727D; font-weight: 600; margin-bottom: 0.5rem;">Round 2 Spacing Issues</p>
+                        <p><strong>Problem:</strong> Inconsistent spacing throughout app. Footer icons too large, pulling attention from primary content.</p>
+                        <blockquote style="margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #E8727D; font-style: italic; color: #6C757D;">
+                            "The Icons in the footer are too big, pulling on the user's attention when this nav bar is a secondary function."
+                        </blockquote>
+                        <p><strong>Solution:</strong> Refined spacing between sections, reduced footer icon size, ensured consistent alignment across all pages</p>
+                        <p style="color: #28a745; font-weight: 600; margin-top: 0.5rem;">✓ Result: "Users liked the simplicity of the typography making the app scannable and easy to read"</p>
+                    </div>
+
+                    <div class="insight-card">
+                        <h4>Privacy & Context</h4>
+                        <p style="color: #E8727D; font-weight: 600; margin-bottom: 0.5rem;">Round 1 Confusion</p>
+                        <p><strong>Problem:</strong> Users didn't understand why profiles were limited or what privacy settings meant</p>
+                        <blockquote style="margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #E8727D; font-style: italic; color: #6C757D;">
+                            "What's the lock for? Why would they need to protect the privacy of generic tags?"
+                        </blockquote>
+                        <p><strong>Solution:</strong> Added clear privacy indicators, public/private toggle during tagging, explained limited profiles with "Follow to see full profile"</p>
+                        <p style="color: #28a745; font-weight: 600; margin-top: 0.5rem;">✓ Result: Users understood privacy controls and profile limitations</p>
+                    </div>
+                </div>
+
+                <!-- Testing Rounds Summary -->
+                <div style="margin-top: 3rem; padding: 2rem; background: #f8f9fa; border-radius: 12px; border-left: 4px solid #E8727D;">
+                    <h4 style="margin-top: 0;">What We Learned Across 3 Rounds</h4>
+                    <ul style="font-size: 1.05rem; line-height: 1.8; color: #495057;">
+                        <li><strong>Specificity matters:</strong> Users remembered "The Corner Store" but not "restaurant"</li>
+                        <li><strong>Stay on the page:</strong> Redirects after saving broke discovery momentum</li>
+                        <li><strong>Visual clarity wins:</strong> Heart icon universally understood vs. plus icon confusion</li>
+                        <li><strong>Space creates focus:</strong> Generous whitespace made the app "scannable and easy to read"</li>
+                        <li><strong>Privacy needs clarity:</strong> Users wanted control but needed explanation of what was protected</li>
+                    </ul>
                 </div>
             </div>
 
