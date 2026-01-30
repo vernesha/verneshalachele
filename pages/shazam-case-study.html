@@ -402,7 +402,7 @@
                         </div>
                     </div>
 
-                    <div class="insight-card">
+                    <div class="insight-card testing-card-with-carousel">
                         <h4>Page Continuity</h4>
                         <p style="color: #E8727D; font-weight: 600; margin-bottom: 0.5rem;">Round 1-2 Critical Issue</p>
                         <p><strong>Problem:</strong> Redirecting after save broke momentum. Users expected to stay on song result page.</p>
@@ -411,9 +411,29 @@
                         </blockquote>
                         <p><strong>Solution:</strong> Maintained song result page as persistent discovery surface with lightweight inline confirmation instead of full page redirect</p>
                         <p style="color: #28a745; font-weight: 600; margin-top: 0.5rem;">✓ Result: Users stayed in discovery flow and explored fans/related content after saving</p>
+                        
+                        <!-- Wireframe Carousel on Hover -->
+                        <div class="wireframe-carousel">
+                            <div class="carousel-header">
+                                <span class="carousel-label">Wireframe Progression</span>
+                                <span class="carousel-counter"><span class="current-slide">1</span> / 2</span>
+                            </div>
+                            <div class="carousel-slides">
+                                <div class="carousel-slide active">
+                                    <img src="../images/shazam/wireframes/continuity-v1.png" alt="Version 1: Page redirect after save">
+                                    <p class="slide-caption">V1: Redirects to profile (breaks flow)</p>
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../images/shazam/wireframes/continuity-v2.png" alt="Version 2: Inline notification">
+                                    <p class="slide-caption">V2: Stays on page with notification</p>
+                                </div>
+                            </div>
+                            <button class="carousel-prev" onclick="event.stopPropagation(); changeCarouselSlide(this, -1)">‹</button>
+                            <button class="carousel-next" onclick="event.stopPropagation(); changeCarouselSlide(this, 1)">›</button>
+                        </div>
                     </div>
 
-                    <div class="insight-card">
+                    <div class="insight-card testing-card-with-carousel">
                         <h4>Visual Hierarchy</h4>
                         <p style="color: #E8727D; font-weight: 600; margin-bottom: 0.5rem;">Round 2 Spacing Issues</p>
                         <p><strong>Problem:</strong> Inconsistent spacing throughout app. Footer icons too large, pulling attention from primary content.</p>
@@ -422,9 +442,29 @@
                         </blockquote>
                         <p><strong>Solution:</strong> Refined spacing between sections, reduced footer icon size, ensured consistent alignment across all pages</p>
                         <p style="color: #28a745; font-weight: 600; margin-top: 0.5rem;">✓ Result: "Users liked the simplicity of the typography making the app scannable and easy to read"</p>
+                        
+                        <!-- Wireframe Carousel on Hover -->
+                        <div class="wireframe-carousel">
+                            <div class="carousel-header">
+                                <span class="carousel-label">Wireframe Progression</span>
+                                <span class="carousel-counter"><span class="current-slide">1</span> / 2</span>
+                            </div>
+                            <div class="carousel-slides">
+                                <div class="carousel-slide active">
+                                    <img src="../images/shazam/wireframes/hierarchy-v1.png" alt="Version 1: Inconsistent spacing">
+                                    <p class="slide-caption">V1: Large footer, tight spacing</p>
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../images/shazam/wireframes/hierarchy-v2.png" alt="Version 2: Refined hierarchy">
+                                    <p class="slide-caption">V2: Balanced spacing, smaller footer</p>
+                                </div>
+                            </div>
+                            <button class="carousel-prev" onclick="event.stopPropagation(); changeCarouselSlide(this, -1)">‹</button>
+                            <button class="carousel-next" onclick="event.stopPropagation(); changeCarouselSlide(this, 1)">›</button>
+                        </div>
                     </div>
 
-                    <div class="insight-card">
+                    <div class="insight-card testing-card-with-carousel">
                         <h4>Privacy & Context</h4>
                         <p style="color: #E8727D; font-weight: 600; margin-bottom: 0.5rem;">Round 1 Confusion</p>
                         <p><strong>Problem:</strong> Users didn't understand why profiles were limited or what privacy settings meant</p>
@@ -433,6 +473,26 @@
                         </blockquote>
                         <p><strong>Solution:</strong> Added clear privacy indicators, public/private toggle during tagging, explained limited profiles with "Follow to see full profile"</p>
                         <p style="color: #28a745; font-weight: 600; margin-top: 0.5rem;">✓ Result: Users understood privacy controls and profile limitations</p>
+                        
+                        <!-- Wireframe Carousel on Hover -->
+                        <div class="wireframe-carousel">
+                            <div class="carousel-header">
+                                <span class="carousel-label">Wireframe Progression</span>
+                                <span class="carousel-counter"><span class="current-slide">1</span> / 2</span>
+                            </div>
+                            <div class="carousel-slides">
+                                <div class="carousel-slide active">
+                                    <img src="../images/shazam/wireframes/privacy-v1.png" alt="Version 1: Unclear privacy">
+                                    <p class="slide-caption">V1: No privacy indicators</p>
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../images/shazam/wireframes/privacy-v2.png" alt="Version 2: Clear privacy controls">
+                                    <p class="slide-caption">V2: Public/private toggle added</p>
+                                </div>
+                            </div>
+                            <button class="carousel-prev" onclick="event.stopPropagation(); changeCarouselSlide(this, -1)">‹</button>
+                            <button class="carousel-next" onclick="event.stopPropagation(); changeCarouselSlide(this, 1)">›</button>
+                        </div>
                     </div>
                 </div>
 
