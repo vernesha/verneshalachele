@@ -100,6 +100,7 @@
 .case-study-section {
     padding: 6rem 0;
     border-bottom: 1px solid #E9ECEF;
+    overflow: visible;
 }
 
 .case-study-section:last-of-type {
@@ -206,6 +207,7 @@
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin: 2rem 0;
+    overflow: visible;
 }
 
 .insight-card {
@@ -761,8 +763,9 @@
     visibility: hidden;
     transform: translateX(-20px);
     transition: all 0.3s ease;
-    z-index: 100;
+    z-index: 1000;
     pointer-events: none;
+    border: 2px solid #E8727D;
 }
 
 /* Keep carousel open when hovering over EITHER the card OR the carousel itself */
