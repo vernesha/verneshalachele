@@ -302,10 +302,10 @@
             <!-- Key Design Changes -->
             <div style="margin-top: 4rem;">
                 <h3>Key Design Changes from Testing</h3>
-                <p class="intro-text" style="margin-bottom: 2rem;">We conducted 3 rounds of usability testing with 5 participants. Here's what we learned and how we iterated.</p>
+                <p class="intro-text" style="margin-bottom: 2rem;">We conducted 3 rounds of usability testing with 5 participants. Here's what we learned and how we iterated. <em style="color: #E8727D;">Hover over cards to see wireframe progression.</em></p>
                 
                 <div class="insights-grid" style="margin-top: 2rem;">
-                    <div class="insight-card">
+                    <div class="insight-card testing-card-with-carousel">
                         <h4>Home & Tagging</h4>
                         <p style="color: #E8727D; font-weight: 600; margin-bottom: 0.5rem;">Round 1 Discovery</p>
                         <p><strong>Problem:</strong> Generic tags like "mall" felt meaningless. Users couldn't remember discovery context.</p>
@@ -314,9 +314,33 @@
                         </blockquote>
                         <p><strong>Solution:</strong> Replaced with specific contextual tags (e.g., "LAX Airport," "The Corner Store") to create memory cues tied to the discovery moment</p>
                         <p style="color: #28a745; font-weight: 600; margin-top: 0.5rem;">✓ Result: Users found tags meaningful when tied to specific places</p>
+                        
+                        <!-- Wireframe Carousel on Hover -->
+                        <div class="wireframe-carousel">
+                            <div class="carousel-header">
+                                <span class="carousel-label">Wireframe Progression</span>
+                                <span class="carousel-counter"><span class="current-slide">1</span> / 3</span>
+                            </div>
+                            <div class="carousel-slides">
+                                <div class="carousel-slide active">
+                                    <img src="../images/shazam/wireframes/tagging-v1.png" alt="Version 1: Generic tags">
+                                    <p class="slide-caption">V1: Generic tags ("mall")</p>
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../images/shazam/wireframes/tagging-v2.png" alt="Version 2: Categories">
+                                    <p class="slide-caption">V2: Category selection</p>
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../images/shazam/wireframes/tagging-v3.png" alt="Version 3: Specific locations">
+                                    <p class="slide-caption">V3: Specific locations</p>
+                                </div>
+                            </div>
+                            <button class="carousel-prev" onclick="event.stopPropagation(); changeCarouselSlide(this, -1)">‹</button>
+                            <button class="carousel-next" onclick="event.stopPropagation(); changeCarouselSlide(this, 1)">›</button>
+                        </div>
                     </div>
 
-                    <div class="insight-card">
+                    <div class="insight-card testing-card-with-carousel">
                         <h4>Song Result Page</h4>
                         <p style="color: #E8727D; font-weight: 600; margin-bottom: 0.5rem;">Round 1-2 Discovery</p>
                         <p><strong>Problem:</strong> 3/5 users said initial layout felt too dense. Users got stuck on what to do next.</p>
@@ -325,9 +349,33 @@
                         </blockquote>
                         <p><strong>Solution:</strong> Increased whitespace, limited items shown at once, moved "Fans of This Song" higher to encourage social exploration</p>
                         <p style="color: #28a745; font-weight: 600; margin-top: 0.5rem;">✓ Result: Round 3 users completed save action without hesitation</p>
+                        
+                        <!-- Wireframe Carousel on Hover -->
+                        <div class="wireframe-carousel">
+                            <div class="carousel-header">
+                                <span class="carousel-label">Wireframe Progression</span>
+                                <span class="carousel-counter"><span class="current-slide">1</span> / 3</span>
+                            </div>
+                            <div class="carousel-slides">
+                                <div class="carousel-slide active">
+                                    <img src="../images/shazam/wireframes/song-result-v1.png" alt="Version 1: Dense layout">
+                                    <p class="slide-caption">V1: Dense layout, unclear hierarchy</p>
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../images/shazam/wireframes/song-result-v2.png" alt="Version 2: More spacing">
+                                    <p class="slide-caption">V2: Added whitespace</p>
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../images/shazam/wireframes/song-result-v3.png" alt="Version 3: Final version">
+                                    <p class="slide-caption">V3: Fans moved higher, clear CTA</p>
+                                </div>
+                            </div>
+                            <button class="carousel-prev" onclick="event.stopPropagation(); changeCarouselSlide(this, -1)">‹</button>
+                            <button class="carousel-next" onclick="event.stopPropagation(); changeCarouselSlide(this, 1)">›</button>
+                        </div>
                     </div>
 
-                    <div class="insight-card">
+                    <div class="insight-card testing-card-with-carousel">
                         <h4>Save Behavior</h4>
                         <p style="color: #E8727D; font-weight: 600; margin-bottom: 0.5rem;">Round 1 Discovery</p>
                         <p><strong>Problem:</strong> Plus icon wasn't intuitive as save action</p>
@@ -336,6 +384,26 @@
                         </blockquote>
                         <p><strong>Solution:</strong> Replaced with heart icon (universal "like/save"), added top-bar notification to confirm saves, maintained discovery flow</p>
                         <p style="color: #28a745; font-weight: 600; margin-top: 0.5rem;">✓ Result: "Finding the song was simple. Easy to follow someone and save music"</p>
+                        
+                        <!-- Wireframe Carousel on Hover -->
+                        <div class="wireframe-carousel">
+                            <div class="carousel-header">
+                                <span class="carousel-label">Wireframe Progression</span>
+                                <span class="carousel-counter"><span class="current-slide">1</span> / 2</span>
+                            </div>
+                            <div class="carousel-slides">
+                                <div class="carousel-slide active">
+                                    <img src="../images/shazam/wireframes/save-v1.png" alt="Version 1: Plus icon">
+                                    <p class="slide-caption">V1: Plus icon (confusing)</p>
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../images/shazam/wireframes/save-v2.png" alt="Version 2: Heart icon">
+                                    <p class="slide-caption">V2: Heart icon + notification</p>
+                                </div>
+                            </div>
+                            <button class="carousel-prev" onclick="event.stopPropagation(); changeCarouselSlide(this, -1)">‹</button>
+                            <button class="carousel-next" onclick="event.stopPropagation(); changeCarouselSlide(this, 1)">›</button>
+                        </div>
                     </div>
 
                     <div class="insight-card">
@@ -645,6 +713,29 @@
             }];
             currentGallery = personaImages;
             showLightbox(0);
+        }
+
+        // Wireframe Carousel Navigation
+        function changeCarouselSlide(button, direction) {
+            const carousel = button.closest('.wireframe-carousel');
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const counter = carousel.querySelector('.current-slide');
+            
+            let currentIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+            
+            // Remove active class
+            slides[currentIndex].classList.remove('active');
+            
+            // Calculate new index
+            currentIndex += direction;
+            if (currentIndex >= slides.length) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = slides.length - 1;
+            
+            // Add active class to new slide
+            slides[currentIndex].classList.add('active');
+            
+            // Update counter
+            counter.textContent = currentIndex + 1;
         }
 
         function openSketchesLightbox(index) {
