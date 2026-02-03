@@ -762,8 +762,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 700px;
-    max-width: 95vw;
+    width: 500px;
+    max-width: 90vw;
     background: white;
     border-radius: 16px;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
@@ -836,7 +836,7 @@
 .carousel-slide img {
     width: 100%;
     height: auto;
-    max-height: 600px;
+    max-height: 350px;
     object-fit: contain;
     border-radius: 8px;
     background: #f8f9fa;
