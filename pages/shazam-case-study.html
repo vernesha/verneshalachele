@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/case-study.css?v=4">
+    <link rel="stylesheet" href="../css/case-study.css?v=5">
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -389,12 +389,12 @@
                             </div>
                             <div class="carousel-slides">
                                 <div class="carousel-slide active">
-                                    <img src="../images/shazam/wireframes/save-v1.png" alt="Version 1: Plus icon">
-                                    <p class="slide-caption">V1: Plus icon (confusing)</p>
+                                    <img src="../images/shazam/wireframes/save-v1.png" alt="Version 1: Plus icon for adding">
+                                    <p class="slide-caption">V1: Plus icons (confusing save action)</p>
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="../images/shazam/wireframes/save-v2.png" alt="Version 2: Heart icon">
-                                    <p class="slide-caption">V2: Heart icon + notification</p>
+                                    <img src="../images/shazam/wireframes/save-v2.png" alt="Version 2: Heart and share icons">
+                                    <p class="slide-caption">V2: Heart icons (universal like/save) + share</p>
                                 </div>
                             </div>
                             <button class="carousel-prev" onclick="event.stopPropagation(); changeCarouselSlide(this, -1)">‹</button>
@@ -838,6 +838,62 @@
             // Update counter
             counter.textContent = currentIndex + 1;
         }
+
+        // Click to zoom wireframe images
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers to all carousel images
+            document.querySelectorAll('.wireframe-carousel img').forEach(img => {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const imgSrc = this.src;
+                    const imgAlt = this.alt;
+                    
+                    // Create fullscreen overlay
+                    const overlay = document.createElement('div');
+                    overlay.style.cssText = `
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.95);
+                        z-index: 999999;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: zoom-out;
+                        padding: 2rem;
+                    `;
+                    
+                    const fullImg = document.createElement('img');
+                    fullImg.src = imgSrc;
+                    fullImg.alt = imgAlt;
+                    fullImg.style.cssText = `
+                        max-width: 90%;
+                        max-height: 90%;
+                        object-fit: contain;
+                        border-radius: 8px;
+                        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+                    `;
+                    
+                    overlay.appendChild(fullImg);
+                    document.body.appendChild(overlay);
+                    
+                    // Close on click
+                    overlay.addEventListener('click', function() {
+                        document.body.removeChild(overlay);
+                    });
+                    
+                    // Close on ESC key
+                    document.addEventListener('keydown', function closeOnEsc(e) {
+                        if (e.key === 'Escape' && document.body.contains(overlay)) {
+                            document.body.removeChild(overlay);
+                            document.removeEventListener('keydown', closeOnEsc);
+                        }
+                    });
+                });
+            });
+        });
 
         function openSketchesLightbox(index) {
             currentGallery = sketchesImages;

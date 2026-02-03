@@ -762,8 +762,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    max-width: 90vw;
+    width: 700px;
+    max-width: 95vw;
     background: white;
     border-radius: 16px;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
@@ -836,10 +836,16 @@
 .carousel-slide img {
     width: 100%;
     height: auto;
-    max-height: 350px;
+    max-height: 600px;
     object-fit: contain;
     border-radius: 8px;
     background: #f8f9fa;
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+}
+
+.carousel-slide img:hover {
+    transform: scale(1.02);
 }
 
 .slide-caption {
@@ -848,6 +854,16 @@
     color: #6C757D;
     margin-top: 0.5rem;
     font-style: italic;
+}
+
+.carousel-slide::after {
+    content: '🔍 Click image to enlarge';
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #E8727D;
+    margin-top: 0.5rem;
+    opacity: 0.8;
 }
 
 .carousel-prev,
