@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/case-study.css?v=6">
+    <link rel="stylesheet" href="../css/case-study.css?v=7">
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -63,9 +63,15 @@
             </div>
         </div>
 
-        <!-- Hero Image Placeholder -->
-        <div class="hero-image-wrapper">
-            <img src="../images/shazam/hero-image.png" alt="Shazam redesign mockup showing song discovery interface" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
+        <!-- 3D Floating Hero Image -->
+        <div class="hero-3d-wrapper fade-in-on-scroll">
+            <div class="hero-3d tilt-container">
+                <img src="../images/shazam/hero-image.png" class="hero-base" data-depth="0" alt="Shazam home screen">
+                <!-- Floating layers - Add these images if you want 3D effect -->
+                <!-- <img src="../images/shazam/layer-button.png" class="float layer-button" data-depth="4" alt="Shazam button"> -->
+                <!-- <img src="../images/shazam/layer-card.png" class="float layer-card" data-depth="2.5" alt="Recently found card"> -->
+                <!-- <img src="../images/shazam/layer-nav.png" class="float layer-nav" data-depth="1.5" alt="Navigation bar"> -->
+            </div>
         </div>
     </section>
 
@@ -893,6 +899,75 @@
                     });
                 });
             });
+
+            // Fade in on scroll observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+
+            // 3D Tilt Effect for Hero
+            const container = document.querySelector('.tilt-container');
+            if (container) {
+                const layers = container.querySelectorAll('[data-depth]');
+                let mouseX = 0;
+                let mouseY = 0;
+                let currentX = 0;
+                let currentY = 0;
+                let requestId = null;
+
+                function updateTilt() {
+                    const dx = mouseX - currentX;
+                    const dy = mouseY - currentY;
+                    currentX += dx * 0.08;
+                    currentY += dy * 0.08;
+
+                    const rotateX = currentY * -0.15;
+                    const rotateY = currentX * 0.15;
+
+                    container.style.transform = `
+                        rotateX(${rotateX}deg)
+                        rotateY(${rotateY}deg)
+                    `;
+
+                    layers.forEach(layer => {
+                        const depth = layer.dataset.depth;
+                        layer.style.transform = `
+                            translateZ(${depth * 20}px)
+                            translateX(${currentX * depth * 0.1}px)
+                            translateY(${currentY * depth * 0.1}px)
+                        `;
+                    });
+
+                    requestId = requestAnimationFrame(updateTilt);
+                }
+
+                container.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    mouseX = (e.clientX - rect.left - rect.width / 2) / 10;
+                    mouseY = (e.clientY - rect.top - rect.height / 2) / 10;
+                    if (!requestId) updateTilt();
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    mouseX = 0;
+                    mouseY = 0;
+                    cancelAnimationFrame(requestId);
+                    requestId = null;
+                    container.style.transform = 'rotateX(0) rotateY(0)';
+                    layers.forEach(layer => {
+                        const depth = layer.dataset.depth;
+                        layer.style.transform = `translateZ(${depth * 20}px)`;
+                    });
+                });
+            }
         });
 
         function openSketchesLightbox(index) {
