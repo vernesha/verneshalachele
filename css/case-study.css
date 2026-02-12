@@ -999,7 +999,6 @@
         animation: none;
     }
 }
-/* Add these styles to your existing case-study.css file */
 
 /* ================================
    SCANNABLE RESEARCH SECTION
@@ -1009,6 +1008,7 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    max-width: 100%;
 }
 
 .key-finding {
@@ -1016,6 +1016,7 @@
     border-left: 4px solid #E8727D;
     padding: 2rem;
     border-radius: 12px;
+    max-width: 100%;
 }
 
 .key-finding h4 {
@@ -1025,17 +1026,30 @@
     font-weight: 700;
 }
 
+.key-finding p {
+    font-size: 1rem;
+    color: #6C757D;
+    line-height: 1.6;
+}
+
 .user-need-callout {
     background: #FFFFFF;
     border: 2px solid #E8727D;
     padding: 2rem;
     border-radius: 12px;
     text-align: center;
+    max-width: 100%;
 }
 
 .user-need-callout strong {
     font-size: 1.2rem;
     color: #212529;
+}
+
+.user-need-callout p {
+    font-size: 1rem;
+    color: #212529;
+    line-height: 1.6;
 }
 
 .highlight {
@@ -1075,6 +1089,7 @@
     padding: 2rem;
     border-radius: 12px;
     text-align: center;
+    max-width: 100%;
 }
 
 .challenge-statement p {
