@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wild Waves Aquatic Park</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      
+      .container {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 3rem 2rem;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 100%;
+      }
+
+      h1 {
+        color: #667eea;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        font-weight: 800;
+      }
+
+      .info-text {
+        color: #666;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+      
+      button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 16px 40px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      
+      button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+      }
+      
+      button:active {
+        transform: translateY(-1px);
+      }
+
+      .attractions-list {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        text-align: left;
+      }
+
+      .attractions-list h3 {
+        color: #333;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+
+      .attraction-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+        background: white;
+        border-radius: 8px;
+        font-size: 0.9rem;
+      }
+
+      .attraction-name {
+        color: #333;
+        font-weight: 600;
+      }
+
+      .height-req {
+        color: #667eea;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🌊 Wild Waves Aquatic Park</h1>
+      <p class="info-text">Welcome to Wild Waves! Check the height requirements below, then purchase your attraction ticket.</p>
+      
+      <div class="attractions-list">
+        <h3>🎢 Attractions & Height Requirements</h3>
+        <div class="attraction-item">
+          <span class="attraction-name">🌊 Wave Pool</span>
+          <span class="height-req">42" minimum</span>
+        </div>
+        <div class="attraction-item">
+          <span class="attraction-name">💦 Waterslide</span>
+          <span class="height-req">48" minimum</span>
+        </div>
+        <div class="attraction-item">
+          <span class="attraction-name">🏖️ Lazy River</span>
+          <span class="height-req">36" minimum</span>
+        </div>
+      </div>
+
+      <button type="button" onclick="buyTicket()">🎫 Purchase Attraction</button>
+    </div>
+
+    <script>
+      const WAVE_POOL_MIN_HEIGHT = 42; // in inches
+      const WATERSLIDE_MIN_HEIGHT = 48; // in inches
+      const LAZY_RIVER_MIN_HEIGHT = 36; // in inches
+      
+      function buyTicket() {
+        const attractionType = prompt(
+          'Which attraction do you want to visit?\n\nType:\n• "wave" for Wave Pool (42" min)\n• "water" for Waterslide (48" min)\n• "river" for Lazy River (36" min)'
+        );
+        
+        if (!attractionType) {
+          return; // User cancelled
+        }
+        
+        const userHeight = prompt("What is your height in inches?");
+        
+        if (!userHeight) {
+          return; // User cancelled
+        }
+        
+        const isAllowed = checkHeight(attractionType.toLowerCase(), parseInt(userHeight));
+        
+        console.log("User's selected attraction is " + attractionType);
+        console.log("User's height is " + userHeight + " inches");
+        
+        if (isAllowed) {
+          alert("🎉 Enjoy the " + getAttractionName(attractionType) + "!");
+        } else {
+          alert("❌ Sorry, you are not tall enough for this ride.\n\nPlease check the height requirements and try another attraction!");
+        }
+      }
+      
+      function checkHeight(attraction, height) {
+        if (attraction === "wave") {
+          return height >= WAVE_POOL_MIN_HEIGHT;
+        } else if (attraction === "water") {
+          return height >= WATERSLIDE_MIN_HEIGHT;
+        } else if (attraction === "river") {
+          return height >= LAZY_RIVER_MIN_HEIGHT;
+        } else {
+          alert("⚠️ Invalid attraction type. Please enter 'wave', 'water', or 'river'.");
+          return false;
+        }
+      }
+
+      function getAttractionName(type) {
+        const names = {
+          'wave': 'Wave Pool',
+          'water': 'Waterslide',
+          'river': 'Lazy River'
+        };
+        return names[type.toLowerCase()] || type;
+      }
+    </script>
+  </body>
+</html>

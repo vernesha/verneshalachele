@@ -276,6 +276,10 @@
             background: rgba(108, 117, 125, 0.95);
         }
 
+        .project-status-badge.complete {
+            background: rgba(40, 167, 69, 0.95);
+        }
+
         .project-header-with-xp {
             display: flex;
             justify-content: space-between;
@@ -373,6 +377,9 @@
             font-weight: 600;
             font-size: 0.95rem;
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
         }
 
         .link-demo {
@@ -402,6 +409,145 @@
             cursor: not-allowed;
             pointer-events: none;
         }
+
+        /* Wild Waves Demo Modal */
+        .demo-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .demo-modal.active {
+            display: flex;
+        }
+
+        .demo-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 80vh;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .demo-modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .demo-modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .demo-close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .demo-close-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .demo-iframe-container {
+            width: 100%;
+            height: calc(100% - 70px);
+            background: white;
+        }
+
+        .demo-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Code Modal */
+        .code-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .code-modal.active {
+            display: flex;
+        }
+
+        .code-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            max-height: 80vh;
+            background: #1e1e1e;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .code-modal-header {
+            background: #2d2d2d;
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #3d3d3d;
+        }
+
+        .code-content {
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: calc(80vh - 70px);
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #d4d4d4;
+        }
+
+        .code-content pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Syntax highlighting */
+        .keyword { color: #569cd6; }
+        .function { color: #dcdcaa; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; }
+        .number { color: #b5cea8; }
 
         .skills-learning {
             background: #FFFFFF;
@@ -558,17 +704,17 @@
                     <span class="level-title">Code Explorer</span>
                 </div>
                 <div class="xp-bar-container">
-                    <div class="xp-bar" style="width: 40%;"></div>
+                    <div class="xp-bar" style="width: 60%;"></div>
                 </div>
-                <span class="xp-text">200 / 500 XP to Level 3</span>
+                <span class="xp-text">300 / 500 XP to Level 3</span>
             </div>
 
             <!-- Achievement Badges -->
             <div class="achievement-row">
                 <div class="achievement unlocked" title="Started first project">🏆</div>
+                <div class="achievement unlocked" title="Complete JavaScript project">⭐</div>
                 <div class="achievement locked" title="Complete Bootstrap project">🔒</div>
                 <div class="achievement locked" title="Master React">🔒</div>
-                <div class="achievement locked" title="Build mobile app">🔒</div>
             </div>
         </div>
     </section>
@@ -584,6 +730,43 @@
 
             <div class="dev-projects-grid">
                 
+                <!-- Wild Waves JavaScript Project -->
+                <div class="dev-project-card">
+                    <div class="dev-project-image">
+                        🌊
+                        <div class="project-status-badge complete">✅ Complete</div>
+                    </div>
+                    <div class="dev-project-content">
+                        <div class="project-header-with-xp">
+                            <h4>Wild Waves Aquatic Park</h4>
+                            <span class="project-xp">+100 XP</span>
+                        </div>
+                        <p>Interactive JavaScript application with conditional logic, user input validation, and height verification system for theme park attractions.</p>
+                        
+                        <div class="project-progress">
+                            <div class="progress-label">
+                                <span>Progress</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="progress-bar-small">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">DOM Manipulation</span>
+                        </div>
+
+                        <div class="project-links">
+                            <button class="project-link link-demo" onclick="openWildWavesDemo()">Try Demo</button>
+                            <button class="project-link link-code" onclick="viewWildWavesCode()">View Code</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Bootstrap Portfolio Project -->
                 <div class="dev-project-card placeholder-card">
                     <div class="dev-project-image">
@@ -637,10 +820,10 @@
                         <div class="project-progress">
                             <div class="progress-label">
                                 <span>Completed</span>
-                                <span>0/15</span>
+                                <span>1/15</span>
                             </div>
                             <div class="progress-bar-small">
-                                <div class="progress-fill" style="width: 0%;"></div>
+                                <div class="progress-fill" style="width: 7%;"></div>
                             </div>
                         </div>
 
@@ -702,7 +885,7 @@
                 <div class="stat-box">
                     <div class="stat-icon">💻</div>
                     <div class="stat-number">1</div>
-                    <div class="stat-label">Active Project</div>
+                    <div class="stat-label">Completed Project</div>
                 </div>
 
                 <div class="stat-box">
@@ -713,13 +896,13 @@
 
                 <div class="stat-box">
                     <div class="stat-icon">⚡</div>
-                    <div class="stat-number">200</div>
+                    <div class="stat-number">300</div>
                     <div class="stat-label">Total XP</div>
                 </div>
 
                 <div class="stat-box">
                     <div class="stat-icon">🎯</div>
-                    <div class="stat-number">1/4</div>
+                    <div class="stat-number">2/4</div>
                     <div class="stat-label">Achievements</div>
                 </div>
             </div>
@@ -783,10 +966,126 @@
 
     </div>
 
+    <!-- Wild Waves Demo Modal -->
+    <div id="wildwaves-demo-modal" class="demo-modal">
+        <div class="demo-modal-content">
+            <div class="demo-modal-header">
+                <h3>🌊 Wild Waves Aquatic Park - Live Demo</h3>
+                <button class="demo-close-btn" onclick="closeWildWavesDemo()">×</button>
+            </div>
+            <div class="demo-iframe-container">
+                <iframe src="wildwaves.html" title="Wild Waves Demo"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wild Waves Code Modal -->
+    <div id="wildwaves-code-modal" class="code-modal">
+        <div class="code-modal-content">
+            <div class="code-modal-header">
+                <h3>🌊 Wild Waves - Source Code</h3>
+                <button class="demo-close-btn" onclick="closeWildWavesCode()">×</button>
+            </div>
+            <div class="code-content">
+                <pre><code><span class="keyword">const</span> WAVE_POOL_MIN_HEIGHT = <span class="number">42</span>; <span class="comment">// in inches</span>
+<span class="keyword">const</span> WATERSLIDE_MIN_HEIGHT = <span class="number">48</span>; <span class="comment">// in inches</span>
+<span class="keyword">const</span> LAZY_RIVER_MIN_HEIGHT = <span class="number">36</span>; <span class="comment">// in inches</span>
+
+<span class="keyword">function</span> <span class="function">buyTicket</span>() {
+  <span class="keyword">const</span> attractionType = <span class="function">prompt</span>(
+    <span class="string">'Which attraction do you want to visit?\n\nType:\n• "wave" for Wave Pool (42" min)\n• "water" for Waterslide (48" min)\n• "river" for Lazy River (36" min)'</span>
+  );
+  
+  <span class="keyword">if</span> (!attractionType) {
+    <span class="keyword">return</span>; <span class="comment">// User cancelled</span>
+  }
+  
+  <span class="keyword">const</span> userHeight = <span class="function">prompt</span>(<span class="string">"What is your height in inches?"</span>);
+  
+  <span class="keyword">if</span> (!userHeight) {
+    <span class="keyword">return</span>; <span class="comment">// User cancelled</span>
+  }
+  
+  <span class="keyword">const</span> isAllowed = <span class="function">checkHeight</span>(attractionType.<span class="function">toLowerCase</span>(), <span class="function">parseInt</span>(userHeight));
+  
+  <span class="keyword">console</span>.<span class="function">log</span>(<span class="string">"User's selected attraction is "</span> + attractionType);
+  <span class="keyword">console</span>.<span class="function">log</span>(<span class="string">"User's height is "</span> + userHeight + <span class="string">" inches"</span>);
+  
+  <span class="keyword">if</span> (isAllowed) {
+    <span class="function">alert</span>(<span class="string">"🎉 Enjoy the "</span> + <span class="function">getAttractionName</span>(attractionType) + <span class="string">"!"</span>);
+  } <span class="keyword">else</span> {
+    <span class="function">alert</span>(<span class="string">"❌ Sorry, you are not tall enough for this ride.\n\nPlease check the height requirements!"</span>);
+  }
+}
+
+<span class="keyword">function</span> <span class="function">checkHeight</span>(attraction, height) {
+  <span class="keyword">if</span> (attraction === <span class="string">"wave"</span>) {
+    <span class="keyword">return</span> height >= WAVE_POOL_MIN_HEIGHT;
+  } <span class="keyword">else if</span> (attraction === <span class="string">"water"</span>) {
+    <span class="keyword">return</span> height >= WATERSLIDE_MIN_HEIGHT;
+  } <span class="keyword">else if</span> (attraction === <span class="string">"river"</span>) {
+    <span class="keyword">return</span> height >= LAZY_RIVER_MIN_HEIGHT;
+  } <span class="keyword">else</span> {
+    <span class="function">alert</span>(<span class="string">"⚠️ Invalid attraction type. Please enter 'wave', 'water', or 'river'."</span>);
+    <span class="keyword">return false</span>;
+  }
+}
+
+<span class="keyword">function</span> <span class="function">getAttractionName</span>(type) {
+  <span class="keyword">const</span> names = {
+    <span class="string">'wave'</span>: <span class="string">'Wave Pool'</span>,
+    <span class="string">'water'</span>: <span class="string">'Waterslide'</span>,
+    <span class="string">'river'</span>: <span class="string">'Lazy River'</span>
+  };
+  <span class="keyword">return</span> names[type.<span class="function">toLowerCase</span>()] || type;
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <h2 class="footer-name">Vernesha LaChele © 2026</h2>
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+    function openWildWavesDemo() {
+        document.getElementById('wildwaves-demo-modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeWildWavesDemo() {
+        document.getElementById('wildwaves-demo-modal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    function viewWildWavesCode() {
+        document.getElementById('wildwaves-code-modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeWildWavesCode() {
+        document.getElementById('wildwaves-code-modal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    // Close modals on ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeWildWavesDemo();
+            closeWildWavesCode();
+        }
+    });
+
+    // Close modals on background click
+    document.querySelectorAll('.demo-modal, .code-modal').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeWildWavesDemo();
+                closeWildWavesCode();
+            }
+        });
+    });
+    </script>
 </body>
 </html>
