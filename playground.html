@@ -384,6 +384,46 @@
             line-height: normal !important;
         }
 
+        /* Playground-specific buttons - override global .project-link */
+        .playground-btn {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid;
+            font-family: 'Sora', sans-serif;
+            display: inline-block !important;
+            line-height: normal !important;
+            pointer-events: auto !important;
+        }
+
+        .btn-demo {
+            background: #E8727D !important;
+            color: #FFFFFF !important;
+            border-color: #E8727D !important;
+        }
+
+        .btn-demo:hover {
+            background: transparent !important;
+            color: #E8727D !important;
+        }
+
+        .btn-code {
+            background: transparent !important;
+            color: #212529 !important;
+            border-color: #E9ECEF !important;
+        }
+
+        .btn-code:hover {
+            border-color: #E8727D !important;
+            color: #E8727D !important;
+        }
+
         .link-demo {
             background: #E8727D !important;
             color: #FFFFFF !important;
@@ -763,8 +803,8 @@
                         </div>
 
                         <div class="project-links" style="display: flex !important;">
-                            <a href="wildwaves.html" target="_blank" class="project-link link-demo" style="display: inline-block !important;">View Demo</a>
-                            <a href="javascript:void(0);" class="project-link link-code" style="display: inline-block !important;" onclick="viewWildWavesCode()">View Code</a>
+                            <a href="wildwaves.html" target="_blank" class="playground-btn btn-demo" style="display: inline-block !important;">View Demo</a>
+                            <a href="javascript:void(0);" class="playground-btn btn-code" style="display: inline-block !important;" onclick="viewWildWavesCode()">View Code</a>
                         </div>
                     </div>
                 </div>
@@ -800,8 +840,8 @@
                         </div>
 
                         <div class="project-links" style="display: flex !important;">
-                            <a href="color-guessing-game.html" target="_blank" class="project-link link-demo" style="display: inline-block !important;">View Demo</a>
-                            <a href="javascript:void(0);" class="project-link link-code" style="display: inline-block !important;" onclick="viewColorGameCode()">View Code</a>
+                            <a href="color-guessing-game.html" target="_blank" class="playground-btn btn-demo" style="display: inline-block !important;">View Demo</a>
+                            <a href="javascript:void(0);" class="playground-btn btn-code" style="display: inline-block !important;" onclick="viewColorGameCode()">View Code</a>
                         </div>
                     </div>
                 </div>
