@@ -999,3 +999,90 @@
         animation: none;
     }
 }
+/* Add these styles to your existing case-study.css file */
+
+/* ================================
+   SCANNABLE RESEARCH SECTION
+   ================================ */
+
+.research-insight {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.key-finding {
+    background: #FFF5F7;
+    border-left: 4px solid #E8727D;
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.key-finding h4 {
+    color: #E8727D;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.user-need-callout {
+    background: #FFFFFF;
+    border: 2px solid #E8727D;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.user-need-callout strong {
+    font-size: 1.2rem;
+    color: #212529;
+}
+
+.highlight {
+    color: #E8727D;
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+
+.need-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+    text-align: left;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.need-list li {
+    padding: 0.8rem 0 0.8rem 2rem;
+    position: relative;
+    font-size: 1.05rem;
+    color: #495057;
+}
+
+.need-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #E8727D;
+    font-weight: 700;
+}
+
+.challenge-statement {
+    background: linear-gradient(135deg, #E8727D 0%, #D0606B 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.challenge-statement p {
+    color: white !important;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.challenge-statement strong {
+    font-size: 1.3rem;
+}
