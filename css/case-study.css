@@ -1101,3 +1101,142 @@
 .challenge-statement strong {
     font-size: 1.3rem;
 }
+/* ================================
+   ENHANCED RESEARCH SECTION STYLES
+   ADD TO YOUR case-study.css
+   ================================ */
+
+/* Competitor Grid */
+.competitor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.competitor-card {
+    background: #FFFFFF;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 2px solid #E9ECEF;
+    transition: all 0.3s ease;
+}
+
+.competitor-card:hover {
+    transform: translateY(-5px);
+    border-color: #E8727D;
+    box-shadow: 0 10px 30px rgba(232, 114, 125, 0.15);
+}
+
+.competitor-card h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 1rem;
+}
+
+.competitor-strength {
+    font-size: 1rem;
+    color: #E8727D;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    font-style: italic;
+}
+
+.competitor-reveal {
+    font-size: 0.95rem;
+    color: #6C757D;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.competitor-reveal strong {
+    color: #495057;
+}
+
+.shazam-card {
+    border-color: #E8727D;
+    background: linear-gradient(135deg, #FFF5F7 0%, #FFFFFF 100%);
+}
+
+.shazam-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(232, 114, 125, 0.25);
+}
+
+/* Enhanced Insight Cards */
+.insights-grid-enhanced {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.insight-card-enhanced {
+    background: #FFFFFF;
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 2px solid #E9ECEF;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: default;
+}
+
+.insight-card-enhanced:hover {
+    border-color: #E8727D;
+    box-shadow: 0 10px 30px rgba(232, 114, 125, 0.15);
+}
+
+.insight-number {
+    position: absolute;
+    top: -1rem;
+    left: 2rem;
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, #E8727D 0%, #D0606B 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(232, 114, 125, 0.3);
+}
+
+.insight-card-enhanced h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    line-height: 1.3;
+}
+
+.insight-statement {
+    font-size: 1rem;
+    color: #495057;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.insight-implication {
+    font-size: 0.95rem;
+    color: #6C757D;
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid #E9ECEF;
+}
+
+.insight-implication strong {
+    color: #E8727D;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .competitor-grid,
+    .insights-grid-enhanced {
+        grid-template-columns: 1fr;
+    }
+}
