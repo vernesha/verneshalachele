@@ -1627,3 +1627,100 @@
         font-size: 1.15rem;
     }
 }
+/* ================================
+   CINEMATIC TRANSITIONS & CLOSING
+   ADD TO YOUR case-study.css
+   ================================ */
+
+/* Section Transitions */
+.section-transition {
+    margin: 4rem 0;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.section-transition p {
+    font-size: 1.2rem;
+    color: #495057;
+    line-height: 1.8;
+    font-style: italic;
+    font-weight: 500;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Final Design Rationale */
+.final-design-rationale {
+    margin: 2rem 0 4rem;
+    padding: 2.5rem 3rem;
+    background: linear-gradient(135deg, #FFF5F7 0%, #FFFFFF 100%);
+    border-left: 4px solid #E8727D;
+    border-radius: 16px;
+}
+
+.final-design-rationale p {
+    font-size: 1.15rem;
+    color: #212529;
+    line-height: 1.8;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Closing Statement */
+.closing-statement {
+    margin: 3rem 0;
+    text-align: center;
+}
+
+.closing-paragraph {
+    font-size: 1.3rem;
+    color: #212529;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    font-weight: 500;
+}
+
+.closing-cta {
+    padding: 2.5rem 3rem;
+    background: linear-gradient(135deg, #E8727D 0%, #D0606B 100%);
+    border-radius: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.closing-cta p {
+    font-size: 1.4rem;
+    color: #FFFFFF;
+    line-height: 1.9;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-transition p {
+        font-size: 1.1rem;
+    }
+    
+    .final-design-rationale {
+        padding: 2rem 1.5rem;
+    }
+    
+    .final-design-rationale p {
+        font-size: 1.05rem;
+    }
+    
+    .closing-paragraph {
+        font-size: 1.15rem;
+    }
+    
+    .closing-cta {
+        padding: 2rem 1.5rem;
+    }
+    
+    .closing-cta p {
+        font-size: 1.2rem;
+    }
+}
