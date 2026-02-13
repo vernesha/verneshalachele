@@ -1240,3 +1240,125 @@
         grid-template-columns: 1fr;
     }
 }
+/* ================================
+   SYLVESTER PERSONA SECTION STYLES
+   ADD TO YOUR case-study.css
+   ================================ */
+
+/* Persona Thesis - One sentence statement */
+.persona-thesis {
+    font-size: 1.3rem;
+    color: #212529;
+    font-weight: 600;
+    line-height: 1.6;
+    text-align: center;
+    margin: 2rem auto 3rem;
+    max-width: 800px;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #FFF5F7 0%, #FFFFFF 100%);
+    border-left: 4px solid #E8727D;
+    border-radius: 12px;
+}
+
+/* Why Persona Container */
+.why-persona {
+    margin: 3rem 0;
+}
+
+.why-persona h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 1.5rem;
+}
+
+.persona-rationale {
+    background: #FFFFFF;
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 2px solid #E9ECEF;
+}
+
+.persona-rationale > p:first-child {
+    font-size: 1.1rem;
+    color: #212529;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+/* Persona Insights - Scannable Points */
+.persona-insights {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.persona-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: #F8F9FA;
+    border-radius: 12px;
+    border-left: 3px solid #E8727D;
+}
+
+.point-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.persona-point p {
+    font-size: 1.05rem;
+    color: #495057;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.persona-point strong {
+    color: #212529;
+}
+
+/* Persona Conclusion */
+.persona-conclusion {
+    font-size: 1.1rem;
+    color: #E8727D;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 0;
+    padding-top: 2rem;
+    border-top: 2px solid #E9ECEF;
+}
+
+/* Journey Transition */
+.journey-transition {
+    font-size: 1.15rem;
+    color: #212529;
+    line-height: 1.8;
+    margin: 1.5rem 0;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .persona-thesis {
+        font-size: 1.1rem;
+        padding: 1.2rem;
+    }
+
+    .persona-rationale {
+        padding: 1.5rem;
+    }
+
+    .persona-point {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .point-icon {
+        font-size: 1.2rem;
+    }
+}
