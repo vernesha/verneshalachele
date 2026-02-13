@@ -1584,3 +1584,46 @@
         padding: 1rem 1.2rem;
     }
 }
+/* ================================
+   COMPETITOR GRID WITH LOGOS
+   UPDATE YOUR EXISTING COMPETITOR STYLES
+   ================================ */
+
+/* Competitor Header - Logo + Name */
+.competitor-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+/* Competitor Logo */
+.competitor-logo {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* Competitor Card - Update existing */
+.competitor-card h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #212529;
+    margin: 0; /* Remove margin since it's in flex container now */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .competitor-logo {
+        height: 28px;
+    }
+    
+    .competitor-header {
+        gap: 0.6rem;
+    }
+    
+    .competitor-card h4 {
+        font-size: 1.15rem;
+    }
+}
