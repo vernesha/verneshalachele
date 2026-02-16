@@ -49,15 +49,9 @@
         }
 
         @keyframes gradient-shift {
-            0% {
-                background-position: 0% center;
-            }
-            50% {
-                background-position: 100% center;
-            }
-            100% {
-                background-position: 0% center;
-            }
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
         }
 
         .playground-hero p {
@@ -67,19 +61,10 @@
             margin-bottom: 2rem;
         }
 
-        .bootcamp-badge {
-            display: inline-block;
-            background: #FFE8EB;
-            color: #E8727D;
-            padding: 0.6rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+        /* ================================
+           ENHANCED LEVEL SYSTEM
+           ================================ */
 
-        /* Gamification Elements */
         .level-system {
             margin: 2rem auto;
             max-width: 500px;
@@ -111,7 +96,7 @@
 
         .xp-bar-container {
             width: 100%;
-            height: 12px;
+            height: 14px;
             background: #E9ECEF;
             border-radius: 20px;
             overflow: hidden;
@@ -121,16 +106,16 @@
 
         .xp-bar {
             height: 100%;
-            background: linear-gradient(90deg, #E8727D, #FF8C94);
+            background: linear-gradient(90deg, #E8727D, #FF8C94, #E8727D);
+            background-size: 200% 100%;
             border-radius: 20px;
-            transition: width 0.5s ease;
-            position: relative;
-            animation: pulse 2s infinite;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: shimmer 2s ease infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
         .xp-text {
@@ -139,16 +124,21 @@
             font-weight: 600;
         }
 
+        /* ================================
+           ACHIEVEMENT BADGES - ENHANCED
+           ================================ */
+
         .achievement-row {
             display: flex;
             gap: 1rem;
             justify-content: center;
             margin-top: 2rem;
+            flex-wrap: wrap;
         }
 
         .achievement {
-            width: 60px;
-            height: 60px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
             background: #FFFFFF;
             border: 3px solid #E9ECEF;
@@ -176,11 +166,37 @@
             filter: grayscale(100%);
         }
 
+        /* Tooltip on hover */
+        .achievement .achievement-tooltip {
+            position: absolute;
+            bottom: -2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #212529;
+            color: #FFFFFF;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .achievement:hover .achievement-tooltip {
+            opacity: 1;
+        }
+
         @keyframes bounce-in {
             0% { transform: scale(0); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
+
+        /* ================================
+           MAIN CONTENT
+           ================================ */
 
         .playground-content {
             max-width: 1200px;
@@ -207,6 +223,10 @@
             text-align: center;
             line-height: 1.8;
         }
+
+        /* ================================
+           PROJECT CARDS
+           ================================ */
 
         .dev-projects-grid {
             display: grid;
@@ -244,20 +264,6 @@
             transform: scale(1.05);
         }
 
-        .coming-soon-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(232, 114, 125, 0.95);
-            color: #FFFFFF;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
         .project-status-badge {
             position: absolute;
             top: 1rem;
@@ -272,12 +278,31 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .project-status-badge.locked {
-            background: rgba(108, 117, 125, 0.95);
-        }
-
         .project-status-badge.complete {
             background: rgba(40, 167, 69, 0.95);
+        }
+
+        /* Difficulty badge */
+        .difficulty-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .difficulty-badge.beginner {
+            background: rgba(40, 167, 69, 0.9);
+            color: #FFFFFF;
+        }
+
+        .difficulty-badge.intermediate {
+            background: rgba(255, 193, 7, 0.9);
+            color: #212529;
         }
 
         .project-header-with-xp {
@@ -363,28 +388,15 @@
             border: 1px solid #E9ECEF;
         }
 
+        /* ================================
+           BUTTONS
+           ================================ */
+
         .project-links {
             display: flex;
             gap: 1rem;
         }
 
-        .project-link {
-            flex: 1;
-            text-align: center;
-            padding: 0.8rem 1.5rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-family: 'Sora', sans-serif;
-            display: block !important;
-            line-height: normal !important;
-        }
-
-        /* Playground-specific buttons - override global .project-link */
         .playground-btn {
             flex: 1;
             text-align: center;
@@ -424,180 +436,9 @@
             color: #E8727D !important;
         }
 
-        .link-demo {
-            background: #E8727D !important;
-            color: #FFFFFF !important;
-            border: 2px solid #E8727D !important;
-        }
-
-        .link-demo:hover {
-            background: transparent !important;
-            color: #E8727D !important;
-        }
-
-        .link-code {
-            background: transparent !important;
-            color: #212529 !important;
-            border: 2px solid #E9ECEF !important;
-        }
-
-        .link-code:hover {
-            border-color: #E8727D !important;
-            color: #E8727D !important;
-        }
-
-        .project-link.disabled {
-            opacity: 0.5 !important;
-            cursor: not-allowed !important;
-            pointer-events: none !important;
-        }
-
-        /* Wild Waves Demo Modal */
-        .demo-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .demo-modal.active {
-            display: flex;
-        }
-
-        .demo-modal-content {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            height: 80vh;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-        }
-
-        .demo-modal-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .demo-modal-header h3 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-
-        .demo-close-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid white;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .demo-close-btn:hover {
-            background: white;
-            color: #667eea;
-        }
-
-        .demo-iframe-container {
-            width: 100%;
-            height: calc(100% - 70px);
-            background: white;
-        }
-
-        .demo-iframe-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Code Modal */
-        .code-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .code-modal.active {
-            display: flex;
-        }
-
-        .code-modal-content {
-            position: relative;
-            width: 100%;
-            max-width: 1000px;
-            max-height: 80vh;
-            background: #1e1e1e;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-        }
-
-        .code-modal-header {
-            background: #2d2d2d;
-            color: white;
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #3d3d3d;
-        }
-
-        .code-content {
-            padding: 2rem;
-            overflow-y: auto;
-            max-height: calc(80vh - 70px);
-            font-family: 'Monaco', 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: #d4d4d4;
-        }
-
-        .code-content pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-
-        /* Syntax highlighting */
-        .keyword { color: #569cd6; }
-        .function { color: #dcdcaa; }
-        .string { color: #ce9178; }
-        .comment { color: #6a9955; }
-        .number { color: #b5cea8; }
-
-        .skills-learning {
-            background: #FFFFFF;
-            padding: 3rem;
-            border-radius: 20px;
-            border: 2px solid #E9ECEF;
-            margin-top: 4rem;
-        }
+        /* ================================
+           STATS DASHBOARD - ENHANCED
+           ================================ */
 
         .stats-dashboard {
             background: linear-gradient(135deg, #FFFFFF, #F8F9FA);
@@ -656,6 +497,18 @@
             font-weight: 600;
         }
 
+        /* ================================
+           SKILLS / TECH STACK
+           ================================ */
+
+        .skills-learning {
+            background: #FFFFFF;
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid #E9ECEF;
+            margin-top: 4rem;
+        }
+
         .skills-learning h3 {
             font-size: 1.8rem;
             color: #212529;
@@ -686,11 +539,6 @@
             margin-bottom: 0.8rem;
         }
 
-        .skill-status {
-            font-size: 0.9rem;
-            color: #6C757D;
-        }
-
         .skill-progress-mini {
             width: 100%;
             height: 6px;
@@ -706,6 +554,243 @@
             background: linear-gradient(90deg, #E8727D, #FF8C94);
             border-radius: 10px;
             transition: width 0.5s ease;
+        }
+
+        /* ================================
+           QUEST LOG
+           ================================ */
+
+        .quest-log {
+            background: linear-gradient(135deg, #FFF5F7 0%, #FFFFFF 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid #E8727D;
+            margin-top: 4rem;
+        }
+
+        .quest-log h3 {
+            font-size: 1.8rem;
+            color: #212529;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .quest-log-subtitle {
+            text-align: center;
+            color: #6C757D;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .quest-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quest-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 1.5rem;
+            background: #FFFFFF;
+            border-radius: 12px;
+            border: 2px solid #E9ECEF;
+            transition: all 0.3s ease;
+        }
+
+        .quest-item:hover {
+            border-color: #E8727D;
+            transform: translateX(4px);
+        }
+
+        .quest-item.completed {
+            border-color: #28A745;
+            background: #F8FFF8;
+        }
+
+        .quest-check {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 3px solid #E9ECEF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .quest-item.completed .quest-check {
+            background: #28A745;
+            border-color: #28A745;
+            color: #FFFFFF;
+        }
+
+        .quest-text {
+            flex: 1;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .quest-item.completed .quest-text {
+            text-decoration: line-through;
+            color: #6C757D;
+        }
+
+        .quest-xp {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #E8727D;
+            white-space: nowrap;
+        }
+
+        /* ================================
+           CODE MODALS
+           ================================ */
+
+        .demo-modal, .code-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .demo-modal.active, .code-modal.active {
+            display: flex;
+        }
+
+        .demo-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 80vh;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .demo-modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .demo-modal-header h3 { margin: 0; font-size: 1.5rem; }
+
+        .demo-close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .demo-close-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .demo-iframe-container {
+            width: 100%;
+            height: calc(100% - 70px);
+            background: white;
+        }
+
+        .demo-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .code-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            max-height: 80vh;
+            background: #1e1e1e;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .code-modal-header {
+            background: #2d2d2d;
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #3d3d3d;
+        }
+
+        .code-content {
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: calc(80vh - 70px);
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #d4d4d4;
+        }
+
+        .code-content pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; }
+
+        /* Syntax highlighting */
+        .keyword { color: #569cd6; }
+        .function { color: #dcdcaa; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; }
+        .number { color: #b5cea8; }
+
+        /* ================================
+           RESPONSIVE
+           ================================ */
+
+        @media (max-width: 768px) {
+            .dev-projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid, .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .achievement-row {
+                gap: 0.8rem;
+            }
+
+            .achievement {
+                width: 52px;
+                height: 52px;
+                font-size: 1.5rem;
+            }
+
+            .quest-log, .stats-dashboard, .skills-learning {
+                padding: 2rem 1.5rem;
+            }
         }
     </style>
 </head>
@@ -742,21 +827,37 @@
             <!-- XP/Level System -->
             <div class="level-system">
                 <div class="level-badge">
-                    <span class="level-number">Level 2</span>
-                    <span class="level-title">Code Explorer</span>
+                    <span class="level-number">Level 3</span>
+                    <span class="level-title">DOM Manipulator</span>
                 </div>
                 <div class="xp-bar-container">
-                    <div class="xp-bar" style="width: 80%;"></div>
+                    <div class="xp-bar" style="width: 60%;"></div>
                 </div>
-                <span class="xp-text">400 / 500 XP to Level 3</span>
+                <span class="xp-text">450 / 750 XP to Level 4</span>
             </div>
 
-            <!-- Achievement Badges -->
+            <!-- Achievement Badges with Tooltips -->
             <div class="achievement-row">
-                <div class="achievement unlocked" title="Started first project">🏆</div>
-                <div class="achievement unlocked" title="Complete JavaScript project">⭐</div>
-                <div class="achievement unlocked" title="Complete 2 projects">🎯</div>
-                <div class="achievement locked" title="Master React">🔒</div>
+                <div class="achievement unlocked">
+                    🏆
+                    <span class="achievement-tooltip">First Project</span>
+                </div>
+                <div class="achievement unlocked">
+                    ⭐
+                    <span class="achievement-tooltip">JavaScript Pro</span>
+                </div>
+                <div class="achievement unlocked">
+                    🎯
+                    <span class="achievement-tooltip">3 Projects Done</span>
+                </div>
+                <div class="achievement unlocked">
+                    🧩
+                    <span class="achievement-tooltip">DOM Master</span>
+                </div>
+                <div class="achievement locked">
+                    🔒
+                    <span class="achievement-tooltip">React Explorer</span>
+                </div>
             </div>
         </div>
     </section>
@@ -777,6 +878,7 @@
                     <div class="dev-project-image">
                         🌊
                         <div class="project-status-badge complete">✅ Complete</div>
+                        <div class="difficulty-badge beginner">Beginner</div>
                     </div>
                     <div class="dev-project-content">
                         <div class="project-header-with-xp">
@@ -814,6 +916,7 @@
                     <div class="dev-project-image">
                         🎨
                         <div class="project-status-badge complete">✅ Complete</div>
+                        <div class="difficulty-badge beginner">Beginner</div>
                     </div>
                     <div class="dev-project-content">
                         <div class="project-header-with-xp">
@@ -846,113 +949,78 @@
                     </div>
                 </div>
 
-                <!-- Bootstrap Portfolio Project -->
-                <div class="dev-project-card placeholder-card">
+                <!-- Matching Game -->
+                <div class="dev-project-card">
                     <div class="dev-project-image">
-                        💼
-                        <div class="project-status-badge">🚧 In Progress</div>
+                        😊
+                        <div class="project-status-badge complete">✅ Complete</div>
+                        <div class="difficulty-badge intermediate">Intermediate</div>
                     </div>
                     <div class="dev-project-content">
                         <div class="project-header-with-xp">
-                            <h4>Bootstrap Portfolio Site</h4>
-                            <span class="project-xp">+500 XP</span>
+                            <h4>Matching Game</h4>
+                            <span class="project-xp">+250 XP</span>
                         </div>
-                        <p>A fully responsive portfolio website built with Bootstrap, showcasing modern grid systems, mobile-first design, and professional UI components.</p>
+                        <p>Find the extra smiley face! A DOM manipulation challenge using cloneNode, event delegation, and progressive difficulty with increasing face counts each level.</p>
                         
                         <div class="project-progress">
                             <div class="progress-label">
                                 <span>Progress</span>
-                                <span>40%</span>
+                                <span>100%</span>
                             </div>
                             <div class="progress-bar-small">
-                                <div class="progress-fill" style="width: 40%;"></div>
-                            </div>
-                        </div>
-
-                        <div class="tech-stack">
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
-                            <span class="tech-tag">Bootstrap</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-
-                        <div class="project-links">
-                            <a href="#" class="project-link link-demo disabled">View Demo</a>
-                            <a href="#" class="project-link link-code disabled">View Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Code Challenges Card -->
-                <div class="dev-project-card placeholder-card">
-                    <div class="dev-project-image">
-                        📝
-                        <div class="project-status-badge locked">🔒 Coming Soon</div>
-                    </div>
-                    <div class="dev-project-content">
-                        <div class="project-header-with-xp">
-                            <h4>Code Challenges</h4>
-                            <span class="project-xp">+50 XP each</span>
-                        </div>
-                        <p>Bite-sized projects and coding exercises. From DOM manipulation to API integration, each challenge sharpens a specific skill.</p>
-                        
-                        <div class="project-progress">
-                            <div class="progress-label">
-                                <span>Completed</span>
-                                <span>2/15</span>
-                            </div>
-                            <div class="progress-bar-small">
-                                <div class="progress-fill" style="width: 13%;"></div>
+                                <div class="progress-fill" style="width: 100%;"></div>
                             </div>
                         </div>
 
                         <div class="tech-stack">
                             <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">cloneNode</span>
+                            <span class="tech-tag">Event Delegation</span>
+                            <span class="tech-tag">DOM Manipulation</span>
                         </div>
 
-                        <div class="project-links">
-                            <a href="#" class="project-link link-demo disabled">View Challenges</a>
-                            <a href="#" class="project-link link-code disabled">View Code</a>
+                        <div class="project-links" style="display: flex !important;">
+                            <a href="pages/matching-game.html" target="_blank" class="playground-btn btn-demo" style="display: inline-block !important;">View Demo</a>
+                            <a href="javascript:void(0);" class="playground-btn btn-code" style="display: inline-block !important;" onclick="viewMatchingGameCode()">View Code</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Personal Experiments -->
-                <div class="dev-project-card placeholder-card">
-                    <div class="dev-project-image">
-                        🚀
-                        <div class="project-status-badge locked">🔒 Coming Soon</div>
-                    </div>
-                    <div class="dev-project-content">
-                        <div class="project-header-with-xp">
-                            <h4>Side Projects</h4>
-                            <span class="project-xp">+300 XP</span>
-                        </div>
-                        <p>Experimental builds and personal projects where I explore new ideas, test different approaches, and push beyond the fundamentals.</p>
-                        
-                        <div class="project-progress">
-                            <div class="progress-label">
-                                <span>Progress</span>
-                                <span>0%</span>
-                            </div>
-                            <div class="progress-bar-small">
-                                <div class="progress-fill" style="width: 0%;"></div>
-                            </div>
-                        </div>
+            </div>
+        </section>
 
-                        <div class="tech-stack">
-                            <span class="tech-tag">TBD</span>
-                        </div>
+        <!-- Quest Log -->
+        <section class="quest-log">
+            <h3>🗺️ Quest Log</h3>
+            <p class="quest-log-subtitle">Missions completed and what's next on the roadmap</p>
 
-                        <div class="project-links">
-                            <a href="#" class="project-link link-demo disabled">View Demo</a>
-                            <a href="#" class="project-link link-code disabled">View Code</a>
-                        </div>
-                    </div>
+            <div class="quest-list">
+                <div class="quest-item completed">
+                    <div class="quest-check">✓</div>
+                    <span class="quest-text">Build first JavaScript project</span>
+                    <span class="quest-xp">+100 XP</span>
                 </div>
-
+                <div class="quest-item completed">
+                    <div class="quest-check">✓</div>
+                    <span class="quest-text">Use arrays and loops in a game</span>
+                    <span class="quest-xp">+100 XP</span>
+                </div>
+                <div class="quest-item completed">
+                    <div class="quest-check">✓</div>
+                    <span class="quest-text">Master DOM manipulation with cloneNode</span>
+                    <span class="quest-xp">+250 XP</span>
+                </div>
+                <div class="quest-item">
+                    <div class="quest-check"></div>
+                    <span class="quest-text">Build a project with an API</span>
+                    <span class="quest-xp">+300 XP</span>
+                </div>
+                <div class="quest-item">
+                    <div class="quest-check"></div>
+                    <span class="quest-text">Create first React component</span>
+                    <span class="quest-xp">+500 XP</span>
+                </div>
             </div>
         </section>
 
@@ -963,7 +1031,7 @@
             <div class="stats-grid">
                 <div class="stat-box">
                     <div class="stat-icon">💻</div>
-                    <div class="stat-number">2</div>
+                    <div class="stat-number">3</div>
                     <div class="stat-label">Completed Projects</div>
                 </div>
 
@@ -975,13 +1043,13 @@
 
                 <div class="stat-box">
                     <div class="stat-icon">⚡</div>
-                    <div class="stat-number">400</div>
+                    <div class="stat-number">450</div>
                     <div class="stat-label">Total XP</div>
                 </div>
 
                 <div class="stat-box">
                     <div class="stat-icon">🎯</div>
-                    <div class="stat-number">3/4</div>
+                    <div class="stat-number">4/5</div>
                     <div class="stat-label">Achievements</div>
                 </div>
             </div>
@@ -994,34 +1062,18 @@
             
             <div class="skills-grid">
                 <div class="skill-item">
-                    <div class="skill-icon">⚛️</div>
-                    <div class="skill-name">React</div>
-                    <div class="skill-progress-mini">
-                        <div class="mini-bar" style="width: 5%;"></div>
-                    </div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-icon">🎨</div>
-                    <div class="skill-name">Bootstrap</div>
-                    <div class="skill-progress-mini">
-                        <div class="mini-bar" style="width: 20%;"></div>
-                    </div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-icon">📱</div>
-                    <div class="skill-name">React Native</div>
-                    <div class="skill-progress-mini">
-                        <div class="mini-bar" style="width: 0%;"></div>
-                    </div>
-                </div>
-
-                <div class="skill-item">
                     <div class="skill-icon">💻</div>
                     <div class="skill-name">JavaScript</div>
                     <div class="skill-progress-mini">
-                        <div class="mini-bar" style="width: 15%;"></div>
+                        <div class="mini-bar" style="width: 25%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">🌐</div>
+                    <div class="skill-name">HTML/CSS</div>
+                    <div class="skill-progress-mini">
+                        <div class="mini-bar" style="width: 35%;"></div>
                     </div>
                 </div>
 
@@ -1034,28 +1086,31 @@
                 </div>
 
                 <div class="skill-item">
+                    <div class="skill-icon">⚛️</div>
+                    <div class="skill-name">React</div>
+                    <div class="skill-progress-mini">
+                        <div class="mini-bar" style="width: 5%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
                     <div class="skill-icon">🌐</div>
                     <div class="skill-name">APIs</div>
                     <div class="skill-progress-mini">
                         <div class="mini-bar" style="width: 10%;"></div>
                     </div>
                 </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">🎨</div>
+                    <div class="skill-name">Bootstrap</div>
+                    <div class="skill-progress-mini">
+                        <div class="mini-bar" style="width: 20%;"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
-    </div>
-
-    <!-- Wild Waves Demo Modal -->
-    <div id="wildwaves-demo-modal" class="demo-modal">
-        <div class="demo-modal-content">
-            <div class="demo-modal-header">
-                <h3>🌊 Wild Waves Aquatic Park - Live Demo</h3>
-                <button class="demo-close-btn" onclick="closeWildWavesDemo()">×</button>
-            </div>
-            <div class="demo-iframe-container">
-                <iframe src="pages/wildwaves.html" title="Wild Waves Demo"></iframe>
-            </div>
-        </div>
     </div>
 
     <!-- Wild Waves Code Modal -->
@@ -1087,36 +1142,11 @@
   
   <span class="keyword">const</span> isAllowed = <span class="function">checkHeight</span>(attractionType.<span class="function">toLowerCase</span>(), <span class="function">parseInt</span>(userHeight));
   
-  <span class="keyword">console</span>.<span class="function">log</span>(<span class="string">"User's selected attraction is "</span> + attractionType);
-  <span class="keyword">console</span>.<span class="function">log</span>(<span class="string">"User's height is "</span> + userHeight + <span class="string">" inches"</span>);
-  
   <span class="keyword">if</span> (isAllowed) {
     <span class="function">alert</span>(<span class="string">"🎉 Enjoy the "</span> + <span class="function">getAttractionName</span>(attractionType) + <span class="string">"!"</span>);
   } <span class="keyword">else</span> {
-    <span class="function">alert</span>(<span class="string">"❌ Sorry, you are not tall enough for this ride.\n\nPlease check the height requirements!"</span>);
+    <span class="function">alert</span>(<span class="string">"❌ Sorry, you are not tall enough for this ride."</span>);
   }
-}
-
-<span class="keyword">function</span> <span class="function">checkHeight</span>(attraction, height) {
-  <span class="keyword">if</span> (attraction === <span class="string">"wave"</span>) {
-    <span class="keyword">return</span> height >= WAVE_POOL_MIN_HEIGHT;
-  } <span class="keyword">else if</span> (attraction === <span class="string">"water"</span>) {
-    <span class="keyword">return</span> height >= WATERSLIDE_MIN_HEIGHT;
-  } <span class="keyword">else if</span> (attraction === <span class="string">"river"</span>) {
-    <span class="keyword">return</span> height >= LAZY_RIVER_MIN_HEIGHT;
-  } <span class="keyword">else</span> {
-    <span class="function">alert</span>(<span class="string">"⚠️ Invalid attraction type. Please enter 'wave', 'water', or 'river'."</span>);
-    <span class="keyword">return false</span>;
-  }
-}
-
-<span class="keyword">function</span> <span class="function">getAttractionName</span>(type) {
-  <span class="keyword">const</span> names = {
-    <span class="string">'wave'</span>: <span class="string">'Wave Pool'</span>,
-    <span class="string">'water'</span>: <span class="string">'Waterslide'</span>,
-    <span class="string">'river'</span>: <span class="string">'Lazy River'</span>
-  };
-  <span class="keyword">return</span> names[type.<span class="function">toLowerCase</span>()] || type;
 }</code></pre>
             </div>
         </div>
@@ -1137,43 +1167,87 @@
   <span class="keyword">let</span> correct = <span class="keyword">false</span>;
   <span class="keyword">let</span> numTries = <span class="number">0</span>;
 
-  <span class="comment">// Randomly select a target color</span>
   <span class="keyword">const</span> targetIndex = <span class="keyword">Math</span>.<span class="function">floor</span>(<span class="keyword">Math</span>.<span class="function">random</span>() * COLORS_ARRAY.length);
   <span class="keyword">const</span> target = COLORS_ARRAY[targetIndex];
 
   <span class="keyword">do</span> {
     guess = <span class="function">prompt</span>(<span class="string">"I am thinking of one of these colors:\n\n"</span> + COLORS_ARRAY.<span class="function">join</span>(<span class="string">", "</span>) + <span class="string">"\n\nWhat color am I thinking of?"</span>);
-     
-    <span class="keyword">if</span> (guess === <span class="keyword">null</span>) {
-      <span class="function">alert</span>(<span class="string">"Game cancelled. Goodbye!"</span>);
-      <span class="keyword">return</span>;   
-    }
-      
     guess = guess.<span class="function">toLowerCase</span>().<span class="function">trim</span>();
     numTries++;
-
     correct = <span class="function">checkGuess</span>(guess, target);
   } <span class="keyword">while</span> (!correct);
       
   <span class="function">alert</span>(<span class="string">"🎉 You correctly guessed "</span> + target + <span class="string">"! It took you "</span> + numTries + <span class="string">" tries."</span>);
   document.body.style.background = target;
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Matching Game Code Modal -->
+    <div id="matchinggame-code-modal" class="code-modal">
+        <div class="code-modal-content">
+            <div class="code-modal-header">
+                <h3>😊 Matching Game - Source Code</h3>
+                <button class="demo-close-btn" onclick="closeMatchingGameCode()">×</button>
+            </div>
+            <div class="code-content">
+                <pre><code><span class="keyword">let</span> numberOfFaces = <span class="number">5</span>;
+<span class="keyword">let</span> gameActive = <span class="keyword">true</span>;
+<span class="keyword">const</span> leftSide = document.<span class="function">getElementById</span>(<span class="string">"leftSide"</span>);
+<span class="keyword">const</span> rightSide = document.<span class="function">getElementById</span>(<span class="string">"rightSide"</span>);
+
+<span class="comment">// Clear both sides using while loops (per assignment spec)</span>
+<span class="keyword">function</span> <span class="function">clearFaces</span>() {
+  <span class="keyword">while</span> (leftSide.firstChild) {
+    leftSide.<span class="function">removeChild</span>(leftSide.firstChild);
+  }
+  <span class="keyword">while</span> (rightSide.firstChild) {
+    rightSide.<span class="function">removeChild</span>(rightSide.firstChild);
+  }
 }
 
-<span class="keyword">function</span> <span class="function">checkGuess</span>(guess, target) { 
-  <span class="keyword">let</span> correct = <span class="keyword">false</span>; 
+<span class="comment">// Game over handler — attached once to document.body</span>
+<span class="keyword">function</span> <span class="function">gameOver</span>() {
+  <span class="keyword">if</span> (!gameActive) <span class="keyword">return</span>;
+  gameActive = <span class="keyword">false</span>;
+  <span class="function">alert</span>(<span class="string">"Game Over!"</span>);
+  document.body.<span class="function">removeEventListener</span>(<span class="string">"click"</span>, gameOver);
+}
 
-  <span class="keyword">if</span> (!COLORS_ARRAY.<span class="function">includes</span>(guess)) {
-    <span class="function">alert</span>(<span class="string">"❌ That color is not in the list."</span>);
-  } <span class="keyword">else if</span> (guess > target) {
-    <span class="function">alert</span>(<span class="string">"📉 Your guess is alphabetically higher."</span>);
-  } <span class="keyword">else if</span> (guess < target) {
-    <span class="function">alert</span>(<span class="string">"📈 Your guess is alphabetically lower."</span>);
-  } <span class="keyword">else</span> {
-    correct = <span class="keyword">true</span>;
+<span class="keyword">function</span> <span class="function">generateFaces</span>() {
+  <span class="comment">// Clear previous faces using while loops</span>
+  <span class="function">clearFaces</span>();
+
+  <span class="comment">// Generate faces on the left side</span>
+  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i < numberOfFaces; i++) {
+    <span class="keyword">const</span> face = document.<span class="function">createElement</span>(<span class="string">"img"</span>);
+    face.src = <span class="string">'images/smile.png'</span>;
+    face.style.top = <span class="keyword">Math</span>.<span class="function">floor</span>(<span class="keyword">Math</span>.<span class="function">random</span>() * <span class="number">400</span>) + <span class="string">'px'</span>;
+    face.style.left = <span class="keyword">Math</span>.<span class="function">floor</span>(<span class="keyword">Math</span>.<span class="function">random</span>() * <span class="number">400</span>) + <span class="string">'px'</span>;
+    leftSide.<span class="function">appendChild</span>(face);
   }
-   
-  <span class="keyword">return</span> correct;
-}</code></pre>
+
+  <span class="comment">// Clone leftSide, remove last child (extra face), append to rightSide</span>
+  <span class="keyword">const</span> leftClone = leftSide.<span class="function">cloneNode</span>(<span class="keyword">true</span>);
+  leftClone.<span class="function">removeChild</span>(leftClone.lastChild);
+  <span class="keyword">while</span> (leftClone.firstChild) {
+    rightSide.<span class="function">appendChild</span>(leftClone.firstChild);
+  }
+
+  <span class="comment">// Extra face click advances level</span>
+  <span class="keyword">const</span> extraFace = leftSide.lastChild;
+  extraFace.<span class="function">addEventListener</span>(<span class="string">"click"</span>, <span class="keyword">function</span> <span class="function">handleCorrectClick</span>(event) {
+    <span class="keyword">if</span> (!gameActive) <span class="keyword">return</span>;
+    event.<span class="function">stopPropagation</span>();
+    numberOfFaces += <span class="number">5</span>;
+    <span class="function">generateFaces</span>();
+  });
+}
+
+<span class="comment">// Attach game over listener once to document.body</span>
+document.body.<span class="function">addEventListener</span>(<span class="string">"click"</span>, gameOver);
+<span class="function">generateFaces</span>();</code></pre>
             </div>
         </div>
     </div>
@@ -1184,16 +1258,6 @@
 
     <script src="js/script.js"></script>
     <script>
-    function openWildWavesDemo() {
-        document.getElementById('wildwaves-demo-modal').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeWildWavesDemo() {
-        document.getElementById('wildwaves-demo-modal').classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-
     function viewWildWavesCode() {
         document.getElementById('wildwaves-code-modal').classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -1214,12 +1278,22 @@
         document.body.style.overflow = 'auto';
     }
 
+    function viewMatchingGameCode() {
+        document.getElementById('matchinggame-code-modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMatchingGameCode() {
+        document.getElementById('matchinggame-code-modal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
     // Close modals on ESC key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            closeWildWavesDemo();
             closeWildWavesCode();
             closeColorGameCode();
+            closeMatchingGameCode();
         }
     });
 
@@ -1227,9 +1301,9 @@
     document.querySelectorAll('.demo-modal, .code-modal').forEach(modal => {
         modal.addEventListener('click', function(e) {
             if (e.target === this) {
-                closeWildWavesDemo();
                 closeWildWavesCode();
                 closeColorGameCode();
+                closeMatchingGameCode();
             }
         });
     });
