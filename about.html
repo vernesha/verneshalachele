@@ -165,6 +165,98 @@
             position: relative;
             z-index: 1;
         }
+
+        /* Resume & Contact Section */
+        .resume-contact-section {
+            background: linear-gradient(135deg, #E8727D 0%, #D0606B 100%);
+            padding: 6rem 2rem;
+            margin: 4rem 0 0;
+        }
+
+        .resume-contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .resume-contact-content h2 {
+            font-size: 3rem;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+            font-family: 'Sora', sans-serif;
+            font-weight: 800;
+        }
+
+        .resume-contact-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Sora', sans-serif;
+        }
+
+        .btn-primary {
+            background: #FFFFFF;
+            color: #E8727D;
+            border: 2px solid #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #FFFFFF;
+            border: 2px solid #FFFFFF;
+        }
+
+        .btn-secondary:hover {
+            background: #FFFFFF;
+            color: #E8727D;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .resume-contact-content h2 {
+                font-size: 2.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -275,6 +367,30 @@
             </div>
         </section>
     </div>
+
+    <!-- Resume & Contact Section -->
+    <section class="resume-contact-section">
+        <div class="resume-contact-content">
+            <h2>Let's Connect</h2>
+            <p>Interested in working together? Download my resume or connect with me on LinkedIn.</p>
+            
+            <div class="action-buttons">
+                <a href="assets/Vernesha-LaChele-Resume.pdf" download class="btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Download Resume
+                </a>
+                
+                <a href="https://www.linkedin.com/in/verneshajones" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    View LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <h2 class="footer-name">Vernesha LaChele © 2026</h2>
