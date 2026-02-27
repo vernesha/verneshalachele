@@ -1,84 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matching Game</title>
-  <style>
-    #leftSide, #rightSide {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-    }
-    #leftSide { left: 0; background: #f0f0f0; }
-    #rightSide { left: 500px; border-left: 1px solid black; background: #f9f9f9; }
-    img { position: absolute; width: 48px; height: 48px; }
-  </style>
-</head>
-<body>
-  <h1>Matching Game</h1>
-  <p>Click on the extra smiling face on the left</p>
-  <div id="leftSide"></div>
-  <div id="rightSide"></div>
-
-  <script>
-    let numberOfFaces = 5;
-    let gameActive = true;
-    const leftSide = document.getElementById("leftSide");
-    const rightSide = document.getElementById("rightSide");
-
-    // Clear both sides using while loops (per assignment spec)
-    function clearFaces() {
-      while (leftSide.firstChild) {
-        leftSide.removeChild(leftSide.firstChild);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matching Game</title>
+    <style>
+      #leftSide,
+      #rightSide {
+        position: absolute;
+        width: 500px;
+        height: 500px;
       }
-      while (rightSide.firstChild) {
-        rightSide.removeChild(rightSide.firstChild);
+      #leftSide {
+        left: 0;
+        background: #f0f0f0;
       }
-    }
+      #rightSide {
+        left: 500px;
+        border-left: 1px solid black;
+        background: #f9f9f9;
+      }
+      .face {
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        font-size: 40px;
+        line-height: 48px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Matching Game</h1>
+    <p>Click on the extra smiling face on the left</p>
+    <div id="leftSide"></div>
+    <div id="rightSide"></div>
 
-    // Game over handler — attached once to document.body
-    function gameOver() {
-      if (!gameActive) return;
-      gameActive = false;
-      alert("Game Over!");
-      document.body.removeEventListener("click", gameOver);
-    }
+    <script>
+      let numberOfFaces = 5;
+      let gameActive = true;
+      const leftSide = document.getElementById("leftSide");
+      const rightSide = document.getElementById("rightSide");
 
-    function generateFaces() {
-      // Clear previous faces using while loops
-      clearFaces();
-
-      // Generate faces on the left side
-      for (let i = 0; i < numberOfFaces; i++) {
-        const face = document.createElement("img");
-        face.src = '../images/smile.png';
-        face.style.top = Math.floor(Math.random() * 400) + 'px';
-        face.style.left = Math.floor(Math.random() * 400) + 'px';
-        leftSide.appendChild(face);
+      function clearFaces() {
+        while (leftSide.firstChild) {
+          leftSide.removeChild(leftSide.firstChild);
+        }
+        while (rightSide.firstChild) {
+          rightSide.removeChild(rightSide.firstChild);
+        }
       }
 
-      // Clone leftSide to rightSide, then remove the last child (the extra face)
-      const leftClone = leftSide.cloneNode(true);
-      leftClone.removeChild(leftClone.lastChild);
-      while (leftClone.firstChild) {
-        rightSide.appendChild(leftClone.firstChild);
-      }
-
-      // The extra face is the last image on the left side
-      const extraFace = leftSide.lastChild;
-      extraFace.addEventListener("click", function handleCorrectClick(event) {
+      function gameOver() {
         if (!gameActive) return;
-        event.stopPropagation();
-        numberOfFaces += 5;
-        generateFaces();
-      });
-    }
+        gameActive = false;
+        alert("Game Over!");
+        document.body.removeEventListener("click", gameOver);
+      }
 
-    // Attach game over listener once to document.body
-    document.body.addEventListener("click", gameOver);
+      function generateFaces() {
+        clearFaces();
 
-    generateFaces();
-  </script>
-</body>
+        for (let i = 0; i < numberOfFaces; i++) {
+          const face = document.createElement("div");
+          face.classList.add("face");
+          face.textContent = "😊";
+          face.style.top = Math.floor(Math.random() * 400) + "px";
+          face.style.left = Math.floor(Math.random() * 400) + "px";
+          leftSide.appendChild(face);
+        }
+
+        const leftClone = leftSide.cloneNode(true);
+        leftClone.removeChild(leftClone.lastChild);
+        while (leftClone.firstChild) {
+          rightSide.appendChild(leftClone.firstChild);
+        }
+
+        const extraFace = leftSide.lastChild;
+        extraFace.addEventListener("click", function (event) {
+          if (!gameActive) return;
+          event.stopPropagation();
+          numberOfFaces += 5;
+          generateFaces();
+        });
+      }
+
+      document.body.addEventListener("click", gameOver);
+
+      generateFaces();
+    </script>
+  </body>
 </html>
