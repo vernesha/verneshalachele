@@ -1069,3 +1069,29 @@ footer p {
 .netflix-animation-container:hover .netflix-label {
     opacity: 1;
 }
+/* ================================
+   NETFLIX PREVIEW IMAGE
+   ================================ */
+ 
+.netflix-animation-container {
+    background: #141414;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ 
+.netflix-preview-img {
+    height: 85%;
+    width: auto;
+    max-width: 85%;
+    object-fit: contain;
+    display: block;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+ 
+.project-split:hover .netflix-preview-img {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 40px rgba(229,9,20,0.15), 0 0 0 1px rgba(255,255,255,0.08);
+}
