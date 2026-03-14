@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Netflix Group Watch — UX Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+
+/* ─── TOKENS ──────────────────────────────────────────────── */
+:root {
+  --ink:     #0f0f0f;
+  --ink-2:   #3a3a3a;
+  --ink-3:   #888;
+  --rule:    #e2e2e2;
+  --bg:      #fafaf8;
+  --bg-warm: #f4f3ef;
+  --bg-dark: #0f0f0f;
+  --red:     #e5091a;
+  --red-dim: rgba(229,9,26,.08);
+  --accent:  #c8b8a2;
+  --max:     860px;
+  --gap:     120px;
+}
+
+/* ─── RESET ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 32px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ─── TYPOGRAPHY ──────────────────────────────────────────── */
+.serif { font-family: 'DM Serif Display', serif; }
+
+.label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--red);
+  flex-shrink: 0;
+}
+
+h2.display {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+h3.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 20px;
+}
+
+p.body-lg {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  font-weight: 300;
+}
+
+p.body {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  font-weight: 300;
+}
+
+/* ─── LAYOUT ──────────────────────────────────────────────── */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+
+.section {
+  padding: var(--gap) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.section:first-of-type { border-top: none; }
+
+.two-col {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.sidebar-label {
+  padding-top: 6px;
+}
+
+/* ─── HERO ────────────────────────────────────────────────── */
+.hero {
+  background: var(--bg-dark);
+  padding: 100px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(229,9,26,.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(200,184,162,.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  border: 1px solid rgba(255,255,255,.1);
+  padding: 7px 14px;
+  border-radius: 100px;
+  margin-bottom: 48px;
+}
+.hero-tag span { color: var(--red); }
+
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(52px, 9vw, 96px);
+  line-height: .95;
+  letter-spacing: -.03em;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: rgba(255,255,255,.4);
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,.4);
+  font-weight: 300;
+  margin-top: 28px;
+  margin-bottom: 64px;
+  max-width: 460px;
+  line-height: 1.6;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 32px;
+}
+
+.hero-meta-item {}
+.hero-meta-item .lbl {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+  margin-bottom: 6px;
+}
+.hero-meta-item .val {
+  font-size: 13px;
+  color: rgba(255,255,255,.65);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* ─── AT A GLANCE ─────────────────────────────────────────── */
+.glance {
+  background: var(--bg-warm);
+  border-bottom: 1px solid var(--rule);
+  padding: 56px 40px;
+}
+
+.glance-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.glance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.4fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 32px;
+}
+
+.glance-col {
+  background: var(--bg-warm);
+  padding: 32px 36px;
+}
+
+.glance-col h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 20px;
+}
+
+.glance-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.glance-col ul li {
+  font-size: 14px;
+  color: var(--ink-2);
+  font-weight: 300;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.glance-col ul li::before {
+  content: '→';
+  color: var(--red);
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.glance-outcome {
+  background: var(--ink);
+}
+
+.glance-outcome h4 {
+  color: rgba(255,255,255,.3) !important;
+}
+
+.glance-outcome p {
+  font-size: 15px;
+  color: rgba(255,255,255,.7);
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.glance-outcome p strong {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* ─── PROCESS STRIP ───────────────────────────────────────── */
+.process-strip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 48px;
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.process-step {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border-right: 1px solid var(--rule);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-2);
+  transition: background .2s;
+}
+
+.process-step:last-child { border-right: none; }
+.process-step.active { background: var(--ink); color: #fff; }
+.process-step { cursor: pointer; text-decoration: none; }
+.process-step:hover:not(.active) { background: var(--bg-warm); }
+
+.process-step .step-icon { font-size: 14px; }
+.process-step .step-name { font-size: 11px; font-weight: 600; letter-spacing: .05em; }
+
+/* ─── PROBLEM BOX ─────────────────────────────────────────── */
+.problem-box {
+  border-left: 2px solid var(--red);
+  padding: 32px 40px;
+  background: var(--bg-warm);
+  margin: 40px 0;
+  border-radius: 0 12px 12px 0;
+}
+
+.problem-box p {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(18px, 2.5vw, 24px);
+  line-height: 1.55;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.problem-box p strong { color: var(--ink); }
+
+/* ─── OVERVIEW CARDS ──────────────────────────────────────── */
+.overview-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 40px;
+}
+
+.ov-card {
+  background: var(--bg);
+  padding: 28px 28px 24px;
+}
+
+.ov-card .icon {
+  font-size: 20px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.ov-card h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 8px;
+}
+
+.ov-card p {
+  font-size: 14px;
+  color: var(--ink-2);
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+/* ─── STATS ROW ───────────────────────────────────────────── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 40px 0;
+}
+
+.stat-cell {
+  background: var(--bg);
+  padding: 32px 28px;
+  text-align: left;
+}
+
+.stat-cell .num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 48px;
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.stat-cell .desc {
+  font-size: 12px;
+  color: var(--ink-3);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* ─── FINDINGS LIST ───────────────────────────────────────── */
+.findings {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 32px;
+}
+
+.finding-row {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  background: var(--bg);
+  transition: background .15s;
+}
+
+.finding-row:hover { background: var(--bg-warm); }
+
+.finding-icon {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 22px 0 22px;
+  font-size: 16px;
+  border-right: 1px solid var(--rule);
+}
+
+.finding-body {
+  padding: 20px 24px;
+}
+
+.finding-body p {
+  font-size: 14px;
+  color: var(--ink-2);
+  font-weight: 300;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.finding-body p strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ─── QUOTE ───────────────────────────────────────────────── */
+.pull-quote {
+  margin: 40px 0;
+  padding: 0 0 0 32px;
+  border-left: 2px solid var(--rule);
+}
+
+.pull-quote blockquote {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.5;
+  color: var(--ink);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.pull-quote cite {
+  font-size: 12px;
+  color: var(--ink-3);
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: .05em;
+}
+
+/* ─── INSIGHT CALLOUT ─────────────────────────────────────── */
+.callout {
+  background: var(--bg-warm);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 32px 36px;
+  margin-top: 32px;
+}
+
+.callout h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+
+.callout p {
+  font-size: 15px;
+  color: var(--ink-2);
+  font-weight: 300;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.callout p strong { font-weight: 600; color: var(--ink); }
+
+/* ─── PERSONA CARDS ───────────────────────────────────────── */
+.persona-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.persona-card {
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.persona-header {
+  padding: 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.persona-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.persona-avatar.primary { background: var(--rule); overflow: hidden; }
+.persona-avatar.secondary { background: var(--rule); overflow: hidden; }
+
+.persona-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.persona-role {
+  font-size: 12px;
+  color: var(--ink-3);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.persona-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.persona-badge.primary { background: #eef; color: #5560d0; }
+.persona-badge.secondary { background: #fff0f5; color: #c0392b; }
+
+.persona-body {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.persona-quote {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-2);
+  line-height: 1.6;
+  padding-left: 14px;
+  border-left: 2px solid var(--rule);
+}
+
+.persona-section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 8px;
+}
+
+.persona-about {
+  font-size: 13px;
+  color: var(--ink-2);
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: 400;
+  padding: 4px 12px;
+  border-radius: 100px;
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  background: var(--bg);
+}
+
+.tag.goal { background: #f0faf4; color: #1a7a4a; border-color: #c5e8d3; }
+.tag.pain { background: #fff2f2; color: #a03030; border-color: #f5cece; }
+.tag.neutral { background: var(--bg-warm); }
+
+/* ─── COMPETITIVE TABLE ───────────────────────────────────── */
+.comp-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  margin-top: 36px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead tr { border-bottom: 1px solid var(--rule); }
+
+thead th {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: var(--bg-warm);
+  white-space: nowrap;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--rule);
+  transition: background .12s;
+}
+
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--bg-warm); }
+
+tbody td {
+  padding: 14px 18px;
+  color: var(--ink-2);
+  vertical-align: middle;
+  font-weight: 300;
+}
+
+tbody td:first-child {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 100px;
+}
+
+.badge.alive { background: #e8f8ed; color: #1a6b34; }
+.badge.dead { background: #fef0f0; color: #a83232; }
+.badge.warn { background: #fef8ec; color: #8a5a10; }
+
+.check { color: #1a6b34; font-weight: 600; }
+.cross { color: #b0b0b0; }
+
+/* ─── HMW ─────────────────────────────────────────────────── */
+.hmw-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.hmw-card {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 24px;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  transition: border-color .15s;
+}
+
+.hmw-card:hover { border-color: var(--ink-3); }
+.hmw-card.full { grid-column: 1 / -1; }
+
+.hmw-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 72px;
+  color: var(--bg-warm);
+  position: absolute;
+  top: -8px;
+  right: 16px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hmw-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.hmw-card p {
+  font-size: 15px;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.5;
+  position: relative;
+}
+
+/* ─── FEATURE TABLE ───────────────────────────────────────── */
+.feature-table {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 32px;
+}
+
+.feature-row {
+  display: grid;
+  grid-template-columns: 36px 1fr 1.4fr;
+  border-bottom: 1px solid var(--rule);
+  transition: background .12s;
+}
+
+.feature-row:last-child { border-bottom: none; }
+.feature-row:hover { background: var(--bg-warm); }
+
+.feature-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  border-right: 1px solid var(--rule);
+}
+
+.feature-status.yes { color: #1a6b34; background: #f0faf4; }
+.feature-status.p2 { color: #8a8a8a; background: var(--bg-warm); }
+.feature-status.no { color: #a83232; background: #fff0f0; }
+
+.feature-name {
+  padding: 14px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  background: var(--bg-warm);
+}
+
+.feature-desc {
+  padding: 14px 18px;
+  font-size: 13px;
+  color: var(--ink-2);
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  line-height: 1.55;
+}
+
+/* ─── WIREFRAME CARDS ─────────────────────────────────────── */
+.wireframe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.wireframe-card {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.wireframe-preview {
+  background: #111;
+  aspect-ratio: 9/16;
+  max-height: 280px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 8px;
+}
+
+.wf-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,.08); }
+.wf-bar.s { width: 35%; }
+.wf-bar.m { width: 60%; }
+.wf-bar.l { width: 90%; }
+.wf-bar.red { background: rgba(229,9,26,.35); }
+
+.wf-screen {
+  flex: 1;
+  background: rgba(255,255,255,.03);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.wf-btn-row {
+  display: flex;
+  gap: 6px;
+}
+
+.wf-btn {
+  flex: 1;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(229,9,26,.25);
+}
+
+.wf-btn.ghost { background: rgba(255,255,255,.06); }
+
+.wireframe-label {
+  padding: 16px 20px;
+  border-top: 1px solid var(--rule);
+  background: var(--bg);
+}
+
+.wireframe-label h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+
+.wireframe-label p {
+  font-size: 12px;
+  color: var(--ink-3);
+  font-weight: 300;
+}
+
+/* ─── SOLUTION BOX ────────────────────────────────────────── */
+.solution-box {
+  background: var(--ink);
+  border-radius: 16px;
+  padding: 48px;
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.solution-box::before {
+  content: '"';
+  font-family: 'DM Serif Display', serif;
+  position: absolute;
+  top: -20px;
+  left: 32px;
+  font-size: 200px;
+  color: rgba(229,9,26,.1);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.solution-box h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.solution-box p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: rgba(255,255,255,.8);
+  font-weight: 300;
+  position: relative;
+}
+
+.solution-box p strong { color: #fff; font-weight: 500; }
+
+/* ─── TESTING ─────────────────────────────────────────────── */
+.scenario-box {
+  background: var(--ink);
+  border-radius: 12px;
+  padding: 36px 40px;
+  margin: 32px 0;
+}
+
+.scenario-box .lbl {
+  color: rgba(255,255,255,.3);
+  margin-bottom: 14px;
+  display: block;
+}
+
+.scenario-box p {
+  font-size: 16px;
+  color: rgba(255,255,255,.75);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.scenario-box p strong { color: #fff; font-weight: 500; }
+
+.testing-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 36px 0;
+}
+
+.t-stat {
+  background: var(--bg);
+  padding: 28px;
+}
+
+.t-stat .num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 40px;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.t-stat .desc {
+  font-size: 12px;
+  color: var(--ink-3);
+  font-weight: 400;
+}
+
+.ba-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.ba-card {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ba-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ba-before {
+  padding: 24px 28px;
+  border-right: 1px solid var(--rule);
+  background: #fff;
+}
+
+.ba-after {
+  padding: 24px 28px;
+  background: #fff;
+}
+
+.ba-after.resolved { background: #f6fcf8; }
+.ba-after.iterating { background: #fffbf2; }
+
+.ba-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.ba-label.problem { color: #a83232; }
+.ba-label.resolved { color: #1a6b34; }
+.ba-label.iterating { color: #8a5a10; }
+
+.ba-before p, .ba-after p {
+  font-size: 14px;
+  color: var(--ink-2);
+  font-weight: 300;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.ba-before p strong, .ba-after p strong { font-weight: 600; color: var(--ink); }
+
+.ba-quote {
+  font-size: 12px;
+  color: var(--ink-3);
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.ba-result {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.ba-result.green { color: #1a6b34; }
+.ba-result.amber { color: #8a5a10; }
+
+.p1-block {
+  background: var(--bg-warm);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 36px;
+  margin-top: 32px;
+}
+
+.p1-block h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 24px;
+}
+
+.p1-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.p1-stat .n {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.p1-stat .d {
+  font-size: 12px;
+  color: var(--ink-3);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.improvements-box {
+  background: var(--bg-warm);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 32px 36px;
+  margin-top: 32px;
+}
+
+.improvements-box h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 16px;
+}
+
+.improvements-box p {
+  font-size: 14px;
+  color: var(--ink-2);
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* ─── CHANGES LIST ────────────────────────────────────────── */
+.changes {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 32px;
+}
+
+.change-row {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 0;
+  background: var(--bg);
+  transition: background .12s;
+}
+
+.change-row:hover { background: var(--bg-warm); }
+
+.change-arrow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 18px 0 18px;
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 700;
+  border-right: 1px solid var(--rule);
+}
+
+.change-text {
+  padding: 16px 20px;
+  font-size: 14px;
+  color: var(--ink-2);
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.change-text strong { font-weight: 600; color: var(--ink); }
+
+/* ─── TAKEAWAYS ───────────────────────────────────────────── */
+.takeaway-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.takeaway-card {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 28px;
+  background: var(--bg);
+  transition: background .15s, border-color .15s;
+}
+
+.takeaway-card:hover {
+  background: var(--bg-warm);
+  border-color: var(--ink-3);
+}
+
+.takeaway-icon {
+  font-size: 24px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.takeaway-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 10px;
+  line-height: 1.25;
+  font-weight: 400;
+}
+
+.takeaway-card p {
+  font-size: 14px;
+  color: var(--ink-2);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.next-steps {
+  list-style: none;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.next-steps li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  background: var(--bg);
+  transition: background .12s;
+}
+
+.next-steps li:hover { background: var(--bg-warm); }
+
+.ns-num {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 0;
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: var(--ink-3);
+  border-right: 1px solid var(--rule);
+}
+
+.ns-text {
+  padding: 18px 24px;
+  font-size: 14px;
+  color: var(--ink-2);
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+/* ─── CTA ─────────────────────────────────────────────────── */
+.cta-section {
+  background: var(--bg-dark);
+  padding: 100px 40px;
+  text-align: center;
+}
+
+.cta-inner {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.cta-inner .eyebrow {
+  justify-content: center;
+  color: rgba(255,255,255,.3);
+}
+
+.cta-inner .eyebrow::before { background: rgba(255,255,255,.2); }
+
+.cta-inner h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 5vw, 48px);
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -.02em;
+}
+
+.cta-inner p {
+  font-size: 16px;
+  color: rgba(255,255,255,.45);
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .03em;
+  cursor: pointer;
+  transition: opacity .2s, transform .15s;
+}
+
+.btn:hover { opacity: .85; transform: translateY(-1px); }
+.btn.primary { background: #fff; color: var(--ink); }
+.btn.ghost { border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.6); }
+
+/* ─── FOOTER ──────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 28px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 680px) {
+  :root { --gap: 72px; }
+  .wrap { padding: 0 20px; }
+  .two-col { grid-template-columns: 1fr; gap: 24px; }
+  .sidebar-label { display: none; }
+  .glance-grid,
+  .overview-cards,
+  .stats-row,
+  .persona-grid,
+  .hmw-grid,
+  .wireframe-grid,
+  .takeaway-grid,
+  .ba-inner,
+  .p1-stats,
+  .testing-stats { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 48px; }
+  .feature-row { grid-template-columns: 32px 1fr; }
+  .feature-desc { display: none; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+
+/* ─── ANIMATIONS ──────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-inner > * {
+  animation: fadeUp .6s ease both;
+}
+
+.hero-inner > *:nth-child(1) { animation-delay: .05s; }
+.hero-inner > *:nth-child(2) { animation-delay: .15s; }
+.hero-inner > *:nth-child(3) { animation-delay: .25s; }
+.hero-inner > *:nth-child(4) { animation-delay: .35s; }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">UX Case Study <span>&nbsp;·&nbsp;</span> Capstone Project</div>
+    <h1>Netflix<br><em>Group Watch</em></h1>
+    <p class="hero-sub">Designing a native co-viewing experience that brings people together across distance.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="lbl">Role</div>
+        <div class="val">UX Designer &amp; Researcher</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="lbl">Timeline</div>
+        <div class="val">Jan – Feb 2026</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="lbl">Tools</div>
+        <div class="val">Figma &middot; FigJam &middot; User Interviews<br>Affinity Mapping &middot; Usability Testing</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- AT A GLANCE -->
+<div class="glance">
+  <div class="glance-inner">
+    <div class="eyebrow">At a Glance</div>
+    <div class="glance-grid">
+      <div class="glance-col">
+        <h4>What I Did</h4>
+        <ul>
+          <li>6 user interviews + affinity mapping</li>
+          <li>Competitive analysis of 6 products</li>
+          <li>2 rounds of usability testing</li>
+          <li>Lo-fi → hi-fi Figma prototype</li>
+          <li>Dual-screen companion app concept</li>
+        </ul>
+      </div>
+      <div class="glance-col">
+        <h4>Key Insight</h4>
+        <ul>
+          <li>Users struggled to <em>get to</em> sync, not with sync itself</li>
+          <li>Setup friction was killing the habit</li>
+          <li>Voice preferred over video: 5 of 6 users</li>
+          <li>Dual-screen behavior was already happening</li>
+        </ul>
+      </div>
+      <div class="glance-col glance-outcome">
+        <h4>Outcome</h4>
+        <p>Designed a native Netflix Watch Party feature with <strong>one-tap invite, integrated voice chat, and a mobile companion mode</strong> — validated through two rounds of usability testing. Round 2 showed measurable improvement: task completion was faster, the invite flow no longer caused hesitation, and all participants understood companion mode without prompting.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 0: PROCESS -->
+<div class="section" id="process">
+  <div class="wrap">
+    <div class="eyebrow">Process Overview</div>
+    <h2 class="display">A full UX process,<br>start to finish</h2>
+    <div class="process-strip">
+      <a href="#research" class="process-step"><span class="step-icon">🔍</span><span class="step-name">Research</span></a>
+      <a href="#personas" class="process-step"><span class="step-icon">🎯</span><span class="step-name">Define</span></a>
+      <a href="#ideation" class="process-step"><span class="step-icon">💡</span><span class="step-name">Ideate</span></a>
+      <a href="#design" class="process-step active"><span class="step-icon">✏️</span><span class="step-name">Design</span></a>
+      <a href="#testing" class="process-step"><span class="step-icon">🧪</span><span class="step-name">Test</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- 1: OVERVIEW -->
+<div class="section" id="overview">
+  <div class="wrap">
+    <div class="two-col">
+      <div class="sidebar-label">
+        <div class="label">01 — Overview</div>
+      </div>
+      <div>
+        <div class="eyebrow">The Challenge</div>
+        <h2 class="display">When watching together means juggling everything else</h2>
+        <p class="body-lg">Movie lovers want to watch with their loved ones remotely — whether maintaining a long-distance relationship, bonding with friends, or staying connected with family. They value the shared reactions and real-time conversation, but are currently forced to juggle multiple apps for sync and voice chat, creating lag, disconnections, and a fractured experience.</p>
+
+        <div class="problem-box" style="margin-top:40px;">
+          <p>Users need a better way to watch movies remotely — one that delivers all the camaraderie of being together, <strong>without the setup complexity</strong> that is currently ripping them out of the experience.</p>
+        </div>
+
+        <div class="overview-cards">
+          <div class="ov-card">
+            <span class="icon">🎯</span>
+            <h4>Goal</h4>
+            <p>Design a native group viewing feature that drives habitual repeat use</p>
+          </div>
+          <div class="ov-card">
+            <span class="icon">👥</span>
+            <h4>Target Users</h4>
+            <p>Long-distance couples, friend groups, and families watching Netflix socially</p>
+          </div>
+          <div class="ov-card">
+            <span class="icon">📱</span>
+            <h4>Platform</h4>
+            <p>Mobile companion + Smart TV — designed around users' natural dual-screen behavior</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2: RESEARCH -->
+<div class="section" id="research">
+  <div class="wrap">
+    <div class="two-col">
+      <div class="sidebar-label">
+        <div class="label">02 — Research</div>
+      </div>
+      <div>
+        <div class="eyebrow">User Research</div>
+        <h2 class="display">Research first.<br>The problem defined itself.</h2>
+        <p class="body-lg">Before any design decisions were made, I needed to understand how people actually experience remote watching — not what I expected to find, but what real users were doing, feeling, and struggling with.</p>
+        <p class="body" style="margin-top:16px;">I conducted 6 in-depth user interviews using contextual inquiry and directed storytelling, then synthesized themes through affinity mapping. Competitive and comparative analysis of Teleparty, Discord, Disney+ GroupWatch, Amazon Watch Party, and Apple SharePlay provided additional context. The research didn't confirm a direction — it <em>created</em> one.</p>
+
+        <div class="stats-row">
+          <div class="stat-cell">
+            <div class="num">6</div>
+            <div class="desc">User interviews conducted</div>
+          </div>
+          <div class="stat-cell">
+            <div class="num">100%</div>
+            <div class="desc">Used 2–3 separate apps to watch together</div>
+          </div>
+          <div class="stat-cell">
+            <div class="num">5/6</div>
+            <div class="desc">Preferred voice chat over video</div>
+          </div>
+        </div>
+
+        <h3 class="section-title">What research surfaced</h3>
+        <div class="findings">
+          <div class="finding-row">
+            <div class="finding-icon">🔗</div>
+            <div class="finding-body"><p><strong>Everyone was using a patchwork of workarounds.</strong> Teleparty for sync, FaceTime for voice, texting for coordination. No single app solved the problem — users were the glue holding it together, and that exhaustion was eroding the habit.</p></div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-icon">⏱️</div>
+            <div class="finding-body"><p><strong>Sync breaks were emotional, not just technical.</strong> When playback fell out of time — especially after an unannounced pause — users didn't just lose sync. They lost the shared moment.</p></div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-icon">📱</div>
+            <div class="finding-body"><p><strong>Dual-screen behavior was already the norm.</strong> 5 of 6 participants had their phone in hand while watching TV. This wasn't a new behavior to design for; it was an existing one to design <em>with</em>.</p></div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-icon">🎙️</div>
+            <div class="finding-body"><p><strong>Voice was strongly preferred over video.</strong> 5 of 6 said no to video or "only if it's small and optional." Video felt like a performance — users wanted presence without the pressure.</p></div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-icon">😂</div>
+            <div class="finding-body"><p><strong>Reactions — not content — were what users missed most.</strong> It wasn't about watching the same show. It was about hearing someone laugh at the same moment.</p></div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-icon">✨</div>
+            <div class="finding-body"><p><strong>Setup friction was the make-or-break factor for habit.</strong> Users who had easy coordination watched together weekly. Users who found it cumbersome stopped entirely.</p></div>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          <blockquote>"One button on Netflix: 'Watch with ___'. It auto-syncs, opens a small video bubble of the other person, and has optional chat."</blockquote>
+          <cite>— Rachel Kim, 27, Marketing Coordinator, Detroit/Chicago</cite>
+        </div>
+
+        <div class="pull-quote">
+          <blockquote>"Coordinating is annoying. If it's not easy, I just don't do it."</blockquote>
+          <cite>— Participant B, 33, used Teleparty during COVID, rarely now</cite>
+        </div>
+
+        <div class="callout">
+          <h4>What the research made clear</h4>
+          <p>Across every interview, the same pattern emerged: the barrier wasn't the technology — it was the fragmentation. Users weren't struggling to watch together once set up. They were struggling to get set up at all. That insight became the foundation for everything that followed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3: PERSONAS -->
+<div class="section" id="personas">
+  <div class="wrap">
+    <div class="two-col">
+      <div class="sidebar-label">
+        <div class="label">03 — Personas</div>
+      </div>
+      <div>
+        <div class="eyebrow">User Personas</div>
+        <h2 class="display">Two users,<br>one shared need</h2>
+        <p class="body-lg">Research revealed two distinct usage patterns — the habitual long-distance viewer and the spontaneous social watcher. Both needed the same thing: less friction to start and more reason to return.</p>
+
+        <div class="persona-grid">
+          <div class="persona-card">
+            <div class="persona-header">
+              <div class="persona-avatar primary"><img src="images/RachelKim.png" alt="Rachel Kim" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+              <div>
+                <div class="persona-name">Rachel Kim</div>
+                <div class="persona-role">27 · Marketing Coordinator · Detroit, MI</div>
+                <span class="persona-badge primary">Primary · Long-Distance Connector</span>
+              </div>
+            </div>
+            <div class="persona-body">
+              <p class="persona-quote">"One button on Netflix: 'Watch with…'. It auto-syncs, opens a small video bubble of the other person, and has optional chat."</p>
+              <div>
+                <div class="persona-section-label">About</div>
+                <p class="persona-about">Long-distance relationship with boyfriend Jake in Chicago. Weekly Friday "virtual date nights" via Teleparty + FaceTime. Active talker during reality shows, quiet during dramas. B.S. degree, $55K/year, rents alone.</p>
+              </div>
+              <div>
+                <div class="persona-section-label">Goals</div>
+                <div class="tags">
+                  <span class="tag goal">Perfect sync</span>
+                  <span class="tag goal">Integrated voice</span>
+                  <span class="tag goal">One-tap invite</span>
+                  <span class="tag goal">Works on TV</span>
+                </div>
+              </div>
+              <div>
+                <div class="persona-section-label">Pain Points</div>
+                <div class="tags">
+                  <span class="tag pain">Juggling Teleparty + FaceTime</span>
+                  <span class="tag pain">Sync breaks on pause</span>
+                  <span class="tag pain">Setup friction</span>
+                </div>
+              </div>
+              <div>
+                <div class="persona-section-label">Won't Use</div>
+                <div class="tags">
+                  <span class="tag neutral">Public watch parties</span>
+                  <span class="tag neutral">Strangers</span>
+                  <span class="tag neutral">Complex setup</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona-card">
+            <div class="persona-header">
+              <div class="persona-avatar secondary"><img src="images/AlexRivera.png" alt="Alex Rivera" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+              <div>
+                <div class="persona-name">Alex Rivera</div>
+                <div class="persona-role">24 · Graduate Student · Chicago, IL</div>
+                <span class="persona-badge secondary">Secondary · Social Watcher</span>
+              </div>
+            </div>
+            <div class="persona-body">
+              <p class="persona-quote">"We all hop on Discord for voice anyway. Would be great if Netflix just had that built in."</p>
+              <div>
+                <div class="persona-section-label">About</div>
+                <p class="persona-about">Watches with 3–5 friends across the country. Spontaneous viewing triggered by trending shows. Uses Discord for voice + Teleparty for sync.</p>
+              </div>
+              <div>
+                <div class="persona-section-label">Goals</div>
+                <div class="tags">
+                  <span class="tag goal">Group coordination</span>
+                  <span class="tag goal">Shared reactions</span>
+                  <span class="tag goal">No app switching</span>
+                </div>
+              </div>
+              <div>
+                <div class="persona-section-label">Pain Points</div>
+                <div class="tags">
+                  <span class="tag pain">Coordinating setup</span>
+                  <span class="tag pain">Chat covering content</span>
+                  <span class="tag pain">Friends giving up</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4: COMPETITIVE -->
+<div class="section" id="competitive">
+  <div class="wrap">
+    <div class="two-col">
+      <div class="sidebar-label">
+        <div class="label">04 — Competitive</div>
+      </div>
+      <div>
+        <div class="eyebrow">Competitive Analysis</div>
+        <h2 class="display">The market told<br>a surprising story</h2>
+        <p class="body-lg">Every major streaming service that launched a native group viewing feature eventually discontinued it — while a third-party browser extension with 20M+ users continued to thrive.</p>
+
+        <div class="comp-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Voice</th>
+                <th>Mobile</th>
+                <th>Key Takeaway</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Teleparty</td><td>Browser Extension</td><td><span class="badge alive">Active</span></td><td><span class="check">✓</span> Premium</td><td><span class="cross">—</span></td><td>Platform-agnostic; continuous iteration drives survival</td></tr>
+              <tr><td>Disney+ GroupWatch</td><td>Native Feature</td><td><span class="badge dead">Discontinued 2023</span></td><td><span class="cross">—</span></td><td><span class="check">✓</span></td><td>Emoji-only reactions weren't enough to sustain use</td></tr>
+              <tr><td>Amazon Watch Party</td><td>Native Feature</td><td><span class="badge dead">Discontinued 2024</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td>Desktop-only + no ongoing investment = abandoned</td></tr>
+              <tr><td>Hulu Watch Party</td><td>Native Feature</td><td><span class="badge warn">Active (at risk)</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td>Desktop-only; same parent as discontinued Disney+ version</td></tr>
+              <tr><td>Discord Watch Together</td><td>Social Platform</td><td><span class="badge alive">Active</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td>Thrives because connection — not content — is the value</td></tr>
+              <tr><td>Apple SharePlay</td><td>OS Integration</td><td><span class="badge alive">Active</span></td><td><span class="check">✓</span> FaceTime</td><td><span class="check">✓</span></td><td>Face-to-face connection is primary; content is secondary</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:24px;">
+          <h4>Critical Insight</h4>
+          <p>Native group viewing features fail when they treat sync as the feature. The products that survive treat <strong>human connection</strong> as the feature — sync is just the enabler.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5: HMW -->
+<div class="section" id="ideation">
+  <div class="wrap">
+    <div class="two-col">
+      <div class="sidebar-label">
+        <div class="label">05 — Ideation</div>
+      </div>
+      <div>
+        <div class="eyebrow">HMW Statements &amp; Ideation</div>
+        <h2 class="display">Reframing problems<br>as opportunities</h2>
+        <p class="body-lg">From research synthesis, I developed five "How Might We" questions — each tied to a specific user pain point and connected to a design opportunity.</p>
+
+        <div class="hmw-grid">
+          <div class="hmw-card">
+            <div class="hmw-num">1</div>
+            <div class="hmw-eyebrow">HMW #1</div>
+            <p>How might we eliminate the need to juggle multiple apps?</p>
+          </div>
+          <div class="hmw-card">
+            <div class="hmw-num">2</div>
+            <div class="hmw-eyebrow">HMW #2</div>
+            <p>How might we ensure reliable sync without lag or disconnections?</p>
+          </div>
+          <div class="hmw-card">
+            <div class="hmw-num">3</div>
+            <div class="hmw-eyebrow">HMW #3</div>
+            <p>How might we make starting a watch party as simple as pressing play?</p>
+          </div>
+          <div class="hmw-card">
+            <div class="hmw-num">4</div>
+            <div class="hmw-eyebrow">HMW #4</div>
+            <p>How might we enable natural conversation without distracting from content?</p>
+          </div>
+          <div class="hmw-card full">
+            <div class="hmw-num">5</div>
+            <div class="hmw-eyebrow">HMW #5</div>
+            <p>How might we recreate the emotional feeling of watching together, despite physical distance?</p>
+          </div>
+        </div>
+
+        <h3 class="section-title" style="margin-top:48px;">Feature priorities from ideation</h3>
+        <div class="feature-table">
+          <div class="feature-row"><div class="feature-status yes">✓</div><div class="feature-name">Native synchronized playback</div><div class="feature-desc">Automatic, low-latency — not an add-on or extension</div></div>
+          <div class="feature-row"><div class="feature-status yes">✓</div><div class="feature-name">One-tap invite system</div><div class="feature-desc">Share link, QR code, or in-app friends list — zero friction to start</div></div>
+          <div class="feature-row"><div class="feature-status yes">✓</div><div class="feature-name">Voice chat (optional)</div><div class="feature-desc">Preferred over video — presence without performance anxiety</div></div>
+          <div class="feature-row"><div class="feature-status yes">✓</div><div class="feature-name">Emoji reactions</div><div class="feature-desc">Low-friction, real-time reactions without covering content</div></div>
+          <div class="feature-row"><div class="feature-status yes">✓</div><div class="feature-name">Mobile companion app</div><div class="feature-desc">Chat + reactions on phone; TV plays clean and unobstructed</div></div>
+          <div class="feature-row"><div class="feature-status p2">2</div><div class="feature-name">Video chat</div><div class="feature-desc">Phase 2 — optional overlay only; 5/6 users preferred voice</div></div>
+          <div class="feature-row"><div class="feature-status no">✗</div><div class="feature-name">Public watch parties</div><div class="feature-desc">Descoped — users want intimate viewing (2–6 people), not public events</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6: WIREFRAMES -->
+<div class="section" id="design">
+  <div class="wrap">
+    <div class="two-col">
+      <div class="sidebar-label">
+        <div class="label">06 — Design</div>
+      </div>
+      <div>
+        <div class="eyebrow">Wireframes &amp; Prototyping</div>
+        <h2 class="display">From concept to<br>clickable prototype</h2>
+
+        <div class="solution-box">
+          <h4>Solution Statement</h4>
+          <p>By introducing a native watch party feature combining <strong>synchronized playback, integrated voice chat, and one-tap setup</strong> — enhanced by a mobile companion mode that lets users react on their phones while watching on TV — Netflix can transform remote viewing into a seamless, natural experience that strengthens retention and turns watching together into a sustainable habit.</p>
+        </div>
+
+        <p class="body">The design went through three rounds: low-fidelity wireframes to validate flows, mid-fidelity to test layout decisions, and a high-fidelity Figma prototype for usability testing. The dual-screen model — TV for content, phone for interaction — emerged as the core interaction pattern.</p>
+
+        <div class="wireframe-grid">
+          <div class="wireframe-card">
+            <div class="wireframe-preview">
+              <div class="wf-bar s"></div>
+              <div class="wf-bar m red"></div>
+              <div class="wf-screen">🎬</div>
+              <div class="wf-btn-row">
+                <div class="wf-btn"></div>
+                <div class="wf-btn ghost"></div>
+              </div>
+            </div>
+            <div class="wireframe-label">
+              <h4>Start Party Flow</h4>
+              <p>One-tap entry from content detail page</p>
+            </div>
+          </div>
+          <div class="wireframe-card">
+            <div class="wireframe-preview">
+              <div class="wf-bar l"></div>
+              <div style="display:flex;gap:6px;flex:1;margin:8px 0;">
+                <div style="flex:1;background:rgba(229,9,26,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;">🎙️</div>
+                <div style="flex:3;background:rgba(255,255,255,.04);border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:6px;justify-content:center;">
+                  <div class="wf-bar s"></div>
+                  <div class="wf-bar m"></div>
+                  <div class="wf-bar s"></div>
+                </div>
+              </div>
+              <div class="wf-bar l"></div>
+            </div>
+            <div class="wireframe-label">
+              <h4>Companion Mode (Mobile)</h4>
+              <p>Voice + reactions while TV plays clean</p>
+            </div>
+          </div>
+          <div class="wireframe-card">
+            <div class="wireframe-preview" style="align-items:center;justify-content:center;gap:12px;">
+              <div style="font-size:32px;margin-bottom:8px;">📺</div>
+              <div style="display:flex;gap:8px;">
+                <div style="width:32px;height:32px;border-radius:50%;background:rgba(108,99,255,.3);display:flex;align-items:center;justify-content:center;font-size:14px;">👤</div>
+                <div style="width:32px;height:32px;border-radius:50%;background:rgba(229,9,26,.2);display:flex;align-items:center;justify-content:center;font-size:14px;">⌛</div>
+              </div>
+              <div class="wf-bar m" style="margin-top:8px;"></div>
+            </div>
+            <div class="wireframe-label">
+              <h4>TV View</h4>
+              <p>Clean playback on TV while companion mode runs on phone</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:24px;">
+          <h4>Key Design Decision</h4>
+          <p>Early testing showed users wanted reactions on the TV screen but chat on their phones. Splitting the interface across devices — rather than cramming everything onto one screen — reduced visual clutter and matched users' existing dual-screen behavior.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 7: TESTING -->
+<div class="section" id="testing">
+  <div class="wrap">
+    <div class="two-col">
+      <div class="sidebar-label">
+        <div class="label">07 — Testing</div>
+      </div>
+      <div>
+        <div class="eyebrow">Testing &amp; Validation</div>
+        <h2 class="display">Two rounds of testing,<br>real feedback, real changes</h2>
+        <p class="body-lg">I ran two rounds of moderated usability testing on the Figma prototype. The goal: validate the core watch party flow and surface anything blocking the experience from feeling seamless and natural.</p>
+
+        <div class="scenario-box">
+          <span class="lbl label">Testing Scenario</span>
+          <p>Rachel wants to watch <strong>Love Is Blind</strong> with her boyfriend Jake in Chicago. She finds the show on Netflix, starts a Watch Party, sends Jake the invite link, waits for him to connect, and transitions to Companion Mode on her phone while the show plays on TV.</p>
+        </div>
+
+        <div class="testing-stats">
+          <div class="t-stat">
+            <div class="num">2</div>
+            <div class="desc">Rounds of usability testing</div>
+          </div>
+          <div class="t-stat">
+            <div class="num">5</div>
+            <div class="desc">Participants per round</div>
+          </div>
+          <div class="t-stat">
+            <div class="num">7</div>
+            <div class="desc">Design changes from testing</div>
+          </div>
+        </div>
+
+        <h3 class="section-title">What changed between Round 1 and Round 2</h3>
+
+        <div class="ba-grid">
+          <div class="ba-card">
+            <div class="ba-inner">
+              <div class="ba-before">
+                <div class="ba-label problem">🧪 Round 1 — Problem</div>
+                <p><strong>Invite step caused hesitation.</strong> User typed in the message box but couldn't tell if they were sending an invite or Jake was.</p>
+                <p class="ba-quote">"I wasn't sure who was sending." — P1</p>
+              </div>
+              <div class="ba-after resolved">
+                <div class="ba-label resolved">✅ Round 2 — Fix &amp; Result</div>
+                <p>Redesigned as a popup overlay with Netflix UI visible in background. Added an after-delay to auto-transition to the waiting room.</p>
+                <p class="ba-result green">No participants hesitated on the invite step in Round 2.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ba-card">
+            <div class="ba-inner">
+              <div class="ba-before">
+                <div class="ba-label problem">🧪 Round 1 — Problem</div>
+                <p><strong>Flow felt like 3 separate apps.</strong> Invite → waiting room → companion mode felt like navigating to entirely different products.</p>
+                <p class="ba-quote">"Why did the page change? That doesn't feel right." — P1</p>
+              </div>
+              <div class="ba-after resolved">
+                <div class="ba-label resolved">✅ Round 2 — Fix &amp; Result</div>
+                <p>Auto-transition via after-delay from waiting room → companion mode. Overlay treatment kept Netflix visible, making transitions feel like state changes.</p>
+                <p class="ba-result green">Participants described the flow as "one experience."</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ba-card">
+            <div class="ba-inner">
+              <div class="ba-before">
+                <div class="ba-label problem">🧪 Round 1 — Problem</div>
+                <p><strong>"Jake pending" created anxiety.</strong> Users didn't know if Jake had seen the invite, was joining, or had declined.</p>
+                <p class="ba-quote">"Is he already here?" — P1</p>
+              </div>
+              <div class="ba-after resolved">
+                <div class="ba-label resolved">✅ Round 2 — Fix &amp; Result</div>
+                <p>Changed to "Jake connected ✓" with a checkmark. Status language now clearly communicates connection state.</p>
+                <p class="ba-result green">Zero confusion about Jake's status in Round 2.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ba-card">
+            <div class="ba-inner">
+              <div class="ba-before">
+                <div class="ba-label problem">🧪 Round 1 — Problem</div>
+                <p><strong>Companion mode had no orientation.</strong> Users landed on the companion screen with no clear sense of what to do.</p>
+              </div>
+              <div class="ba-after iterating">
+                <div class="ba-label iterating">⚠️ Round 2 — Still Iterating</div>
+                <p>TV view made more prominent; Mute/Leave controls de-emphasized. Cast button given glowing active state. Still needs stronger orientation cues.</p>
+                <p class="ba-result amber">Next step: contextual labels + first-launch tooltip.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p1-block">
+          <h4>Participant 1 — Highlights</h4>
+          <div class="p1-stats">
+            <div class="p1-stat">
+              <div class="n">8</div>
+              <div class="d">Clicks to reach Companion Mode</div>
+            </div>
+            <div class="p1-stat">
+              <div class="n">2–3</div>
+              <div class="d">Minutes to complete full scenario</div>
+            </div>
+            <div class="p1-stat">
+              <div class="n">5/5</div>
+              <div class="d">Innovation &amp; Preference Score</div>
+            </div>
+          </div>
+          <div class="pull-quote" style="margin:0;">
+            <blockquote>"Is he already here? It was straightforward."</blockquote>
+            <cite>— P1, preferred companion mode, compared it to Discord + PS5 cross-platform voice</cite>
+          </div>
+        </div>
+
+        <h3 class="section-title" style="margin-top:44px;">Design changes driven by testing</h3>
+        <div class="changes">
+          <div class="change-row"><div class="change-arrow">→</div><div class="change-text"><strong>Invite redesigned as a popup overlay</strong> — Netflix background peeks through so it doesn't feel like a separate screen. After-delay guides users into the waiting room.</div></div>
+          <div class="change-row"><div class="change-arrow">→</div><div class="change-text"><strong>"Jake pending" changed to "Jake connected ✓"</strong> — eliminating ambiguity about whether the invite was accepted.</div></div>
+          <div class="change-row"><div class="change-arrow">→</div><div class="change-text"><strong>Auto-transition added from waiting room to companion mode</strong> — removing the manual step that made the flow feel fragmented.</div></div>
+          <div class="change-row"><div class="change-arrow">→</div><div class="change-text"><strong>"Control from phone" prompt made more visually dominant</strong> — stronger visual weight than the "No, keep TV" dismiss option.</div></div>
+          <div class="change-row"><div class="change-arrow">→</div><div class="change-text"><strong>TV View made more prominent in companion mode</strong> — Mute and Leave controls de-emphasized so viewing context takes visual priority.</div></div>
+          <div class="change-row"><div class="change-arrow">→</div><div class="change-text"><strong>Status indicators updated</strong> — Rachel and Jake pills made less rounded and non-interactive to avoid looking like tappable buttons.</div></div>
+          <div class="change-row"><div class="change-arrow">→</div><div class="change-text"><strong>Cast button given a glowing treatment</strong> — visually signals active casting so users know content is live on the TV.</div></div>
+        </div>
+
+        <div class="improvements-box">
+          <h4>What improved between rounds</h4>
+          <p>Invite hesitation: <strong>eliminated</strong> · Flow continuity: <strong>significantly improved</strong> · Jake status clarity: <strong>fully resolved</strong> · Companion mode orientation: <strong>improved, still iterating</strong> · Task completion: <strong>faster with fewer dead-end clicks</strong></p>
+          <p style="margin-top:10px;color:#888;">Metrics to track in Round 3: invite completion rate · time-to-party-start · companion mode adoption rate · task success rate</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 8: TAKEAWAYS -->
+<div class="section" id="takeaways">
+  <div class="wrap">
+    <div class="two-col">
+      <div class="sidebar-label">
+        <div class="label">08 — Takeaways</div>
+      </div>
+      <div>
+        <div class="eyebrow">Key Takeaways</div>
+        <h2 class="display">What I learned</h2>
+
+        <div class="takeaway-grid">
+          <div class="takeaway-card">
+            <span class="takeaway-icon">🏗️</span>
+            <h3>Design for the ritual, not the feature</h3>
+            <p>Users who watched together weekly weren't using a better app — they had an easier routine. The insight wasn't "better sync," it was "remove every reason not to start."</p>
+          </div>
+          <div class="takeaway-card">
+            <span class="takeaway-icon">📉</span>
+            <h3>Competitive failure is a design brief</h3>
+            <p>Disney+ and Amazon's discontinued features weren't engineering failures — they were engagement failures. Understanding why they lost users shaped every decision made here.</p>
+          </div>
+          <div class="takeaway-card">
+            <span class="takeaway-icon">📱</span>
+            <h3>Meet users in their existing behavior</h3>
+            <p>People were already using two screens. The companion app amplified what they were already doing naturally, rather than asking users to change their habits.</p>
+          </div>
+          <div class="takeaway-card">
+            <span class="takeaway-icon">🎙️</span>
+            <h3>Qualitative research changes designs</h3>
+            <p>Without interviews, I would have built video chat. Research revealed voice was strongly preferred — that single finding reshaped the entire communication model.</p>
+          </div>
+        </div>
+
+        <h3 class="section-title" style="margin-top:52px;">Next steps</h3>
+        <ul class="next-steps">
+          <li><div class="ns-num">1</div><div class="ns-text">Run a third round of testing validating the iterated companion mode layout — specifically the new TV view hierarchy and orientation cues</div></li>
+          <li><div class="ns-num">2</div><div class="ns-text">Explore a "Party History" feature — a lightweight post-viewing recap that extends the shared experience beyond the session</div></li>
+          <li><div class="ns-num">3</div><div class="ns-text">Define what measurable success looks like — identifying the key engagement signals that would indicate the feature is driving habit formation</div></li>
+          <li><div class="ns-num">4</div><div class="ns-text">Build an engineering handoff package — annotated flows, component specs, and interaction notes to make this prototype implementation-ready</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <div class="eyebrow">Let's Connect</div>
+    <h2>Let's keep the conversation going</h2>
+    <p>This project taught me how a fleeting moment — wanting to watch with someone you love — can become the foundation for a product that strengthens real relationships. I'd love to connect with anyone building products that center human connection, emotion, and context.</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn primary">View Portfolio</a>
+      <a href="#" class="btn ghost">Connect on LinkedIn</a>
+      <a href="#" class="btn ghost">Send an Email</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Netflix Group Watch — UX Case Study</span>
+  <span>Adobe Digital Academy Capstone · Jan–Feb 2026</span>
+</footer>
+
+</body>
+</html>
