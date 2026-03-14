@@ -131,7 +131,7 @@ function initSplitState(card) {
             tiltY: 0,
             targetTiltX: 0,
             targetTiltY: 0,
-            scale: 1 // hover scale
+            scale: 1
         });
     }
 }
@@ -142,7 +142,7 @@ function initImageState(image) {
         imageState.set(image, {
             translateY: 0,
             targetTranslateY: 0,
-            scale: 1 // hover zoom
+            scale: 1
         });
     }
 }
@@ -229,7 +229,7 @@ splitCards.forEach(card => {
     });
 
     card.addEventListener('mouseenter', () => {
-        state.scale = 1.02; // hover scale
+        state.scale = 1.02;
     });
 
     card.addEventListener('mouseleave', () => {
@@ -241,11 +241,15 @@ splitCards.forEach(card => {
 
 // ================================
 // HOVER ZOOM FOR .project-image (STACKED WITH PARALLAX)
+// Skip Netflix animation container — SVG logo doesn't need zoom
 // ================================
 
 splitCards.forEach(card => {
     const image = card.querySelector('.project-image');
     if (!image || !imageState.has(image)) return;
+
+    // Skip zoom for Netflix card — SVG logo distorts with scale transform
+    if (image.classList.contains('netflix-animation-container')) return;
 
     const imgState = imageState.get(image);
 
@@ -263,10 +267,8 @@ splitCards.forEach(card => {
 // ================================
 
 function animationLoop() {
-    // Update scroll-based parallax targets
     updateScrollParallax();
 
-    // Smoothly interpolate tilt + parallax
     splitCards.forEach(card => {
         const state = splitState.get(card);
         state.tiltX = lerp(state.tiltX, state.targetTiltX, 0.12);
@@ -290,7 +292,6 @@ requestAnimationFrame(animationLoop);
 
 // ================================
 // PARALLAX EFFECT FOR PROJECT CARDS (OLD)
-// (kept as-is for other parts of your portfolio)
 // ================================
 
 let isMouseMoving = false;
@@ -369,7 +370,6 @@ shapes.forEach((shape, index) => {
 
 // ================================
 // MAGNETIC CURSOR EFFECT
-// (applied to CTAs and project links)
 // ================================
 
 const magneticElements = document.querySelectorAll('.project-link, .hero-cta, .cta-button');
