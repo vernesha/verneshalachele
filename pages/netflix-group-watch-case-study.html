@@ -471,64 +471,131 @@
 
         <p class="body">The design went through three rounds: low-fidelity wireframes to validate flows, mid-fidelity to test layout decisions, and a high-fidelity Figma prototype for usability testing. The dual-screen model — TV for content, phone for interaction — emerged as the core interaction pattern.</p>
 
-        <div class="wireframe-grid">
-          <div class="wireframe-card">
-            <div class="wireframe-preview">
-              <div class="wf-bar s"></div>
-              <div class="wf-bar m red"></div>
-              <div class="wf-screen">🎬</div>
-              <div class="wf-btn-row">
-                <div class="wf-btn"></div>
-                <div class="wf-btn ghost"></div>
-              </div>
-            </div>
-            <div class="wireframe-label">
-              <h4>Start Party Flow</h4>
-              <p>One-tap entry from content detail page</p>
+        <!-- ── 6.1 Feature Discovery ── -->
+        <div class="design-subsection">
+          <div class="design-sub-header">
+            <span class="design-sub-num">6.1</span>
+            <div>
+              <h3 class="design-sub-title">Feature Discovery</h3>
+              <p class="design-sub-desc">Home → Show Selection → Show Details + Watch Party CTA</p>
             </div>
           </div>
-          <div class="wireframe-card">
-            <div class="wireframe-preview">
-              <div class="wf-bar l"></div>
-              <div style="display:flex;gap:6px;flex:1;margin:8px 0;">
-                <div style="flex:1;background:rgba(229,9,26,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;">🎙️</div>
-                <div style="flex:3;background:rgba(255,255,255,.04);border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:6px;justify-content:center;">
-                  <div class="wf-bar s"></div>
-                  <div class="wf-bar m"></div>
-                  <div class="wf-bar s"></div>
-                </div>
-              </div>
-              <div class="wf-bar l"></div>
+          <p class="body" style="margin-bottom:28px;">The feature had to live inside Netflix's existing ecosystem — not feel bolted on. I designed entry points that appear naturally in the browse and detail flow, so users encounter Watch Party at the exact moment they're already thinking about what to watch with someone.</p>
+          <div class="design-screens design-screens--2">
+            <div class="design-screen-wrap">
+              <img src="../images/netflix-preview.png" alt="Netflix home and browse screen showing Watch Party entry point" loading="lazy">
+              <div class="design-screen-caption">Home screen — browse flow</div>
             </div>
-            <div class="wireframe-label">
-              <h4>Companion Mode (Mobile)</h4>
-              <p>Voice + reactions while TV plays clean</p>
+            <div class="design-screen-wrap">
+              <img src="../images/Show Selection.png" alt="Show selection screen with Watch Party CTA visible" loading="lazy">
+              <div class="design-screen-caption">Show detail + Watch Party CTA</div>
             </div>
           </div>
-          <div class="wireframe-card">
-            <div class="wireframe-preview" style="align-items:center;justify-content:center;gap:12px;">
-              <div style="font-size:32px;margin-bottom:8px;">📺</div>
-              <div style="display:flex;gap:8px;">
-                <div style="width:32px;height:32px;border-radius:50%;background:rgba(108,99,255,.3);display:flex;align-items:center;justify-content:center;font-size:14px;">👤</div>
-                <div style="width:32px;height:32px;border-radius:50%;background:rgba(229,9,26,.2);display:flex;align-items:center;justify-content:center;font-size:14px;">⌛</div>
-              </div>
-              <div class="wf-bar m" style="margin-top:8px;"></div>
-            </div>
-            <div class="wireframe-label">
-              <h4>TV View</h4>
-              <p>Clean playback on TV while companion mode runs on phone</p>
-            </div>
+          <div class="design-insight">
+            <span class="design-insight-label">Design Decision</span>
+            <p>The Watch Party CTA sits alongside Play and Download on the show detail page — not buried in a menu. Surface-level placement removes the barrier of discovery entirely.</p>
           </div>
         </div>
 
-        <div class="callout" style="margin-top:24px;">
-          <h4>Key Design Decision</h4>
-          <p>Early testing showed users wanted reactions on the TV screen but chat on their phones. Splitting the interface across devices — rather than cramming everything onto one screen — reduced visual clutter and matched users' existing dual-screen behavior.</p>
+        <!-- ── 6.2 Creating a Watch Party ── -->
+        <div class="design-subsection">
+          <div class="design-sub-header">
+            <span class="design-sub-num">6.2</span>
+            <div>
+              <h3 class="design-sub-title">Creating a Watch Party</h3>
+              <p class="design-sub-desc">QR Code Popup → iMessage Prefill Invite</p>
+            </div>
+          </div>
+          <p class="body" style="margin-bottom:28px;">The setup flow had to feel like one tap, not three steps. A bottom-sheet popup surfaces immediately on CTA tap — no new screen, no context switch. The invite defaults to iMessage with a prefilled link so Rachel can get Jake into the party without typing a single word.</p>
+          <div class="design-screens design-screens--2">
+            <div class="design-screen-wrap">
+              <img src="../images/Popup for Watch Party.png" alt="Watch Party creation popup with QR code and invite options" loading="lazy">
+              <div class="design-screen-caption">Watch Party popup — QR + share options</div>
+            </div>
+            <div class="design-screen-wrap">
+              <img src="../images/iMessage Prefill.png" alt="iMessage with prefilled Watch Party invite link" loading="lazy">
+              <div class="design-screen-caption">iMessage prefill — zero-friction invite</div>
+            </div>
+          </div>
+          <div class="design-insight">
+            <span class="design-insight-label">Design Decision</span>
+            <p>Round 1 testing showed invite hesitation when users couldn't tell who was sending. The popup overlay — with Netflix still visible in the background — eliminates ambiguity and keeps users anchored in the experience.</p>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+        <!-- ── 6.3 Waiting Room & Connection ── -->
+        <div class="design-subsection">
+          <div class="design-sub-header">
+            <span class="design-sub-num">6.3</span>
+            <div>
+              <h3 class="design-sub-title">Waiting Room &amp; Connection</h3>
+              <p class="design-sub-desc">Waiting for Guests → All Guests Connected → Companion Mode Prompt → Connected Confirmation</p>
+            </div>
+          </div>
+          <p class="body" style="margin-bottom:28px;">The waiting room is where the system's thinking becomes visible. Status updates are explicit — "Jake connected ✓" replaced the ambiguous "Jake pending" that caused anxiety in Round 1. The auto-transition to Companion Mode removes the manual handoff that made the flow feel like three separate apps.</p>
+          <div class="design-screens design-screens--2">
+            <div class="design-screen-wrap">
+              <img src="../images/Waiting Room (TV Screen).png" alt="TV waiting room screen showing guests pending" loading="lazy">
+              <div class="design-screen-caption">Waiting room — guest status, pre-connection</div>
+            </div>
+            <div class="design-screen-wrap">
+              <img src="../images/Waiting Room (TV Screen)2.png" alt="TV waiting room showing all guests connected and ready to start" loading="lazy">
+              <div class="design-screen-caption">All guests connected — ready to watch</div>
+            </div>
+          </div>
+          <div class="design-insight">
+            <span class="design-insight-label">Systems Thinking</span>
+            <p>State changes — from waiting to connected to watching — are communicated through visual feedback at every step. No participant in Round 2 was confused about where Jake was in the flow.</p>
+          </div>
+        </div>
+
+        <!-- ── 6.4 Companion Mode — Mobile ── -->
+        <div class="design-subsection">
+          <div class="design-sub-header">
+            <span class="design-sub-num">6.4</span>
+            <div>
+              <h3 class="design-sub-title">Companion Mode — Mobile Experience</h3>
+              <p class="design-sub-desc">Main Controls → Reactions + Chat</p>
+            </div>
+          </div>
+          <p class="body" style="margin-bottom:28px;">Companion Mode is the heart of the concept. The TV plays clean — no overlays, no clutter. Rachel's phone becomes the control center: voice chat, emoji reactions, and text chat all live here. Research showed 5 of 6 users already had their phones in hand while watching; this design amplifies a behavior that already existed.</p>
+          <div class="design-screens design-screens--2">
+            <div class="design-screen-wrap">
+              <img src="../images/Mobile Companion (Rachel's Phone).png" alt="Mobile companion mode showing main controls — voice, reactions, party members" loading="lazy">
+              <div class="design-screen-caption">Companion Mode — main controls</div>
+            </div>
+            <div class="design-screen-wrap">
+              <img src="../images/Mobile Companion (Rachel's Phone)2.png" alt="Mobile companion mode showing reactions panel and chat interface" loading="lazy">
+              <div class="design-screen-caption">Companion Mode — reactions + chat</div>
+            </div>
+          </div>
+          <div class="design-insight">
+            <span class="design-insight-label">Key Design Decision</span>
+            <p>Splitting the interface across devices — rather than cramming everything onto one screen — reduced visual clutter on the TV and matched users' existing dual-screen behavior. The phone becomes a remote, not a distraction.</p>
+          </div>
+        </div>
+
+        <!-- ── 6.5 TV Playback Experience ── -->
+        <div class="design-subsection design-subsection--last">
+          <div class="design-sub-header">
+            <span class="design-sub-num">6.5</span>
+            <div>
+              <h3 class="design-sub-title">TV Playback Experience</h3>
+              <p class="design-sub-desc">TV Viewing Screen — Companion Mode Active</p>
+            </div>
+          </div>
+          <p class="body" style="margin-bottom:28px;">The TV view is intentionally minimal. When Companion Mode is active, the TV screen shows clean playback with a subtle party indicator — nothing that competes with the content. This was a direct response to testing: users wanted to feel connected, not surveilled.</p>
+          <div class="design-screens design-screens--1">
+            <div class="design-screen-wrap design-screen-wrap--wide">
+              <img src="../images/Watch Party Creation.png" alt="TV playback screen with Watch Party active and companion mode running on phone" loading="lazy">
+              <div class="design-screen-caption">TV playback — Companion Mode active, clean viewing experience</div>
+            </div>
+          </div>
+          <div class="design-insight design-insight--final">
+            <span class="design-insight-label">The Cinematic Principle</span>
+            <p>The TV screen is sacred. Every interaction — voice, reactions, chat — lives on the phone. The show plays uninterrupted. That's the experience users described wanting; that's the experience delivered.</p>
+          </div>
+        </div>
 
 <!-- 7: TESTING -->
 <div class="section" id="testing">
