@@ -1409,22 +1409,48 @@ footer {
   color: var(--ink);
 }
 
-/* Screen grids */
+/* ── Screen grids ──────────────────────────────────────────
+   KEY RULE:
+   - Portrait (mobile) screens → 1 column, full width
+     A half-width mobile screen is illegible to a recruiter.
+   - Landscape (TV) screens    → 2 columns side by side is OK
+     TV screens are naturally wide so side-by-side still reads.
+   ────────────────────────────────────────────────────────── */
+
 .wf-screens {
   display: grid;
-  gap: 16px;
+  gap: 20px;
   margin-bottom: 18px;
 }
 
-.wf-screens--1 { grid-template-columns: 1fr; }
-.wf-screens--2 { grid-template-columns: 1fr 1fr; }
+/* Portrait pairs → stacked full-width, large and readable */
+.wf-screens--portrait-pair {
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+/* Landscape pairs → side by side (TV screens are wide) */
+.wf-screens--landscape-pair {
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Single full-width */
+.wf-screens--1 {
+  grid-template-columns: 1fr;
+}
+
+/* Fallback (generic --2 kept for backward compat) */
+.wf-screens--2 {
+  grid-template-columns: 1fr 1fr;
+}
 
 .wf-screen-wrap {
   display: flex;
   flex-direction: column;
 }
 
-/* Image frames */
+/* ── Image frames ── */
 .wf-img-frame {
   border: 1px solid var(--rule);
   border-radius: 10px 10px 0 0;
@@ -1435,9 +1461,10 @@ footer {
   justify-content: center;
 }
 
+/* Portrait: full width of content column → show the whole screen */
 .wf-img-frame--portrait {
-  min-height: 320px;
-  max-height: 560px;
+  min-height: 520px;
+  max-height: 800px;
 }
 
 .wf-img-frame--portrait img {
@@ -1448,8 +1475,9 @@ footer {
   display: block;
 }
 
+/* Landscape: TV screens — enough height to read every element */
 .wf-img-frame--landscape {
-  min-height: 200px;
+  min-height: 360px;
 }
 
 .wf-img-frame--landscape img {
@@ -1459,9 +1487,10 @@ footer {
   object-fit: contain;
 }
 
+/* Wide single-column landscape */
 .wf-img-frame--wide {
-  min-height: 280px;
-  max-height: 520px;
+  min-height: 440px;
+  max-height: 680px;
 }
 
 .wf-img-frame--wide img {
@@ -1475,8 +1504,8 @@ footer {
   border: 1px solid var(--rule);
   border-top: none;
   border-radius: 0 0 10px 10px;
-  padding: 10px 16px;
-  font-size: 12px;
+  padding: 12px 18px;
+  font-size: 13px;
   color: var(--ink-2);
   font-weight: 400;
   background: var(--bg);
@@ -1555,7 +1584,6 @@ footer {
   font-size: 14px;
 }
 
-/* ── Hi-fi section header ── */
 .hifi-section-header {
   margin-bottom: 8px;
 }
@@ -1607,9 +1635,7 @@ footer {
   color: #1a6b34;
 }
 
-.ut-col-icon {
-  font-size: 14px;
-}
+.ut-col-icon { font-size: 14px; }
 
 .ut-items {
   display: flex;
@@ -1625,9 +1651,6 @@ footer {
   background: var(--bg);
 }
 
-.ut-item--problem { background: #fff; }
-.ut-item--fix { background: #fff; }
-
 .ut-item-num {
   display: flex;
   align-items: flex-start;
@@ -1641,7 +1664,7 @@ footer {
 }
 
 .ut-item--problem .ut-item-num { color: #c0392b; }
-.ut-item--fix .ut-item-num { color: #1a6b34; }
+.ut-item--fix .ut-item-num     { color: #1a6b34; }
 
 .ut-item-body {
   padding: 14px 16px;
@@ -1663,7 +1686,6 @@ footer {
   margin: 0;
 }
 
-/* Scope decision callout */
 .ut-removed-callout {
   background: var(--ink);
   border-radius: 12px;
@@ -1699,27 +1721,18 @@ footer {
 
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 680px) {
+  .wf-screens--landscape-pair,
   .wf-screens--2,
   .ut-two-col {
     grid-template-columns: 1fr;
   }
 
-  .wf-flow-label {
-    flex-direction: column;
-    gap: 4px;
-  }
+  .wf-img-frame--portrait  { min-height: 380px; }
+  .wf-img-frame--landscape { min-height: 240px; }
+  .wf-img-frame--wide      { min-height: 300px; }
 
-  .wf-img-frame--portrait {
-    min-height: 260px;
-  }
+  .wf-flow-label { flex-direction: column; gap: 4px; }
 
-  .wf-to-hifi-bridge {
-    gap: 12px;
-    margin: 48px 0 36px;
-  }
-
-  .bridge-label {
-    font-size: 9px;
-    letter-spacing: .08em;
-  }
+  .wf-to-hifi-bridge { gap: 12px; margin: 48px 0 36px; }
+  .bridge-label { font-size: 9px; letter-spacing: .08em; }
 }

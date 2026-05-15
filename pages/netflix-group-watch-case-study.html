@@ -455,16 +455,28 @@
 
 <!-- 6: WIREFRAMES -->
 <div class="section" id="design">
+  <!-- ══════════════════════════════════════════════════════════════
+     SECTION 6 — COMPLETE REPLACEMENT
+
+     In netflix-case-study.html, find:
+       <div class="section" id="design">
+         ...everything inside...
+       </div>
+
+     Keep the outer <div class="section" id="design"> and its </div>.
+     Replace EVERYTHING between them with this entire block.
+     ══════════════════════════════════════════════════════════════ -->
+
   <div class="wrap">
     <div class="two-col">
       <div class="sidebar-label">
         <div class="label">06 — Design</div>
       </div>
       <div><!-- RIGHT COLUMN OPENS -->
- 
+
         <div class="eyebrow">Wireframes &amp; Prototyping</div>
         <h2 class="display">From concept to<br>clickable prototype</h2>
- 
+
         <!-- ╔══════════════════════════════════════╗
              ║  LO-FI — Initial Exploration        ║
              ╚══════════════════════════════════════╝ -->
@@ -473,7 +485,7 @@
           <h3 class="wf-section-title">Lo-Fi v1 — Exploring Multiple Paths Across Devices</h3>
           <p class="body-lg" style="max-width:620px;">Wireframes weren't decoration — they were decisions. Before any hi-fi work began, I needed to validate the end-to-end flow: how does a user go from browsing to watching together in as few steps as possible? Each group below represents a problem I was actively solving, not just a screen I was drawing.</p>
         </div>
- 
+
         <!-- Flow 01: Start Party -->
         <div class="wf-flow-group">
           <div class="wf-flow-label">
@@ -484,7 +496,8 @@
             <span class="wf-annotation-icon">💡</span>
             <p>Early sketches focused on reducing the CTA to a single tap — the feature had to feel native to Netflix's browse experience, not like a separate product. The challenge: where does "Watch Party" live without disrupting solo viewing?</p>
           </div>
-          <div class="wf-screens wf-screens--2">
+          <!-- Portrait screens: stacked full-width, one at a time -->
+          <div class="wf-screens wf-screens--portrait-pair">
             <div class="wf-screen-wrap">
               <div class="wf-img-frame wf-img-frame--portrait">
                 <img src="../images/Show Selection.png" alt="Netflix home browse screen with Watch Party entry point" loading="lazy">
@@ -508,7 +521,7 @@
             <strong>Decision:</strong> The Watch Party CTA sits next to Play on the show detail page — the moment of intent. Not in a menu, not in settings. Surface-level placement removes the barrier of discovery entirely.
           </div>
         </div>
- 
+
         <!-- Flow 02: Invite -->
         <div class="wf-flow-group">
           <div class="wf-flow-label">
@@ -519,7 +532,7 @@
             <span class="wf-annotation-icon">💡</span>
             <p>In the first round of low-fidelity wireframes, I explored the full cross-device system — including an additional "guest-side" flow that allowed Jake to join and manage the party from his own device. I also explored a QR code + iMessage prefill pattern to eliminate invite friction entirely.</p>
           </div>
-          <div class="wf-screens wf-screens--2">
+          <div class="wf-screens wf-screens--portrait-pair">
             <div class="wf-screen-wrap">
               <div class="wf-img-frame wf-img-frame--portrait">
                 <img src="../images/Popup for Watch Party.png" alt="Watch Party creation popup with QR code and share options" loading="lazy">
@@ -543,7 +556,7 @@
             <strong>Lo-Fi v1 — Initial Exploration:</strong> Explored the full cross-device system, including an additional guest-side flow. This round surfaced which paths users naturally gravitated toward — and which caused confusion.
           </div>
         </div>
- 
+
         <!-- Flow 03: Waiting Room -->
         <div class="wf-flow-group">
           <div class="wf-flow-label">
@@ -554,7 +567,8 @@
             <span class="wf-annotation-icon">💡</span>
             <p>The waiting room had to communicate real-time status clearly across two states — before and after Jake connects. I explored how to surface that status without creating anxiety or ambiguity about whether the invite had been seen.</p>
           </div>
-          <div class="wf-screens wf-screens--2">
+          <!-- Landscape: TV screens side by side is fine — they're wide -->
+          <div class="wf-screens wf-screens--landscape-pair">
             <div class="wf-screen-wrap">
               <div class="wf-img-frame wf-img-frame--landscape">
                 <img src="../images/Waiting Room (TV Screen).png" alt="TV waiting room — Rachel confirmed, Jake pending" loading="lazy">
@@ -578,7 +592,7 @@
             <strong>Decision:</strong> Two explicit states — pending and connected — communicated through distinct visual treatments rather than a single ambiguous label.
           </div>
         </div>
- 
+
         <!-- Flow 04: Companion Mode -->
         <div class="wf-flow-group">
           <div class="wf-flow-label">
@@ -589,7 +603,7 @@
             <span class="wf-annotation-icon">💡</span>
             <p>Companion Mode emerged as the core interaction pattern after research validated that 5 of 6 users already had their phones in hand while watching TV. Instead of designing a new behavior, I designed with an existing one. The phone becomes the control center — the TV stays clean.</p>
           </div>
-          <div class="wf-screens wf-screens--2">
+          <div class="wf-screens wf-screens--portrait-pair">
             <div class="wf-screen-wrap">
               <div class="wf-img-frame wf-img-frame--portrait">
                 <img src="../images/Mobile Companion (Rachel's Phone).png" alt="Mobile companion mode — main controls" loading="lazy">
@@ -613,7 +627,7 @@
             <strong>Decision:</strong> Splitting the interface across devices reduced visual clutter on TV and matched users' natural dual-screen behavior. The companion app amplifies what users were already doing.
           </div>
         </div>
- 
+
         <!-- Flow 05: TV Playback -->
         <div class="wf-flow-group wf-flow-group--last">
           <div class="wf-flow-label">
@@ -625,7 +639,7 @@
             <p>The TV screen is sacred. When Companion Mode is active, the TV shows clean playback with only a subtle party indicator — nothing competing with the content itself.</p>
           </div>
           <div class="wf-screens wf-screens--1">
-            <div class="wf-screen-wrap wf-screen-wrap--full">
+            <div class="wf-screen-wrap">
               <div class="wf-img-frame wf-img-frame--landscape wf-img-frame--wide">
                 <img src="../images/Watch Party Creation.png" alt="TV playback — Companion Mode active, clean viewing" loading="lazy">
               </div>
@@ -639,17 +653,16 @@
             <strong>Decision:</strong> Every interaction lives on the phone. The show plays uninterrupted. That's the experience users described wanting — and the experience the system delivers.
           </div>
         </div>
- 
-        <!-- ╔══════════════════════════════════════╗
-             ║  USABILITY TESTING — Round 1 Findings ║
-             ╚══════════════════════════════════════╝ -->
+
+        <!-- ╔══════════════════════════════════════════╗
+             ║  USABILITY TESTING — Round 1 Findings  ║
+             ╚══════════════════════════════════════════╝ -->
         <div class="ut-section">
           <div class="eyebrow" style="margin-bottom:12px;">Usability Testing — Round 1 Findings</div>
           <h3 class="wf-section-title">What I learned — and what I changed</h3>
           <p class="body" style="margin-bottom:32px;">After the first round of lo-fi testing, six clear issues surfaced. Each one drove a specific mid-fi change. This is the evidence connecting exploration to execution.</p>
- 
+
           <div class="ut-two-col">
-            <!-- Issues -->
             <div class="ut-col">
               <div class="ut-col-header ut-col-header--problems">
                 <span class="ut-col-icon">🧪</span>
@@ -700,8 +713,7 @@
                 </div>
               </div>
             </div>
- 
-            <!-- Changes -->
+
             <div class="ut-col">
               <div class="ut-col-header ut-col-header--fixes">
                 <span class="ut-col-icon">✓</span>
@@ -733,7 +745,7 @@
                   <div class="ut-item-num">04</div>
                   <div class="ut-item-body">
                     <strong>Removed guest-side flow</strong>
-                    <p>Eliminated the entire "Jake's view" path — reduced scope to the core host experience.</p>
+                    <p>Eliminated the entire "Jake's view" path — reduced to the core host experience.</p>
                   </div>
                 </div>
                 <div class="ut-item ut-item--fix">
@@ -753,22 +765,21 @@
               </div>
             </div>
           </div>
- 
-          <!-- Scope decision -->
+
           <div class="ut-removed-callout">
             <span class="ut-removed-label">Scope Decision</span>
             <p>The guest-side flow — a fully separate "Jake's view" for joining and managing the party — was removed after Round 1. Users didn't expect it, didn't look for it, and its presence created confusion about who controlled the session. Removing it sharpened the core flow and reduced onboarding friction for both host and guest.</p>
           </div>
         </div>
- 
-        <!-- ╔══════════════════════════════════════╗
-             ║  MID-FI — Only screens that changed ║
-             ╚══════════════════════════════════════╝ -->
+
+        <!-- ╔══════════════════════════════════════════╗
+             ║  MID-FI — Only screens that changed    ║
+             ╚══════════════════════════════════════════╝ -->
         <div class="midfi-section">
           <div class="eyebrow" style="margin-bottom:12px;">Mid-Fidelity Prototypes</div>
           <h3 class="wf-section-title">What I Changed — Shown</h3>
           <p class="body" style="margin-bottom:8px;">Mid-fi prototypes reflect a simplified, user-validated flow focused on the core task: starting and joining a Watch Party. Only the screens that changed are shown here.</p>
- 
+
           <!-- Updated: Invite -->
           <div class="wf-flow-group" style="margin-top:32px;">
             <div class="wf-flow-label">
@@ -779,7 +790,7 @@
               <span class="wf-annotation-icon">→</span>
               <p><strong>What changed:</strong> Full-screen invite replaced with a popup overlay. Netflix UI stays visible in background. iMessage prefill eliminates all typing. After-delay auto-advances to waiting room.</p>
             </div>
-            <div class="wf-screens wf-screens--2">
+            <div class="wf-screens wf-screens--portrait-pair">
               <div class="wf-screen-wrap">
                 <div class="wf-img-frame wf-img-frame--portrait">
                   <img src="../images/Popup for Watch Party.png" alt="Redesigned Watch Party invite as modal overlay" loading="lazy">
@@ -803,7 +814,7 @@
               <strong>Result:</strong> No participants hesitated on the invite step in Round 2. Zero confusion about who was sending.
             </div>
           </div>
- 
+
           <!-- Updated: Waiting Room -->
           <div class="wf-flow-group">
             <div class="wf-flow-label">
@@ -814,7 +825,7 @@
               <span class="wf-annotation-icon">→</span>
               <p><strong>What changed:</strong> "Jake pending" replaced with "Jake connected ✓". Two visually distinct states with a timed auto-transition — no manual handoff required.</p>
             </div>
-            <div class="wf-screens wf-screens--2">
+            <div class="wf-screens wf-screens--landscape-pair">
               <div class="wf-screen-wrap">
                 <div class="wf-img-frame wf-img-frame--landscape">
                   <img src="../images/Waiting Room (TV Screen).png" alt="Waiting room state 1 — pending" loading="lazy">
@@ -838,7 +849,7 @@
               <strong>Result:</strong> Zero confusion about Jake's status in Round 2. The flow felt like one continuous experience, not three separate apps.
             </div>
           </div>
- 
+
           <!-- Updated: Companion Mode -->
           <div class="wf-flow-group">
             <div class="wf-flow-label">
@@ -849,7 +860,7 @@
               <span class="wf-annotation-icon">→</span>
               <p><strong>What changed:</strong> TV view made more prominent. Mute/Leave controls de-emphasized. Cast button given a glowing active state. Participant chips made non-interactive. Guest-side flow removed entirely.</p>
             </div>
-            <div class="wf-screens wf-screens--2">
+            <div class="wf-screens wf-screens--portrait-pair">
               <div class="wf-screen-wrap">
                 <div class="wf-img-frame wf-img-frame--portrait">
                   <img src="../images/Mobile Companion (Rachel's Phone).png" alt="Companion mode — rebalanced hierarchy" loading="lazy">
@@ -874,7 +885,7 @@
             </div>
           </div>
         </div>
- 
+
         <!-- ════ BRIDGE: Mid-Fi → Hi-Fi ════ -->
         <div class="wf-to-hifi-bridge">
           <div class="bridge-line"></div>
@@ -884,7 +895,7 @@
           </div>
           <div class="bridge-line"></div>
         </div>
- 
+
         <!-- ╔══════════════════════════════════════╗
              ║  HI-FI — Final Validated System     ║
              ╚══════════════════════════════════════╝ -->
@@ -893,13 +904,13 @@
           <h3 class="wf-section-title" style="margin-bottom:12px;">The flows, fully realized</h3>
           <p class="body" style="max-width:560px; margin-bottom:0;">With every structural decision validated through lo-fi exploration, usability testing, and mid-fi iteration, I built the high-fidelity prototype — a polished, Netflix-native experience ready for engineering handoff.</p>
         </div>
- 
+
         <div class="solution-box" style="margin-top:32px; margin-bottom:0;">
           <h4>Solution Statement</h4>
           <p>By introducing a native watch party feature combining <strong>synchronized playback, integrated voice chat, and one-tap setup</strong> — enhanced by a mobile companion mode that lets users react on their phones while watching on TV — Netflix can transform remote viewing into a seamless, natural experience that strengthens retention and turns watching together into a sustainable habit.</p>
         </div>
- 
-      </div><!-- /RIGHT COLUMN — closes the second div inside two-col -->
+
+      </div><!-- /RIGHT COLUMN -->
     </div><!-- /two-col -->
   </div><!-- /wrap -->
       </div>
