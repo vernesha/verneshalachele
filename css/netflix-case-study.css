@@ -1423,16 +1423,18 @@ footer {
   margin-bottom: 18px;
 }
 
-/* Portrait pairs → stacked full-width, large and readable */
+/* Portrait pairs → stacked full-width */
 .wf-screens--portrait-pair {
   grid-template-columns: 1fr;
   gap: 28px;
 }
 
-/* Landscape pairs → side by side (TV screens are wide) */
+/* Landscape pairs → ALSO stacked full-width.
+   TV screens are wide but the content column is narrow —
+   side-by-side cuts them in half. Full-width is always more readable. */
 .wf-screens--landscape-pair {
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: 1fr;
+  gap: 28px;
 }
 
 /* Single full-width */
@@ -1455,48 +1457,36 @@ footer {
   border: 1px solid var(--rule);
   border-radius: 10px 10px 0 0;
   overflow: hidden;
-  background: #f0f0f0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  background: #f0f0f0; /* default: light bg for mobile screens */
 }
 
-/* Portrait: full width of content column → show the whole screen */
-.wf-img-frame--portrait {
-  min-height: 520px;
-  max-height: 800px;
+/* TV/landscape screens need dark background —
+   Netflix UI uses light text that washes out on light bg */
+.wf-img-frame--landscape,
+.wf-img-frame--wide {
+  background: #111;
+  border-color: #2a2a2a;
 }
 
+/* Portrait: image drives height naturally — no min/max constraints */
 .wf-img-frame--portrait img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: top center;
+  height: auto;
   display: block;
 }
 
-/* Landscape: TV screens — enough height to read every element */
-.wf-img-frame--landscape {
-  min-height: 360px;
-}
-
+/* Landscape: same — image drives height, no artificial space */
 .wf-img-frame--landscape img {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: contain;
 }
 
 /* Wide single-column landscape */
-.wf-img-frame--wide {
-  min-height: 440px;
-  max-height: 680px;
-}
-
 .wf-img-frame--wide img {
   width: 100%;
   height: auto;
-  object-fit: contain;
+  display: block;
 }
 
 /* Caption */
@@ -1721,15 +1711,10 @@ footer {
 
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 680px) {
-  .wf-screens--landscape-pair,
   .wf-screens--2,
   .ut-two-col {
     grid-template-columns: 1fr;
   }
-
-  .wf-img-frame--portrait  { min-height: 380px; }
-  .wf-img-frame--landscape { min-height: 240px; }
-  .wf-img-frame--wide      { min-height: 300px; }
 
   .wf-flow-label { flex-direction: column; gap: 4px; }
 
