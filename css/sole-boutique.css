@@ -1,10 +1,32 @@
+/* ============================= */
+/*      SOLE BOUTIQUE — BASE     */
+/* ============================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #f7f5f2;
+  color: #1a1a1a;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================= */
+/*         HERO SECTION          */
+/* ============================= */
+
 .sb-hero {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 120px 80px;
-  background: #f7f5f2;
   min-height: 90vh;
+  background: #f7f5f2;
 }
 
 .sb-hero-content {
@@ -14,8 +36,8 @@
 .sb-hero-title {
   font-size: 3.2rem;
   font-weight: 600;
-  color: #1a1a1a;
   margin-bottom: 20px;
+  color: #1a1a1a;
 }
 
 .sb-hero-subtitle {
@@ -27,8 +49,12 @@
 .sb-hero-description {
   font-size: 1.1rem;
   color: #6a6a6a;
-  line-height: 1.6;
+  margin-bottom: 24px;
 }
+
+/* ============================= */
+/*       HERO VISUAL AREA        */
+/* ============================= */
 
 .sb-hero-visual {
   position: relative;
@@ -40,16 +66,78 @@
   position: absolute;
   width: 220px;
   border-radius: 12px;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
-  animation: floatUp 1.2s ease-out forwards;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
   opacity: 0;
+  animation: floatUp 1.2s ease-out forwards;
 }
 
-.item-1 { top: 40px; left: 40px; animation-delay: 0.1s; }
-.item-2 { top: 160px; right: 20px; animation-delay: 0.25s; }
-.item-3 { bottom: 40px; left: 80px; animation-delay: 0.4s; }
+/* Component positions */
+.item-1 {
+  top: 40px;
+  left: 40px;
+  animation-delay: 0.1s;
+}
+
+.item-2 {
+  top: 160px;
+  right: 20px;
+  animation-delay: 0.25s;
+}
+
+.item-3 {
+  bottom: 40px;
+  left: 80px;
+  animation-delay: 0.4s;
+}
+
+/* ============================= */
+/*        ANIMATION EFFECT       */
+/* ============================= */
 
 @keyframes floatUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
+
+/* ============================= */
+/*        RESPONSIVE DESIGN      */
+/* ============================= */
+
+@media (max-width: 900px) {
+  .sb-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 80px 40px;
+  }
+
+  .sb-hero-visual {
+    margin-top: 40px;
+    width: 360px;
+    height: 360px;
+  }
+
+  .sb-hero-item {
+    width: 180px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sb-hero-title {
+    font-size: 2.4rem;
+  }
+
+  .sb-hero-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .sb-hero-description {
+    font-size: 1rem;
+  }
+}
+
